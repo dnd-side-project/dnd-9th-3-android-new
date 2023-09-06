@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="bottom_sheet_radius">12dp</dimen>
+
+    <dimen name="center_toast_height">72dp</dimen>
+    <dimen name="center_toast_width">325dp</dimen>
+
+    <dimen name="design_bottom_navigation_height" tools:override="true">0dp</dimen>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDatePickerStyle">
+        <item name="colorAccent">@color/primaryColor</item>
+        <!-- arrow bordercolor(<>)-->
+<!--        <item name="android:selectableItemBackgroundBorderless">@color/white</item>-->
+        <!--Calender Background color -->
+        <item name="android:windowBackground">@color/primaryBackgroundColor</item>
+        <!-- Week TextColor-->
+        <item name="android:textColorSecondary">@color/quaternaryColor</item>
+        <!-- Calender Number color arrow color (< >) -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--day , month-->
+        <item name="android:textColorPrimaryInverse">@color/black</item>
+        <!-- year-->
+        <item name="android:textColorSecondaryInverse">#009688</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/activatedColor</item>
+        <item name="colorControlHighlight">@color/white</item>
+<!--        <item name="android:textColor">@drawable/canlendar_text_color</item>-->
+    </style>
+
+
+    <style name="RounderBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundBottomSheet</item>
+    </style>
+
+    <style name="RoundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_border</item>
+    </style>
+
+    <style name="CustomSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:thumb">@drawable/selector_thumb</item>
+        <item name="android:track">@drawable/selector_track</item>
+    </style>
+</resources>

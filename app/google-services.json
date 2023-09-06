@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1025089687385",
+    "project_id": "studio-gooding",
+    "storage_bucket": "studio-gooding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025089687385:android:be489fe5e3b8b8e243c648",
+        "android_client_info": {
+          "package_name": "com.dnd_9th_3_android.gooding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025089687385-n76p4g1pabdt53pcf0j737rvitckhl8a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dnd_9th_3_android.gooding",
+            "certificate_hash": "6c2cb00088ef7772d72f90925a813001ff022adc"
+          }
+        },
+        {
+          "client_id": "1025089687385-f1mqbs0v1lr88ttkp1q28lptlkgvtuum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQHtMdUFrtHhbGFxPnbnzlWLTE9DToqa0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025089687385-f1mqbs0v1lr88ttkp1q28lptlkgvtuum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

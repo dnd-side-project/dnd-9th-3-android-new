@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 양쪽 라운드 처리 -->
+    <corners android:radius= "30dp" />
+
+    <!-- 트랙의 width / height
+    사실 width는 위젯 속성 중 'app:switchMinWidth'에 의해 설정되므로 크게 상관은 없습니다.-->
+    <size
+        android:width="45dp"
+        android:height="28dp" />
+
+    <!-- 배경색 -->
+    <solid android:color="@color/primaryColor" />
+</shape>

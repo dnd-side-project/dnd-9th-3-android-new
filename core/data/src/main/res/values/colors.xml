@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="unselect_white">#80FFFFFF</color>
+    <color name="location_color">#50FFFFFF</color>
+    <color name="tab_shadow">#26000000</color> <!--15%-->
+    <color name="tab_shadow_25">#40000000</color> <!--25%-->
+    <color name="top_gra_color_1">#57000000</color> <!--34%-->
+    <color name="top_gra_color_2">#00000000</color> <!--0%-->
+
+    <color name="bottom_gra_color_3">#CC090807</color> <!--80%-->
+    <color name="bottom_gra_color_2">#66100F0C</color> <!--40%-->
+    <color name="bottom_gra_color_1">#0011100D</color> <!--00%-->
+
+    <color name="romantic_bar_color">#CC1C1D27</color>
+    <color name="shadow_color_romantic">#33000000</color> <!--20%-->
+
+    <color name="secondary_1">#3CEFA3</color>
+    <color name="secondary_1_50">#803CEFA3</color>
+    <color name="secondary_1_25">#403CEFA3</color> <!--25%-->
+    <color name="warn_color">#FF5A6E</color>
+    <color name="for_grada_1">#FF59D0</color>
+    <color name="box_stork_color">#3CEFA3</color>
+    <color name="blue_gray">#3E4049</color>
+    <color name="back_blue_gray">#1A3CEFA3</color>
+    <color name="tab_background">#282932</color>
+    <color name="blue_gray_2">#A4A6AA</color>
+    <color name="blue_gray_3">#75777B</color>
+    <color name="blue_gray_4">#575860</color>
+    <color name="blue_gray_5">#3E4049</color>
+    <color name="blue_gray_6">#282932</color>
+    <color name="blue_gray_7">#1C1D27</color>
+
+    <color name="feed_in_di_back">#66FFFFFF</color> <!--feed 선택 back-->
+
+    <color name="normal_state">#BBBEC3</color>
+
+    <color name="state1">#FE5FD3</color>
+    <color name="state2">#FC71DA</color>
+    <color name="state3">#F984E2</color>
+    <color name="state4">#F697EA</color>
+    <color name="state5">#F3A9F2</color>
+    <color name="state6">#EDAEF4</color>
+    <color name="state7">#E6B3F6</color>
+    <color name="state8">#E0B7F8</color>
+    <color name="state9">#D8BCF8</color>
+    <color name="state10">#CEC1F5</color>
+    <color name="state11">#C4C6F2</color>
+    <color name="state12">#B9CAEF</color>
+    <color name="state13">#AAD0E6</color>
+    <color name="state14">#97D5DB</color>
+    <color name="state15">#84DBCF</color>
+    <color name="state16">#72E0C4</color>
+    <color name="state17">#63E4BB</color>
+    <color name="state18">#56E8B3</color>
+    <color name="state19">#4AEBAC</color>
+    <color name="state20">#3CEFA3</color>
+</resources>
