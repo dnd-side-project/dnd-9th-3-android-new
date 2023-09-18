@@ -172,5 +172,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:data"))
     implementation(project(":feature:feed"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:record"))
     implementation(project(":feature:myaccount"))
 }
