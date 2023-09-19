@@ -1,21 +1,10 @@
 package com.dnd_9th_3_android.gooding.my.itemFeed
 
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.dnd_9th_3_android.gooding.data.SampleFeedData
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.model.feed.Feed
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 
 @Composable

@@ -1,6 +1,5 @@
 package com.dnd_9th_3_android.gooding.my.mainTabLayout
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
@@ -19,18 +18,11 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dnd_9th_3_android.gooding.api.RetrofitUtil
-import com.dnd_9th_3_android.gooding.data.SampleFeedData
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
-import com.dnd_9th_3_android.gooding.model.feed.MyFeedList
 import com.dnd_9th_3_android.gooding.my.itemFeed.ItemMainFeedScreen
 import com.dnd_9th_3_android.gooding.my.mainLayout.DefaultTimeLineScreen
 import com.dnd_9th_3_android.gooding.my.selectMonth.SelectMonthBottomSheet
 import com.dnd_9th_3_android.gooding.my.viewModel.CurrentTimeLineViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 @Composable
 fun TimeLineScreen(

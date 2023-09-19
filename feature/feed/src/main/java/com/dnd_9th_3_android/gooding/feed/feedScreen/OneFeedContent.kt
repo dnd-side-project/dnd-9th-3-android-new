@@ -1,10 +1,8 @@
 package com.dnd_9th_3_android.gooding.feed.feedScreen
 
-import android.net.Uri
 import androidx.compose.runtime.Composable
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.dnd_9th_3_android.gooding.data.SampleFeedData.sampleThumb
 import com.dnd_9th_3_android.gooding.data.video.CheckUrl
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -14,10 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.ImagePainter
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.viewinterop.AndroidView
 
 import com.dnd_9th_3_android.gooding.core.data.R
 

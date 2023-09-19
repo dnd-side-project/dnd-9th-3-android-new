@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data
+package com.dnd_9th_3_android.gooding.data.sampleData
 
 import com.dnd_9th_3_android.gooding.model.user.SampleUserInfo
 

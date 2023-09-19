@@ -15,13 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
-import com.dnd_9th_3_android.gooding.model.search.SearchLogData
+import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 
 @Composable
 fun RecentlyItem(
-    logData : SearchLogData,
+    logData : SearchLog,
     deleteData : () -> Unit,
     clickData : () -> Unit,
 ) {

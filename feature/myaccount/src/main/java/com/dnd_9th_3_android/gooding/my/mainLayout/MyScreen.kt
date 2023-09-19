@@ -1,11 +1,5 @@
 package com.dnd_9th_3_android.gooding.my.mainLayout
 
-import android.util.Log
-import android.view.View
-import android.view.animation.Animation
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
@@ -22,13 +16,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
 import androidx.navigation.NavController
-import com.dnd_9th_3_android.gooding.data.SampleUserData
 import com.dnd_9th_3_android.gooding.data.SwipingStates
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.my.BottomNaviLocator
@@ -38,7 +30,6 @@ import com.dnd_9th_3_android.gooding.my.subLayout.TopMenuScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.UserInfoScreen
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.*
-import java.time.Duration
 
 
 //https://github.com/Debdutta-Panda/MotionLayoutWithNestedScrollAndSwipeable/blob/main/app/src/main/java/com/debduttapanda/motionlayoutwithnestedscrollandswipeable/MainActivity.kt
