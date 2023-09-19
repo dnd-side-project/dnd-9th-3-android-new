@@ -9,18 +9,18 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.model.search.SearchLogData
+import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
+import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import com.dnd_9th_3_android.gooding.search.item.RecentlyItem
 
 @Composable
 fun RecentlySearchScreen(
-    searchLogListState : SnapshotStateList<SearchLogData>
+    searchLogListState : SnapshotStateList<SearchLog>
 ) {
     Column(Modifier.padding(horizontal = 18.dp)) {
         Box(Modifier.fillMaxWidth()){
@@ -29,14 +29,14 @@ fun RecentlySearchScreen(
                 modifier = Modifier.align(Alignment.CenterStart),
                 color = Color.White,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold
+                fontFamily = pretendardBold
             )
             Text(
                 text = "모두 지우기",
                 modifier = Modifier.align(Alignment.CenterEnd),
                 color = colorResource(id = R.color.blue_gray_3),
                 fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
+                fontFamily = pretendardBold
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
