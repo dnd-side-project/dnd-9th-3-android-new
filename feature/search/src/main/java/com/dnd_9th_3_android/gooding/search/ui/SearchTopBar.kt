@@ -17,7 +17,7 @@ import com.dnd_9th_3_android.gooding.search.component.SearchTextLayer
 
 @Composable
 fun SearchTopBar(
-    backScreen : () -> Unit
+    backScreen : () -> Unit,
 ) {
     val searchText = remember{
         mutableStateOf(TextFieldValue(""))
@@ -46,8 +46,8 @@ fun SearchTopBar(
         Spacer(modifier = Modifier.width(11.dp))
         Box(
             Modifier
-                .padding(vertical = 12.dp)
-                .fillMaxSize()
+                .padding(top = 12.dp,bottom=12.dp,end = 18.dp)
+                .fillMaxWidth()
         ){
             SearchTextLayer(
                 hintText = "검색어를 입력하세요" ,
@@ -58,6 +58,5 @@ fun SearchTopBar(
                 }
             )
         }
-        Spacer(modifier = Modifier.width(18.dp))
     }
 }

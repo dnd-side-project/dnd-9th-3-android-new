@@ -59,7 +59,8 @@ fun SearchTextLayer(
                 Box(Modifier.size(24.dp)){
                     Icon(
                         painter = painterResource(id = R.drawable.search_24),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = colorResource(id = R.color.blue_gray_4)
                     )
                 }
             }

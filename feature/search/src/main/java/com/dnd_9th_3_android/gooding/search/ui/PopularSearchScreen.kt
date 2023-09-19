@@ -1,8 +1,7 @@
 package com.dnd_9th_3_android.gooding.search.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.data.sampleData.SampleSearchData
 import com.dnd_9th_3_android.gooding.model.search.PopularData
 import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import com.dnd_9th_3_android.gooding.search.item.PopularItem
@@ -28,7 +28,7 @@ import com.dnd_9th_3_android.gooding.search.item.RecentlyItem
 fun PopularSearchScreen(
     popularListState : SnapshotStateList<PopularData>
 ) {
-    Column {
+    Column (Modifier.fillMaxSize()){
         Text(
             text = buildAnnotatedString {
                 withStyle(
@@ -40,9 +40,14 @@ fun PopularSearchScreen(
             },
             fontFamily = pretendardBold,
             fontSize = 16.sp,
-            color = Color.White
+            color = Color.White,
+            modifier = Modifier.clickable {
+                // 나중에 꼭 지우기 !
+                popularListState.clear()
+                popularListState.addAll(SampleSearchData.popularSampleData)
+            }
         )
-
+        Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
