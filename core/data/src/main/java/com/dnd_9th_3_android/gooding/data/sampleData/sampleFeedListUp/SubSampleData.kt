@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.sampleFeedListUp
+package com.dnd_9th_3_android.gooding.data.sampleData.sampleFeedListUp
 
 import com.dnd_9th_3_android.gooding.model.feed.FileData
 import com.dnd_9th_3_android.gooding.model.user.UserInfo

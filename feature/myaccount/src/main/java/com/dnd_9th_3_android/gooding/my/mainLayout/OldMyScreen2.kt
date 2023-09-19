@@ -1,24 +1,5 @@
 package com.dnd_9th_3_android.gooding.my.mainLayout
 
-import android.view.View
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
-import com.dnd_9th_3_android.gooding.data.SampleUserData
-import com.dnd_9th_3_android.gooding.feature.my.R
-import com.dnd_9th_3_android.gooding.my.subLayout.BottomTabScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.LevelScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.TopMenuScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.UserInfoScreen
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
 //@Composable
 //fun OldMyScreen2(
 //    navController: NavController,

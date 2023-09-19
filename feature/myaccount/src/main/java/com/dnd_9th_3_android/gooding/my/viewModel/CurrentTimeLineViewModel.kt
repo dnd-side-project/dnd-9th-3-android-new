@@ -2,13 +2,11 @@ package com.dnd_9th_3_android.gooding.my.viewModel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnd_9th_3_android.gooding.SampleRecordData
+import com.dnd_9th_3_android.gooding.data.sampleData.SampleRecordData
 import com.dnd_9th_3_android.gooding.api.RetrofitUtil
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
-import com.dnd_9th_3_android.gooding.my.selectMonth.data.MonthPickerImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call

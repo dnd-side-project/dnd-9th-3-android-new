@@ -1,6 +1,6 @@
 package com.dnd_9th_3_android.gooding.data
 
-import com.dnd_9th_3_android.gooding.data.sampleFeedListUp.SubSampleData
+import com.dnd_9th_3_android.gooding.data.sampleData.sampleFeedListUp.SubSampleData
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeed
 
 //GetMainFeed
