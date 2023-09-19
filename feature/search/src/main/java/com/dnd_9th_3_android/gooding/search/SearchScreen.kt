@@ -11,6 +11,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.input.TextFieldValue
 import com.dnd_9th_3_android.gooding.model.search.PopularData
 import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import com.dnd_9th_3_android.gooding.search.ui.NoSearchDataScreen
@@ -21,6 +22,7 @@ import com.dnd_9th_3_android.gooding.search.ui.SearchTopBar
 @Composable
 fun SearchScreen(){
     val currentStep =  remember { mutableStateOf("인기") }
+    val searchData = remember { mutableStateOf(TextFieldValue(""))}
     val searchLogListState = remember { mutableStateListOf<SearchLog>() }
     val popularListState = remember { mutableStateListOf<PopularData>() }
     Column(
@@ -29,9 +31,11 @@ fun SearchScreen(){
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(39.dp))
-        SearchTopBar(backScreen = {
-
-        })
+        SearchTopBar(
+            searchData,
+            backScreen = {
+            }
+        )
         Spacer(modifier = Modifier.height(16.dp))
 
         Box(Modifier.padding(horizontal = 18.dp)) {
