@@ -28,8 +28,11 @@ fun RecentlyItem(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .background(Color.White, shape = RoundedCornerShape(24.dp))
-            .border(BorderStroke(1.dp, colorResource(id = R.color.blue_gray_2)))
+            .background(Color.Transparent, shape = RoundedCornerShape(24.dp))
+            .border(
+                BorderStroke(1.dp, colorResource(id = R.color.blue_gray_2)),
+                RoundedCornerShape(24.dp)
+            )
     ){
         Row(
            modifier = Modifier.padding(

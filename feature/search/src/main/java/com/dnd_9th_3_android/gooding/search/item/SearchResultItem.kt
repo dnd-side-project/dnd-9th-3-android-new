@@ -10,6 +10,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -26,7 +27,7 @@ import com.dnd_9th_3_android.gooding.model.search.SearchLog
 @Composable
 fun SearchResultItem(
     searchLog: SearchLog,
-    currentText : TextFieldValue,
+    currentText : MutableState<TextFieldValue>,
     clickData : () -> Unit
 ) {
     Row(
@@ -39,11 +40,11 @@ fun SearchResultItem(
         Spacer(modifier = Modifier.width(8.dp))
         // 문자열 분할
         var prevIndex = 0
-        var index = searchLog.text.indexOf(currentText.text)
-        val currentTextSize = currentText.text.length
+        var index = searchLog.text.indexOf(currentText.value.text)
+        val currentTextSize = currentText.value.text.length
         Text(
             text = buildAnnotatedString {
-                while (true) {
+                while (index!=-1) {
                     // 비검색 문자열 (이전 인덱스 ~ 현재 인덱스)
                     append(searchLog.text.substring(prevIndex, index))
                     // 검색 문자열  (현재 인덱스 ~ 검색 글자 수)
@@ -55,10 +56,9 @@ fun SearchResultItem(
                     // 이전 인덱스 = 현재 인덱스
                     prevIndex = index
                     // 현재 인덱스 = 다음 검색 글자
-                    index = searchLog.text.indexOf(currentText.text, index + 1)
+                    index = searchLog.text.indexOf(currentText.value.text, index + 1)
                     if (index == -1) {
                         append(searchLog.text.substring(prevIndex))
-                        break
                     }
                 }
             },
