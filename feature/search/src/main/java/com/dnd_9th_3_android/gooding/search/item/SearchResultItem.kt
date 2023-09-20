@@ -18,6 +18,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.substring
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,26 +40,23 @@ fun SearchResultItem(
         )
         Spacer(modifier = Modifier.width(8.dp))
         // 문자열 분할
-        var prevIndex = 0
-        var index = searchLog.text.indexOf(currentText.value.text)
+        var indexList = searchLog.text.indexOfAll(currentText.value.text)
         val currentTextSize = currentText.value.text.length
         Text(
             text = buildAnnotatedString {
-                while (index!=-1) {
-                    // 비검색 문자열 (이전 인덱스 ~ 현재 인덱스)
-                    append(searchLog.text.substring(prevIndex, index))
-                    // 검색 문자열  (현재 인덱스 ~ 검색 글자 수)
-                    withStyle(
-                        SpanStyle(color = colorResource(id = R.color.secondary_1))
-                    ){
-                        append(searchLog.text.substring(index, index + currentTextSize))
-                    }
-                    // 이전 인덱스 = 현재 인덱스
-                    prevIndex = index
-                    // 현재 인덱스 = 다음 검색 글자
-                    index = searchLog.text.indexOf(currentText.value.text, index + 1)
-                    if (index == -1) {
-                        append(searchLog.text.substring(prevIndex))
+                if (indexList.isEmpty()) { append(searchLog.text) }
+                else {
+                    for (i in 0 until indexList.size){
+                        withStyle(
+                            SpanStyle(color = colorResource(id = R.color.secondary_1))
+                        ){
+                            append(searchLog.text.substring(indexList[i],indexList[i]+currentTextSize))
+                        }
+                        if (i == indexList.size-1){ //마지막
+                            append(searchLog.text.substring(indexList[i]+currentTextSize))
+                        }else{
+                            append(searchLog.text.substring(indexList[i]+currentTextSize,indexList[i+1]))
+                        }
                     }
                 }
             },
@@ -69,4 +67,15 @@ fun SearchResultItem(
             overflow = TextOverflow.Ellipsis // ... 처리
         )
     }
+}
+
+fun String.indexOfAll(str : String) : MutableList<Int>{
+    var index = this.indexOf(str)
+    val returnIndex = mutableListOf<Int>()
+
+    while (index != -1){
+        returnIndex.add(index)
+        index = this.indexOf(str, index+1)
+    }
+    return returnIndex
 }
