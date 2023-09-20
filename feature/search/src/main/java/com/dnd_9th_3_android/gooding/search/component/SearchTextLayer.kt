@@ -1,6 +1,7 @@
 package com.dnd_9th_3_android.gooding.search.component
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,18 +10,21 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
-
+import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import androidx.compose.foundation.Image
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SearchTextLayer(
@@ -34,29 +38,38 @@ fun SearchTextLayer(
 
     // Composable icon
     val trailingIconView = @Composable{
-        Row {
-            if (visualCloseIcon.value) {
-                IconButton(
-                    onClick = {
-                        searchText.value = TextFieldValue("")
-                        visualCloseIcon.value = false
-                    }
-                ){
-                    Box(Modifier.size(24.dp)){
-                        Icon(
+        IconButton(onClick = {}) {
+            Row (
+                Modifier
+                    .height(24.dp)
+                    .padding(end = 8.dp)
+            ){
+                // close box
+                if (visualCloseIcon.value) {
+                    Box(
+                        Modifier
+                            .size(24.dp)
+                            .clickable {
+                                searchText.value = TextFieldValue("")
+                                visualCloseIcon.value = false
+                            }
+                    ) {
+                        Image(
                             painter = painterResource(id = R.drawable.search_data_delete_24),
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
                         )
                     }
-                }
-            }
-            Spacer(modifier = Modifier.width(4.dp))
-            IconButton(
-                onClick = {
-                    searchData()
-                }
-            ){
-                Box(Modifier.size(24.dp)){
+                }else{ Box(Modifier.size(24.dp)) }
+                Spacer(modifier = Modifier.width(4.dp))
+                // search box
+                Box(
+                    Modifier
+                        .size(24.dp)
+                        .clickable {
+                            searchData()
+                        }
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.search_24),
                         contentDescription = null,
@@ -65,6 +78,7 @@ fun SearchTextLayer(
                 }
             }
         }
+
     }
 
     val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
@@ -76,6 +90,12 @@ fun SearchTextLayer(
         ){
             BasicTextField(
                 value = searchText.value,
+                singleLine = true,
+                textStyle = TextStyle(
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontFamily = pretendardRegular
+                ),
                 onValueChange = {searchText.value = it},
                 modifier = Modifier.fillMaxSize(),
                 interactionSource = interactionSource,

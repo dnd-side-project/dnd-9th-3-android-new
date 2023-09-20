@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.search.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -22,7 +23,7 @@ import com.dnd_9th_3_android.gooding.search.item.RecentlyItem
 fun RecentlySearchScreen(
     searchLogListState : SnapshotStateList<SearchLog>
 ) {
-    Column(Modifier.padding(horizontal = 18.dp)) {
+    Column {
         Box(Modifier.fillMaxWidth()){
             Text(
                 text = "최근 검색어",
@@ -31,13 +32,17 @@ fun RecentlySearchScreen(
                 fontSize = 16.sp,
                 fontFamily = pretendardBold
             )
-            Text(
-                text = "모두 지우기",
-                modifier = Modifier.align(Alignment.CenterEnd),
-                color = colorResource(id = R.color.blue_gray_3),
-                fontSize = 14.sp,
-                fontFamily = pretendardBold
-            )
+            Box(Modifier.clickable {
+                searchLogListState.clear()
+            }){
+                Text(
+                    text = "모두 지우기",
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                    color = colorResource(id = R.color.blue_gray_3),
+                    fontSize = 14.sp,
+                    fontFamily = pretendardBold
+                )
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
