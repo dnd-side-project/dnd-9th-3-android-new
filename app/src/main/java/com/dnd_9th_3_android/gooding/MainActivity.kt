@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.app.ActivityCompat
 import com.dnd_9th_3_android.gooding.databinding.ActivityMainBinding
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryActivity
+import com.dnd_9th_3_android.gooding.trash.FeedFragment
+import com.dnd_9th_3_android.gooding.trash.MyGoodingFragment
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint

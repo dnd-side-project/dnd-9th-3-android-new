@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.dnd_9th_3_android.gooding.presentation.gallery.GalleryViewModel" />
+            type="com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
