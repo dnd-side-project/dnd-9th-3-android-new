@@ -97,7 +97,7 @@
 
             </LinearLayout>
 
-            <com.dnd_9th_3_android.gooding.ui.component.RecordInputView
+            <com.dnd_9th_3_android.gooding.trash.component.RecordInputView
                 android:id="@+id/text_layout_title_goodie_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_title_what_goodie_day_did_you_have" />
 
-            <com.dnd_9th_3_android.gooding.ui.component.RecordInputView
+            <com.dnd_9th_3_android.gooding.trash.component.RecordInputView
                 android:id="@+id/text_layout_content_goodie_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

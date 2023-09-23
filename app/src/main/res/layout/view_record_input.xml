@@ -7,7 +7,7 @@
     tools:layout_width="match_parent"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <com.dnd_9th_3_android.gooding.ui.component.RecordEditText
+    <com.dnd_9th_3_android.gooding.trash.component.RecordEditText
         android:id="@+id/input_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
