@@ -1,1 +1,5 @@
-<resources></resources>
+<resources>
+    <string name="feed_screen_text">피드</string>
+    <string name="record_screen_text">기록</string>
+    <string name="my_account_screen_text">나의 굳잉</string>
+</resources>
