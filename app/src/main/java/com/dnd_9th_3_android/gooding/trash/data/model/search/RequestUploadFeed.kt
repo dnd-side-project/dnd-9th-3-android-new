@@ -1,7 +1,5 @@
 package com.dnd_9th_3_android.gooding.trash.data.model.search
 
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryData
-import com.dnd_9th_3_android.gooding.data.model.request.UploadRequest
 import java.io.File
 
 data class RequestUploadFeed1(

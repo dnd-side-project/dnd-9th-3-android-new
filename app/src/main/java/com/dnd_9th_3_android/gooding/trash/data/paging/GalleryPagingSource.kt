@@ -2,8 +2,8 @@ package com.dnd_9th_3_android.gooding.trash.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dnd_9th_3_android.gooding.data.local.GalleryLocalDataSource
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryData
+import com.dnd_9th_3_android.gooding.trash.data.local.GalleryLocalDataSource
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryData
 
 class GalleryPagingSource(
     private val galleryLocalDataSource: GalleryLocalDataSource,

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedData
 import com.dnd_9th_3_android.gooding.databinding.ItemPopularKeywordBinding
 
 class SearchFeedListAdapter(

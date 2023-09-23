@@ -3,8 +3,8 @@ package com.dnd_9th_3_android.gooding.trash.data.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedResponse
-import com.dnd_9th_3_android.gooding.data.remote.search.SearchFeedListRemoteDataSource
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedResponse
+import com.dnd_9th_3_android.gooding.trash.data.remote.search.SearchFeedListRemoteDataSource
 
 class SearchFeedListPagingSource(
     private val searchFeedListRemoteDataSource: SearchFeedListRemoteDataSource,
@@ -28,9 +28,6 @@ class SearchFeedListPagingSource(
                     query = query
                 )
             }
-                .onFailure {
-                    return LoadResult.Error(it)
-                }
 
         val list = searchFeedResponse.getOrNull()?.result.orEmpty()
 

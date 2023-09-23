@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.dnd_9th_3_android.gooding.data.model.search.PopularKeywordData
-import com.dnd_9th_3_android.gooding.data.model.search.RecentKeywordData
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedData
-import com.dnd_9th_3_android.gooding.data.model.search.toEntity
-import com.dnd_9th_3_android.gooding.data.repository.search.SearchFeedRepository
+import com.dnd_9th_3_android.gooding.trash.data.model.search.PopularKeywordData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RecentKeywordData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.toEntity
+import com.dnd_9th_3_android.gooding.trash.data.repository.search.SearchFeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

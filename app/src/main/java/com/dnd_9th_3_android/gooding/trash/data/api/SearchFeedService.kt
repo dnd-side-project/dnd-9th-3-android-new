@@ -1,8 +1,8 @@
 package com.dnd_9th_3_android.gooding.trash.data.api
 
-import com.dnd_9th_3_android.gooding.data.model.search.PopularKeywordListResponse
-import com.dnd_9th_3_android.gooding.data.model.search.RecentKeywordListResponse
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedListResponse
+import com.dnd_9th_3_android.gooding.trash.data.model.search.PopularKeywordListResponse
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RecentKeywordListResponse
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedListResponse
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST

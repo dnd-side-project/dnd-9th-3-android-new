@@ -2,10 +2,10 @@ package com.dnd_9th_3_android.gooding.trash.di
 
 import android.util.Log
 import com.dnd_9th_3_android.gooding.api.baseUrl
-import com.dnd_9th_3_android.gooding.data.api.KakaoMapService
+import com.dnd_9th_3_android.gooding.trash.data.api.KakaoMapService
 import com.dnd_9th_3_android.gooding.api.kakaoMapUrl
-import com.dnd_9th_3_android.gooding.data.api.RecordFeedService
-import com.dnd_9th_3_android.gooding.data.api.SearchFeedService
+import com.dnd_9th_3_android.gooding.trash.data.api.RecordFeedService
+import com.dnd_9th_3_android.gooding.trash.data.api.SearchFeedService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

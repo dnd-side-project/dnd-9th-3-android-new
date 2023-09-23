@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnd_9th_3_android.gooding.data.model.search.RequestUploadFeed1
-import com.dnd_9th_3_android.gooding.data.repository.feed.UploadFeedRepository
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RequestUploadFeed1
+import com.dnd_9th_3_android.gooding.trash.data.repository.feed.UploadFeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

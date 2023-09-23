@@ -8,7 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ViewCenterToastBinding
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
+
 
 class CenterToastView @JvmOverloads constructor(
     context: Context,

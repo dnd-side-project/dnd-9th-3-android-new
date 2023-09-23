@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnd_9th_3_android.gooding.data.model.map.KakaoMapData
-import com.dnd_9th_3_android.gooding.data.model.map.KakaoMapDocuments
-import com.dnd_9th_3_android.gooding.data.model.map.KakaoMapResponse
-import com.dnd_9th_3_android.gooding.data.repository.map.KakaoMapAddressRepository
+import com.dnd_9th_3_android.gooding.trash.data.model.map.KakaoMapData
+import com.dnd_9th_3_android.gooding.trash.data.model.map.KakaoMapDocuments
+import com.dnd_9th_3_android.gooding.trash.data.model.map.KakaoMapResponse
+import com.dnd_9th_3_android.gooding.trash.data.repository.map.KakaoMapAddressRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

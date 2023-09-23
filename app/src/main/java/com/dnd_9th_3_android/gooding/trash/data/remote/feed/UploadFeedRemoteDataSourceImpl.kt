@@ -1,9 +1,9 @@
 package com.dnd_9th_3_android.gooding.trash.data.remote.feed
 
-import com.dnd_9th_3_android.gooding.data.api.RecordFeedService
-import com.dnd_9th_3_android.gooding.data.model.search.RequestUploadFeed
-import com.dnd_9th_3_android.gooding.data.model.feed.UploadFeedResponse
-import com.dnd_9th_3_android.gooding.presentation.util.FormDataUtil
+import com.dnd_9th_3_android.gooding.trash.data.api.RecordFeedService
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RequestUploadFeed
+import com.dnd_9th_3_android.gooding.trash.data.model.feed.UploadFeedResponse
+import com.dnd_9th_3_android.gooding.trash.presentation.util.FormDataUtil
 import javax.inject.Inject
 
 class UploadFeedRemoteDataSourceImpl @Inject constructor(

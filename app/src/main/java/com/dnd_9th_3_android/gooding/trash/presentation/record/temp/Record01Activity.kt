@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ActivityRecord01Binding
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryFileUiData
-import com.dnd_9th_3_android.gooding.presentation.record.search.SearchGoodieDayPlaceActivity
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
+import com.dnd_9th_3_android.gooding.trash.presentation.record.search.SearchGoodieDayPlaceActivity
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.Observable
 import java.text.SimpleDateFormat

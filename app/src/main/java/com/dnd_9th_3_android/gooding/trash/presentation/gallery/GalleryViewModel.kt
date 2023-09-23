@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.dnd_9th_3_android.gooding.data.model.gallery.toUiData
-import com.dnd_9th_3_android.gooding.data.repository.gallery.GalleryRepository
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.toUiData
+import com.dnd_9th_3_android.gooding.trash.data.repository.gallery.GalleryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow

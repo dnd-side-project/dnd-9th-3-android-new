@@ -1,7 +1,7 @@
 package com.dnd_9th_3_android.gooding.trash.data.model.feed
 
 import android.os.Parcelable
-import com.dnd_9th_3_android.gooding.data.model.request.UploadRequest
+import com.dnd_9th_3_android.gooding.trash.data.model.request.UploadRequest
 import kotlinx.parcelize.Parcelize
 import java.io.File
 

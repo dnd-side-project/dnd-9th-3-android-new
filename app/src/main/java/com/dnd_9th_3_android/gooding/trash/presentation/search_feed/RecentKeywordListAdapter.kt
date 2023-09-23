@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dnd_9th_3_android.gooding.data.model.search.RecentKeywordData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RecentKeywordData
 import com.dnd_9th_3_android.gooding.databinding.ItemRecentKeywordBinding
 
 class RecentKeywordListAdapter(

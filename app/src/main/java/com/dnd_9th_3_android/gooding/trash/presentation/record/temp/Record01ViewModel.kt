@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnd_9th_3_android.gooding.data.model.search.RequestUploadFeed1
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryFileUiData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RequestUploadFeed1
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

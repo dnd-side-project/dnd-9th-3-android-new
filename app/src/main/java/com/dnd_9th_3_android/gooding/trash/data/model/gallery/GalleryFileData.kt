@@ -1,6 +1,7 @@
 package com.dnd_9th_3_android.gooding.trash.data.model.gallery
 
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryFileUiData
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
+
 
 data class GalleryData(
     val id: Long = -1,

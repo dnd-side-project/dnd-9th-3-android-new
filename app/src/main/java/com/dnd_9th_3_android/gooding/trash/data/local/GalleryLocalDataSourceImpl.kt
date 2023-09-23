@@ -14,10 +14,10 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import com.dnd_9th_3_android.gooding.R
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryAlbumData
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryData
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryImageData
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryVideoData
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryAlbumData
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryData
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryImageData
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryVideoData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dnd_9th_3_android.gooding.databinding.ItemRecordImageVideoFileBinding
 import com.dnd_9th_3_android.gooding.databinding.ViewAddFileBinding
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 
 class RecordImageVideoListAdapter(
     private val onClick: (RecordGalleryItem) -> Unit,

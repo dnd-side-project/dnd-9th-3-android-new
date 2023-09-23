@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.dnd_9th_3_android.gooding.presentation.record.search.SearchGoodieDayPlaceViewModel" />
+            type="com.dnd_9th_3_android.gooding.trash.presentation.record.search.SearchGoodieDayPlaceViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

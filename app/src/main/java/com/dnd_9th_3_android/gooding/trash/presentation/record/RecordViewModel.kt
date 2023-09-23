@@ -6,8 +6,8 @@ import androidx.compose.runtime.MutableState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnd_9th_3_android.gooding.data.repository.record.RecordRepository
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryFileUiData
+import com.dnd_9th_3_android.gooding.trash.data.repository.record.RecordRepository
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

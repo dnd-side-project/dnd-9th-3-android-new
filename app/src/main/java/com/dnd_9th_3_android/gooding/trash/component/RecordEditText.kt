@@ -17,7 +17,7 @@ import androidx.core.view.updateMargins
 import androidx.core.widget.doOnTextChanged
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ViewRecordEditBinding
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 
 
 @SuppressLint("ClickableViewAccessibility", "SetTextI18n")

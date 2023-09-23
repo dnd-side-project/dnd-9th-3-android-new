@@ -1,9 +1,9 @@
 package com.dnd_9th_3_android.gooding.trash.data.repository.search
 
 import androidx.paging.PagingData
-import com.dnd_9th_3_android.gooding.data.model.search.PopularKeywordListResponse
-import com.dnd_9th_3_android.gooding.data.model.search.RecentKeywordListResponse
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.PopularKeywordListResponse
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RecentKeywordListResponse
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedData
 import kotlinx.coroutines.flow.Flow
 
 interface SearchFeedRepository {

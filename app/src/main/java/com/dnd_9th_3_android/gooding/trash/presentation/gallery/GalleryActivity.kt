@@ -22,8 +22,8 @@ import com.dnd_9th_3_android.gooding.trash.FeedFragment
 import com.dnd_9th_3_android.gooding.trash.MyGoodingFragment
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ActivityGalleryBinding
-import com.dnd_9th_3_android.gooding.presentation.record.RecordActivity
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.record.RecordActivity
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 import com.dnd_9th_3_android.gooding.trash.component.CenterToastView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay

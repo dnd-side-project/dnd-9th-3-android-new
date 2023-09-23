@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.dnd_9th_3_android.gooding.data.local.GalleryLocalDataSource
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryAlbumData
-import com.dnd_9th_3_android.gooding.data.model.gallery.GalleryData
-import com.dnd_9th_3_android.gooding.data.paging.GalleryPagingSource
+import com.dnd_9th_3_android.gooding.trash.data.local.GalleryLocalDataSource
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryAlbumData
+import com.dnd_9th_3_android.gooding.trash.data.model.gallery.GalleryData
+import com.dnd_9th_3_android.gooding.trash.data.paging.GalleryPagingSource
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 import kotlinx.coroutines.flow.Flow

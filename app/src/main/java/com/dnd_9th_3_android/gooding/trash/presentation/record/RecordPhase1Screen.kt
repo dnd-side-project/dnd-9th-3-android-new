@@ -58,7 +58,7 @@ import coil.compose.rememberImagePainter
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
-import com.dnd_9th_3_android.gooding.presentation.record.search.SearchGoodieDayPlaceActivity
+import com.dnd_9th_3_android.gooding.trash.presentation.record.search.SearchGoodieDayPlaceActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

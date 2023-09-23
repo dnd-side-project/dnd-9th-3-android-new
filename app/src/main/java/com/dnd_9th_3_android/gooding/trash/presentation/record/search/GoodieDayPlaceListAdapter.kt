@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dnd_9th_3_android.gooding.data.model.map.KakaoMapDocuments
+import com.dnd_9th_3_android.gooding.trash.data.model.map.KakaoMapDocuments
 import com.dnd_9th_3_android.gooding.databinding.ItemKakaoMapPlaceBinding
 
 class GoodieDayPlaceListAdapter(

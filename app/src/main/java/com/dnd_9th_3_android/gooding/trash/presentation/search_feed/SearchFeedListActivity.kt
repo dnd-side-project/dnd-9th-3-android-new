@@ -25,13 +25,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
-import com.dnd_9th_3_android.gooding.data.model.search.PopularKeywordData
-import com.dnd_9th_3_android.gooding.data.model.search.RecentKeywordData
-import com.dnd_9th_3_android.gooding.data.model.search.SearchFeedData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.PopularKeywordData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.RecentKeywordData
+import com.dnd_9th_3_android.gooding.trash.data.model.search.SearchFeedData
 import com.dnd_9th_3_android.gooding.databinding.ActivitySearchFeedListBinding
 import com.dnd_9th_3_android.gooding.databinding.ItemPopularKeywordBinding
 import com.dnd_9th_3_android.gooding.databinding.ItemRecentKeywordBinding
-import com.dnd_9th_3_android.gooding.presentation.util.fromDpToPx
+import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.coroutines.launch

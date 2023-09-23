@@ -36,8 +36,8 @@ import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.data.sampleData.SampleRecordData
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
 import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
-import com.dnd_9th_3_android.gooding.presentation.gallery.GalleryFileUiData
-import com.dnd_9th_3_android.gooding.presentation.record.temp.BottomSheetDatePicker
+import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
+import com.dnd_9th_3_android.gooding.trash.presentation.record.temp.BottomSheetDatePicker
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
