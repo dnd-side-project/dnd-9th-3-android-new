@@ -37,7 +37,6 @@ class FeedFragment : Fragment() {
                 // In Compose
                 GoodingTheme {
 //                    FeedScreen()
-                    mainActivity.bottomNavi.visibility = View.GONE
                     SearchScreen()
                 }
             }

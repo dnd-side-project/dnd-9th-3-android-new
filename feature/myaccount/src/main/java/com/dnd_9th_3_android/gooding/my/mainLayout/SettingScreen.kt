@@ -9,13 +9,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @Composable
 fun SettingScreen(
-    onBackPress : () -> Unit,
-    bottomNavi: BottomNavigationView
+    onBackPress : () -> Unit
 ) {
-    BottomNaviLocator.stateChange(bottomNavi,false)
+//    BottomNaviLocator.stateChange(bottomNavi,false)
     // 뒤로가기 동작 제어
     BackHandler(enabled = true, onBack = {
-        BottomNaviLocator.stateChange(bottomNavi,true)
+//        BottomNaviLocator.stateChange(bottomNavi,true)
         onBackPress()
     })
 }

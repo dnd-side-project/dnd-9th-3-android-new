@@ -4,8 +4,6 @@
     <style name="Base.Theme.MyApplication.ActivityFullscreenNoCutout" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

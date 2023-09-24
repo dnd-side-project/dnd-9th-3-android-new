@@ -36,8 +36,7 @@ import kotlinx.coroutines.*
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMotionApi::class, DelicateCoroutinesApi::class)
 @Composable
 fun MyScreen(
-    navController: NavController,
-    bottomNavi : BottomNavigationView
+    navController: NavController
 ) {
     // swipe state
     val swipingState = rememberSwipeableState(initialValue = SwipingStates.EXPANDED)
@@ -165,10 +164,10 @@ fun MyScreen(
                     // top bottom Visible
                     if (swipingState.currentValue==SwipingStates.COLLAPSED){
                         topBottom = true
-                        BottomNaviLocator.stateChange(bottomNavi,false)
+//                        BottomNaviLocator.stateChange(bottomNavi,false)
                     }else{
                         topBottom = false
-                        BottomNaviLocator.stateChange(bottomNavi,true)
+//                        BottomNaviLocator.stateChange(bottomNavi,true)
                     }
                 },
                 progress = computedProgress
