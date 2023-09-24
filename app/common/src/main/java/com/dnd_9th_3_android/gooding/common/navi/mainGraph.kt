@@ -23,7 +23,7 @@ fun NavGraphBuilder.mainGraph(appState : ApplicationState) {
             // Record
             SearchScreen()
         }
-        composable(BottomScreen.Feed.route){
+        composable(BottomScreen.MyAccount.route){
             MyAccountScreen()
         }
     }

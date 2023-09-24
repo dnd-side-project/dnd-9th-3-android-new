@@ -55,7 +55,7 @@ fun UserInfoScreen() {
         Spacer(modifier =Modifier.width(dimensionResource(id = R.dimen.padding_10)))
         // user name
         Text(
-            text =  com.dnd_9th_3_android.gooding.api.UserInfo.myData!!.nickname,
+            text =  "username",
             fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
             color = Color.White,
             fontFamily = pretendardBold

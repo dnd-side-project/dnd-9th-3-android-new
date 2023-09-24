@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -48,13 +49,15 @@ fun BottomBar(
                 val isSelected =
                     currentDestination?.hierarchy?.any {it.route == screen.route} == true
                 BottomNavigationItem(
+
                     icon = {
                         Icon(
                             painter = painterResource(
                                 id =
                                 if (isSelected) screen.selectedDrawableResId else screen.drawableResId
                             ),
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.padding(bottom = 4.dp)
                         )
                     },
                     label = {
