@@ -17,17 +17,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationGraph(
-    navController: NavHostController,
-    bottomNavi : BottomNavigationView
+    navController: NavHostController
 ){
     NavHost(
         navController = navController,
         startDestination = "myScreen"
     ){
-        composable("myScreen"){ MyScreen(navController,bottomNavi) }
+        composable("myScreen"){ MyScreen(navController) }
         composable("settingScreen"){SettingScreen(onBackPress = {
 //            BottomNaviLocator.stateChange(bottomNavi,true)
             navController.popBackStack()
-        },bottomNavi)}
+        })}
     }
 }

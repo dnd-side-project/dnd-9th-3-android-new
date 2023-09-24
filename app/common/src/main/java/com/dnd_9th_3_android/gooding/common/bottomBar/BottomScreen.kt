@@ -6,11 +6,13 @@ import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_FEED
 import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_MY
 import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_RECORD
 import com.dnd_9th_3_android.gooding.core.data.R
+
+// 각 바텀 스크린 아이템
 sealed class BottomScreen(
     val route : String,
     @StringRes val stringResId : Int,
-    @DrawableRes val drawableResId : Int? = null,
-    @DrawableRes val selectedDrawableResId : Int? = null,
+    @DrawableRes val drawableResId : Int ,
+    @DrawableRes val selectedDrawableResId : Int ,
 ) {
     object Feed:
         BottomScreen(

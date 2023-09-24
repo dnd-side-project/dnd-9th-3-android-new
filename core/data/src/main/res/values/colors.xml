@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
     <color name="unselect_white">#80FFFFFF</color>
     <color name="location_color">#50FFFFFF</color>
     <color name="tab_shadow">#26000000</color> <!--15%-->

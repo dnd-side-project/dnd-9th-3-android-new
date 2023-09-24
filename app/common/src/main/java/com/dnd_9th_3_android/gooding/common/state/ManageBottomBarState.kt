@@ -5,6 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.navigation.NavBackStackEntry
 import com.dnd_9th_3_android.gooding.common.root.ScreenRoot
 
+// bottom bar 뷰 보이는 관리
 @Composable
 fun ManageBottomBarState(
     navBackStackEntry: NavBackStackEntry?,

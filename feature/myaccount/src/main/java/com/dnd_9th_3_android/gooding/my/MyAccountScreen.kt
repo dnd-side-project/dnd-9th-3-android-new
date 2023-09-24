@@ -17,12 +17,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 // just nav controller view
 @Composable
-fun MyAccountScreen(
-    bottomNavi : BottomNavigationView,
-) {
+fun MyAccountScreen() {
     // 뒤로가기 동작 제어
     BackHandler(enabled = true, onBack = {})
 
     val navController = rememberNavController()
-    NavigationGraph(navController,bottomNavi)
+    NavigationGraph(navController)
 }

@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.ui.theme
 
+import android.view.View
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -36,8 +37,7 @@ fun GoodingTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
     } else {
         LightColorPalette
     }
-
-    rememberSystemUiController().setStatusBarColor(color = Color(0xFF1C1D27))
+    rememberSystemUiController().isStatusBarVisible = false
 
     MaterialTheme(
         colors = colors,
