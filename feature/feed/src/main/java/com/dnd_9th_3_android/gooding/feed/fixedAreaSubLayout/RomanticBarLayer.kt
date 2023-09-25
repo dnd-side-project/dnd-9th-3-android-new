@@ -1,6 +1,5 @@
 package com.dnd_9th_3_android.gooding.feed.itemFeed
 
-import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -12,17 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Observer
 
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.coustomShadow
+import com.dnd_9th_3_android.gooding.data.component.coustomShadow
 import com.dnd_9th_3_android.gooding.feed.romanticFunction.BarInternalContent
 import com.dnd_9th_3_android.gooding.feed.romanticFunction.ProgressGradient
 import com.dnd_9th_3_android.gooding.feed.romanticFunction.ProgressGraphic
@@ -30,8 +25,6 @@ import com.dnd_9th_3_android.gooding.feed.romanticFunction.ProgressSlider
 import com.dnd_9th_3_android.gooding.feed.viewModel.MainFeedViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable

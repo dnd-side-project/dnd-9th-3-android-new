@@ -20,12 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.TextFieldValue
 import com.dnd_9th_3_android.gooding.data.sampleData.SampleSearchData
+import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.model.search.PopularData
 import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import com.dnd_9th_3_android.gooding.search.ui.*
 
 @Composable
-fun SearchScreen(){
+fun SearchScreen(appState : ApplicationState){
     val focusManager = LocalFocusManager.current
 
     val currentStep =  remember { mutableStateOf("인기") }
@@ -97,9 +98,3 @@ fun SearchScreen(){
     }
 }
 
-
-@Composable
-@Preview
-fun SearchPreview(){
-    SearchScreen()
-}

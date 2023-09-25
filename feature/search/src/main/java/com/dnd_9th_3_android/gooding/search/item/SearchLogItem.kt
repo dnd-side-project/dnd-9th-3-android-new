@@ -14,7 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import com.dnd_9th_3_android.gooding.model.search.SearchLog
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource

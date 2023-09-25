@@ -1,7 +1,6 @@
 package com.dnd_9th_3_android.gooding.my.subLayout
 
 import android.annotation.SuppressLint
-import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,9 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
-import com.dnd_9th_3_android.gooding.my.BottomNaviLocator
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 
 // my main top menu
 @SuppressLint("RestrictedApi")

@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.contentLayout
+package com.dnd_9th_3_android.gooding.data.component
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

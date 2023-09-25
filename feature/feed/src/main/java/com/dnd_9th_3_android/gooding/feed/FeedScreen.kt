@@ -7,6 +7,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
+import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 
 import com.dnd_9th_3_android.gooding.feed.fixedAreaSubLayout.FeedTopLayout
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -16,7 +18,7 @@ import com.google.accompanist.pager.rememberPagerState
 private val pages = listOf("NOW", "HOT")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FeedScreen() {
+fun FeedScreen(appState : ApplicationState) {
     // 뒤로가기 동작 제어
     BackHandler(enabled = true, onBack = {})
     Box {
@@ -39,8 +41,13 @@ fun FeedScreen() {
         Box(
             modifier = Modifier.align(Alignment.TopCenter)
         ){
-            val coroutineScope = rememberCoroutineScope()
-            FeedTopLayout(pageState = hoPageState, coroutineScope = coroutineScope)
+            FeedTopLayout(
+                pageState = hoPageState,
+                coroutineScope = appState.coroutineScope,
+                goSearch = {
+                    appState.navController.navigate(ScreenRoot.MAIN_SEARCH)
+                }
+            )
         }
     }
 

@@ -34,8 +34,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.MainActivity
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.data.sampleData.SampleRecordData
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
 import com.dnd_9th_3_android.gooding.trash.presentation.record.temp.BottomSheetDatePicker
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme

@@ -16,7 +16,7 @@ object RetrofitUtil {
     val LoginApiService : LoginRetrofitService by lazy {
         getRetrofit().create(LoginRetrofitService::class.java)
     }
-    lateinit var userApiService: UserApiService
+    var userApiService: UserApiService? = null
 
     // 레트로핏 생성
     private fun getRetrofit() : Retrofit{

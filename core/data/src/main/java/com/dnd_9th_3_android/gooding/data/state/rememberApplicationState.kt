@@ -1,9 +1,8 @@
-package com.dnd_9th_3_android.gooding.common.state
+package com.dnd_9th_3_android.gooding.data.state
 
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope

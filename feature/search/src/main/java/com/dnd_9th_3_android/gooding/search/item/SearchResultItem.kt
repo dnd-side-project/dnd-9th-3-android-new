@@ -16,13 +16,11 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.substring
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import com.dnd_9th_3_android.gooding.model.search.SearchLog
 
 @Composable

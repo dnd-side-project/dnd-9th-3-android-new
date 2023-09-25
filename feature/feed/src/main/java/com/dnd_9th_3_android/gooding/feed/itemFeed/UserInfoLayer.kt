@@ -2,8 +2,6 @@ package com.dnd_9th_3_android.gooding.feed.itemFeed
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import coil.compose.rememberImagePainter
-import com.dnd_9th_3_android.gooding.model.user.SampleUserInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,11 +16,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.model.user.UserInfo
 
 

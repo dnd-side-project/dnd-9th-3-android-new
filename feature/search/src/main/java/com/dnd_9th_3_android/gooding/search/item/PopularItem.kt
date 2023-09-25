@@ -9,12 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import com.dnd_9th_3_android.gooding.model.search.PopularData
 
 @Composable

@@ -5,27 +5,25 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.dnd_9th_3_android.gooding.common.root.ScreenRoot
-import com.dnd_9th_3_android.gooding.common.state.ApplicationState
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
+import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.material.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardMedium
+import com.dnd_9th_3_android.gooding.data.component.pretendardMedium
 
 // BottomNavigation Bar
 @Composable
@@ -73,13 +71,16 @@ fun BottomBar(
                     selected = isSelected,
                     onClick = {
                         appState.navController.navigate(screen.route){
-                            // saveState +  restoreState -> 상태 저장, 유지 , 복원
-                            popUpTo(ScreenRoot.MAIN_GRAPH){
-                                saveState = true
+                            // 레코드 스크린의 경우 백 스택 추가
+                            if (screen.route!=ScreenRoot.MAIN_RECORD) {
+                                // saveState +  restoreState -> 상태 저장, 유지 , 복원
+                                popUpTo(ScreenRoot.MAIN_GRAPH) {
+                                    saveState = true
+                                }
+                                // 멀티 목적지 방지
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            // 멀티 목적지를 방지
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     },
                     selectedContentColor = Color.White,

@@ -17,8 +17,8 @@ class LoginViewModel @Inject constructor(): ViewModel(){
     fun userInfoData(){
         if(isUser) {
             RetrofitUtil.userOauth?.let { oauth ->
-                RetrofitUtil.userApiService.getUserInfo(oauth)
-                    .enqueue(object : Callback<com.dnd_9th_3_android.gooding.model.user.UserInfo> {
+                RetrofitUtil.userApiService?.getUserInfo(oauth)
+                    ?.enqueue(object : Callback<com.dnd_9th_3_android.gooding.model.user.UserInfo> {
                         override fun onResponse(
                             call: Call<com.dnd_9th_3_android.gooding.model.user.UserInfo>,
                             response: Response<com.dnd_9th_3_android.gooding.model.user.UserInfo>

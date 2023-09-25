@@ -12,7 +12,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.BoxText
+import com.dnd_9th_3_android.gooding.data.component.BoxText
 
 // user level
 @Composable

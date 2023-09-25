@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.material.Text
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 
 @Composable
 fun NoSearchDataScreen() {

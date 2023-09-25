@@ -31,7 +31,7 @@ class MyGoodingFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 GoodingTheme {
-                    MyAccountScreen()
+//                    MyAccountScreen()
                 }
             }
         }

@@ -1,7 +1,6 @@
 package com.dnd_9th_3_android.gooding.feed.itemFeed
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import com.dnd_9th_3_android.gooding.model.feed.Feed
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -17,8 +16,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.bottomGradient
-import com.dnd_9th_3_android.gooding.data.contentLayout.topGradient
+import com.dnd_9th_3_android.gooding.data.component.bottomGradient
+import com.dnd_9th_3_android.gooding.data.component.topGradient
 import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPost
 import com.dnd_9th_3_android.gooding.feed.feedScreen.OneFeedContent
 import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.GradientBoxState

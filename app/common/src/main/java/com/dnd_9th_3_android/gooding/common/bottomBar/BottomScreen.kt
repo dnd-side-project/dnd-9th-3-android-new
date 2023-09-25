@@ -2,9 +2,9 @@ package com.dnd_9th_3_android.gooding.common.bottomBar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_FEED
-import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_MY
-import com.dnd_9th_3_android.gooding.common.root.ScreenRoot.MAIN_RECORD
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot.MAIN_FEED
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot.MAIN_MY
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot.MAIN_RECORD
 import com.dnd_9th_3_android.gooding.core.data.R
 
 // 각 바텀 스크린 아이템

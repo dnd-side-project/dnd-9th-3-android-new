@@ -1,6 +1,5 @@
 package com.dnd_9th_3_android.gooding.feed.romanticFunction
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Alignment
@@ -18,7 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.camptonBold
+import com.dnd_9th_3_android.gooding.data.component.camptonBold
 
 @Composable
 fun ProgressGraphic(

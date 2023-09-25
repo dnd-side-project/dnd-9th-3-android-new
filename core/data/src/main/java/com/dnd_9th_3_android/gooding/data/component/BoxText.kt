@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.contentLayout
+package com.dnd_9th_3_android.gooding.data.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
