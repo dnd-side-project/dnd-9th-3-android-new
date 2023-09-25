@@ -7,10 +7,12 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 
 import com.dnd_9th_3_android.gooding.feed.fixedAreaSubLayout.FeedTopLayout
+import com.dnd_9th_3_android.gooding.feed.viewModel.FeedOptionViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -18,7 +20,12 @@ import com.google.accompanist.pager.rememberPagerState
 private val pages = listOf("NOW", "HOT")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FeedScreen(appState : ApplicationState) {
+fun FeedScreen(
+    appState : ApplicationState,
+    viewModel : FeedOptionViewModel = hiltViewModel()
+) {
+    // app State 저장
+    viewModel.initAppState(appState)
     // 뒤로가기 동작 제어
     BackHandler(enabled = true, onBack = {})
     Box {
@@ -45,7 +52,7 @@ fun FeedScreen(appState : ApplicationState) {
                 pageState = hoPageState,
                 coroutineScope = appState.coroutineScope,
                 goSearch = {
-                    appState.navController.navigate(ScreenRoot.MAIN_SEARCH)
+                    viewModel.naviToSearch()
                 }
             )
         }
