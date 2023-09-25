@@ -68,4 +68,8 @@ dependencies {
     // tab + pager
     implementation("com.google.accompanist:accompanist-pager:0.20.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.20.1")
+    // compose navi
+    implementation ("androidx.fragment:fragment-ktx:1.5.4")
+    implementation("androidx.navigation:navigation-compose:2.7.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 }

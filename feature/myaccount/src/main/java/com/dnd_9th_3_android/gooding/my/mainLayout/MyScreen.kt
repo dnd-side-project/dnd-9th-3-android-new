@@ -16,19 +16,18 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
 import androidx.navigation.NavController
-import com.dnd_9th_3_android.gooding.data.SwipingStates
+import com.dnd_9th_3_android.gooding.data.state.SwipingStates
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.my.BottomNaviLocator
 import com.dnd_9th_3_android.gooding.my.subLayout.BottomTabScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.LevelScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.TopMenuScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.UserInfoScreen
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.*
 
 
@@ -43,7 +42,9 @@ fun MyScreen(
     // top visible
     var topBottom by remember { mutableStateOf(false) }
     BoxWithConstraints( //to get the max height
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.blue_gray_7))
     ) {
         val heightInPx = with(LocalDensity.current) { maxHeight.toPx() }
         val nestedScrollConnection = remember {
@@ -162,7 +163,7 @@ fun MyScreen(
                         this.bottom.linkTo(parent.bottom,0.dp)
                     }
                     // top bottom Visible
-                    if (swipingState.currentValue==SwipingStates.COLLAPSED){
+                    if (swipingState.currentValue== SwipingStates.COLLAPSED){
                         topBottom = true
 //                        BottomNaviLocator.stateChange(bottomNavi,false)
                     }else{

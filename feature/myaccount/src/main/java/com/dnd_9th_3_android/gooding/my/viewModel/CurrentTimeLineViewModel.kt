@@ -24,8 +24,8 @@ class CurrentTimeLineViewModel @Inject constructor(): ViewModel() {
         if(prevDate!=loadData) {
             viewModelScope.launch {
 
-                RetrofitUtil.userApiService.getMyDateRecords(userId, recordDate.toInt())
-                    .enqueue(object : Callback<ArrayList<MyFeed>> {
+                RetrofitUtil.userApiService?.getMyDateRecords(userId, recordDate.toInt())
+                    ?.enqueue(object : Callback<ArrayList<MyFeed>> {
                         override fun onResponse(
                             call: Call<ArrayList<MyFeed>>,
                             response: Response<ArrayList<MyFeed>>

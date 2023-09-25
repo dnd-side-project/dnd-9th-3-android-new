@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.common.root
+package com.dnd_9th_3_android.gooding.data.root
 
 object ScreenRoot {
     const val MAIN_GRAPH = "mainGraph"

@@ -21,8 +21,8 @@ import coil.compose.rememberImagePainter
 import com.dnd_9th_3_android.gooding.data.video.CheckUrl
 import com.dnd_9th_3_android.gooding.data.video.VideoThumbnailUtil
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardRegular
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import com.dnd_9th_3_android.gooding.data.video.VideoDataChanger
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 

@@ -1,8 +1,7 @@
-package com.dnd_9th_3_android.gooding.data.contentLayout
+package com.dnd_9th_3_android.gooding.data.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import com.dnd_9th_3_android.gooding.core.data.R
 

@@ -18,14 +18,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.my.mainTabLayout.SaveFeedScreen
-import com.dnd_9th_3_android.gooding.my.mainTabLayout.TabTopScreen
 import com.dnd_9th_3_android.gooding.my.mainTabLayout.TimeLineScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.contentLayout.CustomRowTabBar
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.CustomRowTabBar
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.customRowTab.myPages
 
 

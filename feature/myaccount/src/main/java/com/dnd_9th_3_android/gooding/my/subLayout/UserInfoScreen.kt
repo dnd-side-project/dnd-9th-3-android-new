@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,12 +13,11 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
-import com.dnd_9th_3_android.gooding.data.contentLayout.BoxText
-import com.dnd_9th_3_android.gooding.data.contentLayout.pretendardBold
+import com.dnd_9th_3_android.gooding.data.component.BoxText
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 
 // user info
 @OptIn(ExperimentalCoilApi::class)

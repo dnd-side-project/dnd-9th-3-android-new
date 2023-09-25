@@ -23,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 fun FeedTopLayout(
     pageState: PagerState,
     coroutineScope: CoroutineScope,
+    goSearch : ()-> Unit
 ) {
     // top Layout
     Box(
@@ -42,19 +43,19 @@ fun FeedTopLayout(
         }
 
 
-        // search function
-        var goSearchActivity by remember {
-            mutableStateOf(false)
-        }
-        if (goSearchActivity){
-            // go search activity
-            val intent = Intent(
-                LocalContext.current.applicationContext,
-                Class.forName("com.dnd_9th_3_android.gooding.presentation.search_feed.SearchFeedListActivity")
-            )
-            LocalContext.current.startActivity(intent)
-            goSearchActivity = false
-        }
+//        // search function
+//        var goSearchActivity by remember {
+//            mutableStateOf(false)
+//        }
+//        if (goSearchActivity){
+//            // go search activity
+//            val intent = Intent(
+//                LocalContext.current.applicationContext,
+//                Class.forName("com.dnd_9th_3_android.gooding.presentation.search_feed.SearchFeedListActivity")
+//            )
+//            LocalContext.current.startActivity(intent)
+//            goSearchActivity = false
+//        }
 
         // search button
         Box(
@@ -62,7 +63,7 @@ fun FeedTopLayout(
                 .align(Alignment.TopEnd)
                 .size(dimensionResource(id = R.dimen.padding_24))
                 .clickable {
-                    goSearchActivity = true
+                    goSearch()
                 }
         ){
             Image(
