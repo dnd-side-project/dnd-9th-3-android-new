@@ -11,7 +11,11 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun CustomProgressBar(
-    modifier: Modifier, width: Dp, backgroundColor: Color, foregroundColor: Brush, percent: Int,
+    modifier: Modifier,
+    width: Dp,
+    backgroundColor: Color,
+    foregroundColor: Brush,
+    percent: Int,
     isShownText: Boolean
 ) {
     Box(

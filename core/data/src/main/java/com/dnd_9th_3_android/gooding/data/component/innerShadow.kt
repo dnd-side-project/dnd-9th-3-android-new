@@ -15,14 +15,14 @@ fun Modifier.coustomShadow(
     color: Color,
     offsetX: Dp = 0.dp,
     offsetY: Dp = 0.dp,
-    blurRadius: Dp,
+    blurRadius: Float,
 ) = then(
     drawBehind {
         drawIntoCanvas { canvas ->
             val paint = Paint()
             val frameworkPaint = paint.asFrameworkPaint()
-            if (blurRadius != 0.dp) {
-                frameworkPaint.maskFilter = (BlurMaskFilter(blurRadius.toPx(),BlurMaskFilter.Blur.NORMAL))
+            if (blurRadius != 0f) {
+                frameworkPaint.maskFilter = (BlurMaskFilter(blurRadius,BlurMaskFilter.Blur.NORMAL))
             }
             frameworkPaint.color = color.toArgb()
 
