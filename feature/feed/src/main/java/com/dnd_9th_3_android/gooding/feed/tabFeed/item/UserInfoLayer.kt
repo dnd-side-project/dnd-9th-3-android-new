@@ -24,6 +24,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.model.user.UserInfo
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 
 // refactoring
@@ -39,7 +40,9 @@ fun UserInfoLayer(userInfo: UserInfo) {
     )
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start =  18.dp)
+        modifier = Modifier
+            .padding(start = 18.dp)
+            .fillMaxWidth()
     ) {
         Box(
             modifier = Modifier
@@ -65,7 +68,13 @@ fun UserInfoLayer(userInfo: UserInfo) {
                         color = colorResource(id = R.color.secondary_1)
                     )
                 }
-                else->{}
+                else->{
+                    Image(
+                        painter = painterResource(id = R.drawable.profile_nomal),
+                        modifier = Modifier.size(26.dp),
+                        contentDescription = null
+                    )
+                }
             }
         }
 

@@ -1,5 +1,7 @@
 package com.dnd_9th_3_android.gooding.feed.viewModel
 
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -24,8 +26,15 @@ class FeedOptionViewModel @Inject constructor(
     private var _pagerStage : FeedPagerState? = null
     val pagerState get() = _pagerStage
 
-    fun initAppState(appState : ApplicationState){
+    private var _screenWidth : Dp = 360.dp
+    val screenWidth get() = _screenWidth
+
+    fun initAppState(
+        appState : ApplicationState,
+        appWidth : Dp
+    ){
         _applicationState = appState
+        _screenWidth = appWidth
     }
 
     fun initPagerState(feedPagerState: FeedPagerState){

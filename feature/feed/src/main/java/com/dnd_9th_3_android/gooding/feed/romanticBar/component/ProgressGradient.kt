@@ -20,20 +20,22 @@ import com.dnd_9th_3_android.gooding.data.customProgress.CustomProgressBar
 @Composable
 fun ProgressGradient(
     progress : Float,
-    offset: Offset,
+    widthRatio: Dp,
 ) {
     Row(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
         // start space
-        Spacer(modifier = Modifier.width(58.dp))
+        Spacer(modifier = Modifier.width(widthRatio*58))
 
         // mid state bar
         CustomProgressBar(
             Modifier
                 .clip(shape = RoundedCornerShape(24.dp))
                 .height(8.dp),
-            208.dp,
+            widthRatio*208,
             backgroundColor = Color.Transparent,
             foregroundColor = Brush.horizontalGradient(
                 listOf(
@@ -46,7 +48,7 @@ fun ProgressGradient(
         )
 
         // end space
-        Spacer(modifier = Modifier.width(58.dp))
+        Spacer(modifier = Modifier.width(widthRatio*58))
     }
 
 }

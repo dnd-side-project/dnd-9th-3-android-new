@@ -1,25 +1,38 @@
 package com.dnd_9th_3_android.gooding.feed
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.feed.feedPages
-import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPost
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPrev
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledVerticalPointerInputScrollPost
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledVerticalPointerInputScrollPrev
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.data.state.FeedPagerState
 
-import com.dnd_9th_3_android.gooding.feed.fixedAreaSubLayout.FeedTopLayout
+import com.dnd_9th_3_android.gooding.feed.topBar.ui.FeedTopLayout
 import com.dnd_9th_3_android.gooding.feed.viewModel.FeedOptionViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun FeedScreen(
     appState : ApplicationState,
@@ -29,7 +42,8 @@ fun FeedScreen(
     BackHandler(enabled = true, onBack = {})
 
     // app State 저장
-    viewModel.initAppState(appState)
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    viewModel.initAppState(appState,screenWidth)
     // pager State 저장
     viewModel.initPagerState(
         FeedPagerState(
@@ -41,13 +55,13 @@ fun FeedScreen(
 
     Box {
         viewModel.pagerState?.topFeedPagerState?.let { topPagerState->
+
             // 페이지 상태 지정 ( now - 추천 가로 페이징 )
             HorizontalPager(
                 count = feedPages.size,
                 state = topPagerState,
                 modifier = Modifier
                     .fillMaxSize()
-                //                .disabledHorizontalPointerInputScroll() //custom
             ) { page ->
                 when (page) {
                     0 -> NowScreen()

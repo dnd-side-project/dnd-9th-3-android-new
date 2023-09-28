@@ -35,8 +35,7 @@ fun RecommendScreen(
         modifier = Modifier
             .fillMaxSize()
             .disabledHorizontalPointerInputScrollPrev()
-    ){
-    }
+    ){}
 
 
     Column(

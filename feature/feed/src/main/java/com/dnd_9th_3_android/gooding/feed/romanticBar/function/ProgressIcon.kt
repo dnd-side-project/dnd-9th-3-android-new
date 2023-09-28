@@ -15,6 +15,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.camptonBold
@@ -27,7 +28,7 @@ import com.dnd_9th_3_android.gooding.feed.romanticBar.getRomanticColorList
 @Composable
 fun ProgressGraphic(
     progress : Float,
-    offset: Offset,
+    widthRatio : Dp
 ) {
     // color state
     val colorState by  animateColorAsState(
@@ -42,58 +43,57 @@ fun ProgressGraphic(
         }
     )
 
-    // text modifier
-    val textModifier =
-        if (progress<10.0f){ // 한자리
-            Modifier
-                .fillMaxSize()
-                .padding(
-                    top = 6.dp,
-                    start = 14.dp
-                )
-        }else if (10.0f<=progress && progress< 100.0f){ //두자리
-            Modifier
-                .fillMaxSize()
-                .padding(
-                    top = 6.dp,
-                    start = 11.dp
-                )
-        }else{ //세자리
-            Modifier
-                .fillMaxSize()
-                .padding(
-                    top = 6.dp,
-                    start = 7.dp
-                )
-        }
+//    // text modifier
+//    val textModifier =
+//        if (progress<10.0f){ // 한자리
+//            Modifier
+//                .fillMaxSize()
+//                .padding(
+//                    top = 6.dp,
+//                    start = 14.dp
+//                )
+//        }else if (10.0f<=progress && progress< 100.0f){ //두자리
+//            Modifier
+//                .fillMaxSize()
+//                .padding(
+//                    top = 6.dp,
+//                    start = 11.dp
+//                )
+//        }else{ //세자리
+//            Modifier
+//                .fillMaxSize()
+//                .padding(
+//                    top = 6.dp,
+//                    start = 7.dp
+//                )
+//        }
 
 
     Row(
         modifier = Modifier
-            .fillMaxSize()
-
+            .fillMaxSize(),
     ){
         // start scope
-        Spacer(modifier = Modifier.width(44.dp))
+        Spacer(modifier = Modifier.width(widthRatio*44))
 
-        // space box (투명 박스가 icon을 미는 형태) - max 204
+        // space box (투명 박스가 icon을 미는 형태)
         Box(
             modifier = Modifier
-                .width((progress * 2).dp)
+                .width(widthRatio * progress * 2)
                 .background(Color.Transparent)
         )
         // icon
         Box(
             modifier = Modifier
-                .width(36.dp)
+                .width(widthRatio * 36)
                 .height(64.dp)
         ) {
 
             // top image
             Box(
                 modifier = Modifier
-                    .height(30.59.dp)
-                    .width(36.dp)
+                    .height(31.dp)
+                    .width(widthRatio * 36)
                     .align(Alignment.TopCenter)
             ) {
                 // 말풍선 이미지
@@ -108,21 +108,19 @@ fun ProgressGraphic(
 
                 // 텍스트
                 Box(
-                    modifier = textModifier
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .wrapContentWidth()
+                        .padding(bottom = 1.dp)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .height(14.dp)
-                    ) {
-                        // progress text
-                        Text(
-                            text = progress.toInt().toString(),
-                            fontSize = 12.sp,
-                            fontFamily = camptonBold,
-                            color = Color.White,
-                        )
-                    }
+                    // progress text
+                    Text(
+                        text = progress.toInt().toString(),
+                        fontSize = 12.sp,
+                        fontFamily = camptonBold,
+                        color = Color.White,
+                        letterSpacing = (-0.25).sp,
+                    )
                 }
             }
 
@@ -130,7 +128,8 @@ fun ProgressGraphic(
             // bottom image
             Box(
                 modifier = Modifier
-                    .size(28.dp)
+                    .width(widthRatio * 28)
+                    .height(28.dp)
                     .align(Alignment.BottomCenter),
                 contentAlignment = Alignment.Center
             ) {
@@ -146,7 +145,10 @@ fun ProgressGraphic(
                 Image(
                     painter = painterResource(R.drawable.bottom_pro_image),
                     contentDescription = null,
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(26.dp)
+                    ,
                     colorFilter = ColorFilter.tint(colorState)
                 )
                 //main
@@ -180,7 +182,7 @@ fun ProgressGraphic(
 
 
         // end scope
-        Spacer(modifier = Modifier.width(44.dp))
+        Spacer(modifier = Modifier.width(widthRatio*44))
     }
 
 }

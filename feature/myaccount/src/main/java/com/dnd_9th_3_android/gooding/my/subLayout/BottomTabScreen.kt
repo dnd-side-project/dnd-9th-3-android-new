@@ -23,7 +23,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.component.CustomRowTabBar
+import com.dnd_9th_3_android.gooding.data.customRowTab.CustomRowTabBar
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.customRowTab.myPages
 
@@ -71,7 +71,7 @@ fun BottomTabScreen(
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_6)))
 
         // tab selector
-        Row {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_18)))
             CustomRowTabBar(
                 pagerState = pageState,
@@ -86,7 +86,7 @@ fun BottomTabScreen(
                 fontSelectColor = Color.White,
                 colorResource(id = R.color.blue_gray_3),
                 boxHeight = 0.dp,
-                dimensionResource(id = R.dimen.padding_14),
+                7.dp,
                 indicator = true
             )
         }

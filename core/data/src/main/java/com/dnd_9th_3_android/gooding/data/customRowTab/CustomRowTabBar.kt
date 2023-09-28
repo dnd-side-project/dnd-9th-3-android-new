@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.component
+package com.dnd_9th_3_android.gooding.data.customRowTab
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -7,17 +7,15 @@ import androidx.compose.foundation.layout.*
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.customRowTab.CustomText
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.CoroutineScope
@@ -43,79 +41,63 @@ fun CustomRowTabBar(
     indicator : Boolean
 ) {
     val boxHeightModifier = if (boxHeight==0.dp){
-        Modifier
-            .width(dimensionResource(id = R.dimen.tab_width))
-            .wrapContentHeight()
+        Modifier.wrapContentSize()
     } else{
         Modifier
-            .width(dimensionResource(id = R.dimen.tab_width))
             .height(boxHeight)
+            .wrapContentWidth()
+
     }
-    Column(
-        modifier = Modifier.wrapContentSize()
-    ){
-        Row(
-            modifier = boxHeightModifier,
-            horizontalArrangement = Arrangement.spacedBy(horizontalMargin)
-        ) {
-            pages.forEachIndexed { index, title ->
-                Box(
+    Row(
+        modifier = boxHeightModifier,
+        horizontalArrangement = Arrangement.spacedBy(horizontalMargin)
+    ) {
+        pages.forEachIndexed { index, title ->
+            Box(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .clickable {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                // 선택 텍스트
+                Column(
                     modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .wrapContentSize()
-                        .clickable {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(index)
-                            }
-                        },
-                    contentAlignment = Alignment.Center
-                )
-                {
+                        .wrapContentSize(),
+                    horizontalAlignment = CenterHorizontally
+                ) {
                     // 선택 텍스트
-                    Column(
-                        modifier = Modifier.wrapContentSize(),
-                        horizontalAlignment = CenterHorizontally
-                    ) {
-                        // 선택 텍스트
-                        if (index == pagerState.currentPage) {
-                            CustomText(
-                                title,
-                                textShadow,
-                                fontFamily,
-                                fontSize,
-                                fontSelectColor
-                            )
-                            if (indicator && index == 0) {
-                                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_15)))
-                                Box(
-                                    Modifier
-                                        .height(dimensionResource(id = R.dimen.padding_2))
-                                        .background(Color.White)
-                                        .width(dimensionResource(id = R.dimen.size_75))
-                                )
-                            } else if(indicator && index==1){
-                                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_15)))
-                                Box(
-                                    Modifier
-                                        .height(dimensionResource(id = R.dimen.padding_2))
-                                        .background(Color.White)
-                                        .width(dimensionResource(id = R.dimen.padding_48))
-                                )
-                            }
-                        }
-                        // 비 선택 텍스트
-                        else {
-                            CustomText(
-                                title,
-                                textShadow,
-                                fontFamily,
-                                fontSize,
-                                fontUnSelectColor
-                            )
-                            if (indicator) {
-                                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
-                            }
-                        }
+                    if (index == pagerState.currentPage) {
+                        CustomText(
+                            title,
+                            textShadow,
+                            fontFamily,
+                            fontSize,
+                            fontSelectColor
+                        )
+                    }
+                    // 비 선택 텍스트
+                    else {
+                        CustomText(
+                            title,
+                            textShadow,
+                            fontFamily,
+                            fontSize,
+                            fontUnSelectColor
+                        )
+                    }
+                    if (indicator) { Spacer(modifier = Modifier.height(16.dp)) }
+                    // indicator
+                    if (indicator) {
+                        Box(
+                            Modifier
+                                .height(2.dp)
+                                .background(if (index == pagerState.currentPage) Color.White else Color.Transparent)
+                                .width(if (index==0) 75.dp else 48.dp)
+                        )
                     }
                 }
             }
