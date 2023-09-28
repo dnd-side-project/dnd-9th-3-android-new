@@ -18,6 +18,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.bottomGradient
 import com.dnd_9th_3_android.gooding.data.component.topGradient
 import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPost
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPrev
 import com.dnd_9th_3_android.gooding.feed.feedScreen.OneFeedUriContent
 import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.GradientBoxState
 import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.PaddingState
@@ -36,26 +37,24 @@ fun OneFeedItem(
 
     // 텍스트 화면 확장 상태
     var extendState by remember { mutableStateOf(1) }
+    // poster paging
+    val pagerState = rememberPagerState(pageCount = { feed.files.size })
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Transparent)
     ) {
-        // poster paging
-        val pagerState = rememberPagerState(pageCount = { feed.files.size })
-
         // feed image list
         HorizontalPager(
             state = pagerState,
-            modifier =
-            if (pagerState.currentPage == feed.files.size - 1) Modifier.disabledHorizontalPointerInputScrollPost()
-            else Modifier
+            modifier =  Modifier.disabledHorizontalPointerInputScrollPrev()
         ) { page ->
             OneFeedUriContent(feed.files[page].fileUrl)
         }
 
         // top Box - add shadow
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(136.dp)
@@ -63,7 +62,11 @@ fun OneFeedItem(
                 .background(
                     brush = topGradient()
                 )
-        )
+        ){
+            Spacer(modifier = Modifier.height(95.dp))
+            UserInfoLayer(userInfo = feed.user)
+        }
+
         // bottom Box - add shadow
         Box(
             modifier = Modifier
@@ -72,23 +75,9 @@ fun OneFeedItem(
                 .align(Alignment.BottomCenter)
                 .background(
                     brush = bottomGradient()
-                )
-        )
-
-        // top layer
-        Column(
-            Modifier.align(Alignment.TopCenter)
-        ) {
-            Spacer(modifier = Modifier.height(95.dp))
-            UserInfoLayer(userInfo = feed.user)
-        }
-        //bottom layer
-        Column(
-            Modifier
-                .align(Alignment.BottomCenter)
-                .height(GradientBoxState(extendState))
-        ) {
-            Spacer(modifier = Modifier.height(PaddingState(extendState)))
+                ),
+            contentAlignment = Alignment.BottomCenter
+        ){
             ContentInfoLayer(
                 feed.placeTitle,
                 feed.title,
@@ -126,5 +115,13 @@ fun OneFeedItem(
             }
         }
     }
+
+    //prevent scroll
+    HorizontalPager(
+        state = pagerState,
+        modifier = Modifier
+            .fillMaxSize()
+            .disabledHorizontalPointerInputScrollPost()
+    ){}
 }
 

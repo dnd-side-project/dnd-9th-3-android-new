@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.feed.tabFeed.function
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -23,7 +24,8 @@ fun TabFeedPager(
     // sample code : init view model
     feedViewModel.initFeedData()
 
-    Column(
+
+    Box(
         modifier = Modifier.fillMaxSize()
     ) {
         optionViewModel.pagerState?.let { feedPager ->

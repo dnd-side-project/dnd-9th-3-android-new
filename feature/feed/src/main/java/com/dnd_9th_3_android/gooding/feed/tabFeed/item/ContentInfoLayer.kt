@@ -38,10 +38,13 @@ fun ContentInfoLayer(
     // for back ground
     Column(
         modifier = Modifier
-            .padding(start = 18.dp,end = 62.dp)
-            .height(ExtendBoxState(extendState))
+            .padding(
+                start = 18.dp,
+                end = 62.dp,
+                bottom = 137.dp
+            )
+            .wrapContentHeight()
             .fillMaxWidth()
-//            .background(Color.White)
             .clickable {
                 if (extendState == 1) {
                     changeState(lineCount)
@@ -64,11 +67,11 @@ fun ContentInfoLayer(
                     .padding(
                         top = 4.dp,
                         bottom = 4.dp,
-                        start = 8.5.dp,
-                        end = 8.5.dp
-                    )
-                    .blur(3.dp),
-                verticalAlignment = Alignment.CenterVertically
+                        start = 9.25.dp,
+                        end = 8.dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+
             ){
                 Box(
                     contentAlignment = Alignment.Center,
@@ -98,7 +101,7 @@ fun ContentInfoLayer(
             }
         }
 
-        Spacer(modifier = Modifier.height(17.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // subject
         Text(
@@ -116,30 +119,33 @@ fun ContentInfoLayer(
         Spacer(modifier = Modifier.height(4.dp))
 
         // content
-        Text(
-            text = content,
-            color = Color.White,
-            modifier = Modifier
-                .width(280.dp)
-                .wrapContentHeight(),
-            fontFamily = pretendardRegular,
-            fontSize = 12.sp,
-            overflow = if (extendState==1)TextOverflow.Ellipsis else TextOverflow.Visible,
-        )
-
-        // for count content
-        Text(
-            text = content,
-            color = Color.Transparent,
-            modifier = Modifier
-                .width(280.dp)
-                .wrapContentHeight(),
-            fontFamily = pretendardRegular,
-            fontSize = 12.sp,
-            // line count
-            onTextLayout ={textLayoutResult: TextLayoutResult ->
-                lineCount = textLayoutResult.lineCount
-            },
-        )
+        Box(modifier = Modifier.wrapContentSize()) {
+            Text(
+                text = content,
+                color = Color.White,
+                modifier = Modifier
+                    .width(280.dp)
+                    .wrapContentHeight(),
+                fontFamily = pretendardRegular,
+                fontSize = 12.sp,
+                maxLines = extendState,
+                overflow = if (extendState == 1) TextOverflow.Ellipsis else TextOverflow.Visible,
+            )
+            // for count content - 투명 박스
+            Text(
+                text = content,
+                color = Color.Transparent,
+                modifier = Modifier
+                    .width(280.dp)
+                    .wrapContentHeight(),
+                fontFamily = pretendardRegular,
+                fontSize = 12.sp,
+                // line count
+                onTextLayout ={textLayoutResult: TextLayoutResult ->
+                    lineCount = textLayoutResult.lineCount
+                },
+            )
+        }
     }
+
 }

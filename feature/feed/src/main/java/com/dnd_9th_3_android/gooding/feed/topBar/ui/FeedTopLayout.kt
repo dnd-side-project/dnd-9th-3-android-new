@@ -1,7 +1,8 @@
-package com.dnd_9th_3_android.gooding.feed.fixedAreaSubLayout
+package com.dnd_9th_3_android.gooding.feed.topBar.ui
 
 import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -30,6 +31,8 @@ fun FeedTopLayout(
     // top Layout
     Box(
         Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
             .padding(
                 start = 18.dp,
                 end = 16.dp,
@@ -39,39 +42,27 @@ fun FeedTopLayout(
     ) {
         // top bar .. ! -> left
         Box(
-            modifier = Modifier.align(Alignment.TopStart)
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .fillMaxWidth(),
         ) {
             TopScrollBarLayer()
         }
 
 
-//        // search function
-//        var goSearchActivity by remember {
-//            mutableStateOf(false)
-//        }
-//        if (goSearchActivity){
-//            // go search activity
-//            val intent = Intent(
-//                LocalContext.current.applicationContext,
-//                Class.forName("com.dnd_9th_3_android.gooding.presentation.search_feed.SearchFeedListActivity")
-//            )
-//            LocalContext.current.startActivity(intent)
-//            goSearchActivity = false
-//        }
-
         // search button -> right
         Box(
             Modifier
-                .align(Alignment.TopEnd)
+                .align(Alignment.CenterEnd)
                 .size(24.dp)
                 .clickable {
                     goSearch()
-                }
+                },
+            contentAlignment = Alignment.Center
         ){
             Image(
                 painterResource(id = R.drawable.search_24),
                 contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
                 colorFilter = ColorFilter.tint(Color.White)
             )
         }

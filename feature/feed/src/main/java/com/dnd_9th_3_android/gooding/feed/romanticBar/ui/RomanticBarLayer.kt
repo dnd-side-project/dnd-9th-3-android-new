@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,7 +38,7 @@ fun RomanticBarLayer(
         mutableStateOf(initBarData)
     }
     // progress animation
-    val progressAnimDuration = 700
+    val progressAnimDuration = 500
     val progressAnimation by animateFloatAsState(
         targetValue = currentValue.value,
         animationSpec = tween(durationMillis = progressAnimDuration, easing = FastOutSlowInEasing)
@@ -58,10 +59,12 @@ fun RomanticBarLayer(
         }
 
     }
+    val widthRatio = optionalViewModel.screenWidth / 360
     // total 높이 : 85(70+15) 드래그 탑 아이콘 까지 고려
     Box(
         modifier = Modifier
-            .width(324.dp)
+            // 324
+            .width(widthRatio*324)
             .height(85.dp)
     ){
         // custom box (배경) (____)
@@ -74,26 +77,40 @@ fun RomanticBarLayer(
                     color = colorResource(id = R.color.romantic_bar_color),
                     shape = RoundedCornerShape(16.dp)
                 )
-                .blur(60.dp)
                 .coustomShadow(
                     color = colorResource(id = R.color.shadow_color_romantic),
                     offsetY =4.dp,
                     blurRadius = 30f
                 )
+                .blur(60.dp)
 
+        )
+        // 배경 위 메인 뷰
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(70.dp)
+                .align(Alignment.BottomCenter)
+                .background(
+                    color = Color.Transparent,
+                    shape = RoundedCornerShape(16.dp)
+                ),
+            contentAlignment = Alignment.Center
         ){
-            BarInternalContent() // 배경 내부 뷰
+            BarInternalContent(widthRatio) // 배경 내부 뷰
 
             // 그라데이션 뷰
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
                     .padding(
                         top = 31.dp,
                         bottom = 31.dp
-                    )
+                    ),
+                contentAlignment = Alignment.Center
             ){
-                ProgressGradient(progressAnimation,currentOffset.value)
+                ProgressGradient(progressAnimation,widthRatio)
             }
 
             // 투명 스크롤러 - 드래그 관리 !
@@ -105,8 +122,9 @@ fun RomanticBarLayer(
                         top = 13.dp,
                         bottom = 13.dp
                     )
-                    .width(244.dp)
+                    .width(widthRatio*244)
                     .height(44.dp)
+                    .background(Color.Transparent)
             ){
                 ProgressSlider(
                     currentValue = currentValue.value,
@@ -119,6 +137,7 @@ fun RomanticBarLayer(
             }
         }
 
-        ProgressGraphic(progress = progressAnimation, offset = currentOffset.value) //현재 상태 아이콘
+        //현재 상태 아이콘
+        ProgressGraphic(progress = progressAnimation, widthRatio = widthRatio)
     }
 }

@@ -15,13 +15,13 @@ fun PaddingState(
 ) : Dp {
     return when (extendState) {
         2 -> { // 2줄
-            54.dp
+            51.dp
         }
         3 -> { // 3줄
-            34.dp
+            31.dp
         }
         else -> { // 1줄
-            38.dp
+            36.dp
         }
     }
 }
