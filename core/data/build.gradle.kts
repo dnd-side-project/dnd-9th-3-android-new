@@ -72,4 +72,19 @@ dependencies {
     implementation ("androidx.fragment:fragment-ktx:1.5.4")
     implementation("androidx.navigation:navigation-compose:2.7.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
+
+    val pagingVersion = "3.1.1"
+    // paging dependencies 추가
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    // optional - Jetpack Compose integration
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
+
+    val roomVersion = "2.5.1"
+    implementation ("androidx.room:room-runtime:$roomVersion")
+    implementation ("androidx.room:room-ktx:$roomVersion")
+    kapt ("androidx.room:room-compiler:$roomVersion")
+    implementation ("androidx.room:room-paging:$roomVersion")
+    testImplementation ("androidx.room:room-testing:$roomVersion")
+
+    implementation(project(":core:api"))
 }

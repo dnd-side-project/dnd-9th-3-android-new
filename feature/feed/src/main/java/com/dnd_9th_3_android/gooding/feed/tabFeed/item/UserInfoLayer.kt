@@ -22,10 +22,10 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
-import com.dnd_9th_3_android.gooding.model.user.UserInfo
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
+import com.dnd_9th_3_android.gooding.model.feed.model.UserInfo
 
 // refactoring
 @OptIn(ExperimentalCoilApi::class)
