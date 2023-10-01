@@ -11,7 +11,6 @@ class MainFeedRemoteMediator (
 
 ):RemoteMediator<Int,MainFeedEntity>(){
 
-    // 서버에서 어떤 값들을 가지고 와서 어떻게 db에 넣어서 보여줄 지 결정
     // load tye 지정
     override suspend fun load(
         loadType: LoadType,

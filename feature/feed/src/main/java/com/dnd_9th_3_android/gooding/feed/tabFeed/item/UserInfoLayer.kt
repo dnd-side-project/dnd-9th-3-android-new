@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
@@ -23,7 +22,6 @@ import coil.compose.rememberImagePainter
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.model.feed.model.UserInfo
 
