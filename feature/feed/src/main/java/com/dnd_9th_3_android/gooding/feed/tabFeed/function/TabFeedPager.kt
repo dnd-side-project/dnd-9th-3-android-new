@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.dnd_9th_3_android.gooding.data.feedData.toMainFeed
 import com.dnd_9th_3_android.gooding.feed.itemFeed.OneFeedItem
 import com.dnd_9th_3_android.gooding.feed.viewModel.FeedOptionViewModel
 import com.dnd_9th_3_android.gooding.feed.viewModel.MainFeedViewModel
@@ -22,18 +24,20 @@ fun TabFeedPager(
     optionViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel: MainFeedViewModel = hiltViewModel()
 ) {
-
-    val lazyPagingItems = feedViewModel.feedDataList.collectAsLazyPagingItems()
+    feedViewModel.initMainFeed(LocalContext.current,0, listOf("1","2","3"))
+    val lazyPagingItems = feedViewModel.feedDataList?.collectAsLazyPagingItems()
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         optionViewModel.pagerState?.let { feedPager ->
-            VerticalPager(
-                count = lazyPagingItems.itemCount,
-                state = feedPager.postingFeedPagerState
-            ) {page->
-                OneFeedItem(feed = lazyPagingItems[page])
+            lazyPagingItems?.let{
+                VerticalPager(
+                    count = lazyPagingItems.itemCount,
+                    state = feedPager.postingFeedPagerState
+                ) {page->
+                    OneFeedItem(feed = lazyPagingItems[page]!!.toMainFeed())
+                }
             }
         }
     }

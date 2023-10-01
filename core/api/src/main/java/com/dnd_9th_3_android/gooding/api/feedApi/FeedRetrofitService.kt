@@ -1,6 +1,7 @@
 package com.dnd_9th_3_android.gooding.api.feedApi
 
 import com.dnd_9th_3_android.gooding.api.feedApi.dto.MainFeedDto
+import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeedList
 import com.dnd_9th_3_android.gooding.model.user.OnBoardingData
 import retrofit2.Call
@@ -17,5 +18,5 @@ interface FeedRetrofitService {
         @Query("interestCodes") interestCodes : List<String>,
         @Query("page") page : Int,
         @Query("size") size : Int,
-    ) : List<MainFeedDto>
+    ) : List<MainFeedEntity>
 }
