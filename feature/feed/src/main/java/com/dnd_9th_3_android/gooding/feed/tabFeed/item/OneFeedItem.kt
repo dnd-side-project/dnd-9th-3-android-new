@@ -21,16 +21,15 @@ import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointe
 import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointerInputScrollPrev
 import com.dnd_9th_3_android.gooding.feed.feedScreen.OneFeedUriContent
 import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.GradientBoxState
-import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.PaddingState
 import com.dnd_9th_3_android.gooding.feed.viewModel.MainFeedViewModel
-import com.dnd_9th_3_android.gooding.model.feed.GetMainFeed
+import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
 
 // refactoring
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OneFeedItem(
     feedViewModel: MainFeedViewModel = hiltViewModel(),
-    feed: GetMainFeed
+    feed: MainFeed
 ) {
     // 현재 피드 셀렉
     feedViewModel.setCurrentFeed(feed)

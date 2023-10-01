@@ -1,7 +1,6 @@
-package com.dnd_9th_3_android.gooding.data.transform
+package com.dnd_9th_3_android.gooding.data.utils
 
 import android.annotation.SuppressLint
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
