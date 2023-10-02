@@ -2,12 +2,22 @@ package com.dnd_9th_3_android.gooding.data.feedData.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
+import com.dnd_9th_3_android.gooding.api.feedApi.entity.RemoteKeysEntity
+import com.dnd_9th_3_android.gooding.data.converter.FileListConverters
+import com.dnd_9th_3_android.gooding.data.converter.UserStringConverters
 import com.dnd_9th_3_android.gooding.data.feedData.local.MainFeedDao
 import com.dnd_9th_3_android.gooding.data.feedData.local.RemoteKeysDao
 
-@Database(entities = [MainFeedEntity::class]
-    , version = 1,exportSchema = false)
+@Database(entities = [MainFeedEntity::class, RemoteKeysEntity::class]
+    , version = 1)
+@TypeConverters(
+    value = [
+        FileListConverters::class,
+        UserStringConverters::class
+    ]
+)
 abstract class MainFeedDatabase : RoomDatabase() {
 
     abstract fun getMainFeedDao() : MainFeedDao

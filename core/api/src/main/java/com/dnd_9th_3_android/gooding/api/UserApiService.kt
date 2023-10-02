@@ -3,7 +3,7 @@ package com.dnd_9th_3_android.gooding.api
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeedList
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import com.dnd_9th_3_android.gooding.model.user.OnBoardingData
-import com.dnd_9th_3_android.gooding.model.user.UserInfo
+import com.dnd_9th_3_android.gooding.model.user.UserData
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -33,7 +33,7 @@ interface UserApiService {
     @GET("api/v1/user/{oauthId}")
     fun getUserInfo(
         @Path("oauthId") oauthId : String,
-    ): Call<UserInfo>
+    ): Call<UserData>
 
 
     @POST("api/v1/onboard/update/{userId}")
@@ -42,7 +42,7 @@ interface UserApiService {
         @Path("userId") userId: Int,
         @Field("nickName") nickName:String,
         @Field("interestCodes") interestCodes : List<String>
-    ) : Call<UserInfo>
+    ) : Call<UserData>
 
 
     // 관심사 기반 데이터 조회

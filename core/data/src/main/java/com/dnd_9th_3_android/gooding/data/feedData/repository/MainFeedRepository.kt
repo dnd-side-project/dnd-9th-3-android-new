@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.data.feedData.repository
 
+import android.app.Application
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -13,18 +14,16 @@ import com.dnd_9th_3_android.gooding.data.feedData.database.MainFeedDatabase
 import com.dnd_9th_3_android.gooding.data.feedData.local.MainFeedDao
 import com.dnd_9th_3_android.gooding.data.feedData.remote.MainFeedRemoteMediator
 import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MainFeedRepository(
+class MainFeedRepository @Inject constructor(
     private val db : MainFeedDatabase,
     private val networkManager : NetworkManager
 ) {
     @OptIn(ExperimentalPagingApi::class)
-    fun getMainFeedPager(
-        context: Context,
-        userId : Int,
-        interestCodes: List<String>
-    ) : Flow<PagingData<MainFeedEntity>> {
+    fun getMainFeedPager() : Flow<PagingData<MainFeedEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5,
@@ -33,9 +32,7 @@ class MainFeedRepository(
             pagingSourceFactory = {
                 db.getMainFeedDao().getItemPager()
             },
-            remoteMediator = MainFeedRemoteMediator(
-                userId,interestCodes,db,networkManager.getFeedApiService(context)
-            )
+            remoteMediator = MainFeedRemoteMediator(db,networkManager)
         ).flow
     }
 }

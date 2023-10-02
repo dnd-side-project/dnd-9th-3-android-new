@@ -1,6 +1,6 @@
 package com.dnd_9th_3_android.gooding.model.feed
 
-import com.dnd_9th_3_android.gooding.model.user.UserInfo
+import com.dnd_9th_3_android.gooding.model.user.UserData
 
 data class GetMainFeed(
     val recordId : Int,
@@ -11,6 +11,6 @@ data class GetMainFeed(
     val placeLongitude : Int,
     val interestType : String,
     var recordScore : Int = 0,
-    val user : UserInfo,
+    val user : UserData,
     val files : ArrayList<FileData>
 ):java.io.Serializable

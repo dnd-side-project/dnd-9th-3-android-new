@@ -16,4 +16,8 @@ interface LoginRetrofitService {
     fun loginGoogle(
         @Query("idToken")idToken : String,
     ) : Call<AccessToken>
+
+    // for get token
+    @GET("api/v1/tokens/temporary")
+    fun getTemporaryToken() : Call<AccessToken>
 }

@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.data.feedData.remote
 
+import android.content.Context
 import android.net.http.HttpException
 import androidx.annotation.RequiresApi
 import androidx.paging.ExperimentalPagingApi
@@ -8,22 +9,22 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.Database
 import androidx.room.withTransaction
+import com.dnd_9th_3_android.gooding.api.NetworkManager
 import com.dnd_9th_3_android.gooding.api.feedApi.FeedRetrofitService
 import com.dnd_9th_3_android.gooding.api.feedApi.dto.MainFeedDto
 import com.dnd_9th_3_android.gooding.data.feedData.database.MainFeedDatabase
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.RemoteKeysEntity
 import com.dnd_9th_3_android.gooding.data.feedData.toMainFeedEntity
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
 class MainFeedRemoteMediator constructor(
-    private val userId : Int,
-    private val interestCodes: List<String>,
     private val db : MainFeedDatabase,
-    private val feedApi : FeedRetrofitService,
+    private val networkManager: NetworkManager,
 ):RemoteMediator<Int, MainFeedEntity>(){
     private val STARTING_PAGE_INDEX = 1
 
@@ -47,8 +48,13 @@ class MainFeedRemoteMediator constructor(
         }
 
         try {
-            val response = feedApi
-                .getUserFeedFromId(userId,interestCodes,page,state.config.pageSize)
+            val response = networkManager.getFeedApiService()
+                .getUserFeedFromId(
+                    networkManager.getUserData()!!.id,
+                    networkManager.getUserData()!!.onboardingStrings,
+                    page,
+                    state.config.pageSize
+                )
             val endOfList = response.isEmpty()
             db.withTransaction {
                 if (loadType == LoadType.REFRESH){

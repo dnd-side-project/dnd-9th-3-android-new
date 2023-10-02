@@ -1,6 +1,7 @@
 package com.dnd_9th_3_android.gooding.feed
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
@@ -16,6 +17,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.feed.feedPages
@@ -31,7 +33,7 @@ import com.dnd_9th_3_android.gooding.feed.viewModel.FeedOptionViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-
+import com.dnd_9th_3_android.gooding.core.data.R
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun FeedScreen(
@@ -53,7 +55,10 @@ fun FeedScreen(
         )
     )
 
-    Box {
+    Box (
+        modifier = Modifier
+            .background(colorResource(id = R.color.blue_gray_7))
+    ){
         viewModel.pagerState?.topFeedPagerState?.let { topPagerState->
 
             // 페이지 상태 지정 ( now - 추천 가로 페이징 )

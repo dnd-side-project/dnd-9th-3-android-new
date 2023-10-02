@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.bottomGradient
 import com.dnd_9th_3_android.gooding.data.component.topGradient
@@ -29,7 +30,7 @@ import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
 @Composable
 fun OneFeedItem(
     feedViewModel: MainFeedViewModel = hiltViewModel(),
-    feed: MainFeed
+    feed: MainFeedEntity
 ) {
     // 현재 피드 셀렉
     feedViewModel.setCurrentFeed(feed)
