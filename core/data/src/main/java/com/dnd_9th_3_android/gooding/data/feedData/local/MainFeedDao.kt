@@ -16,9 +16,9 @@ interface MainFeedDao {
     suspend fun insert(items: List<MainFeedEntity>)
 
     // 컬럼의 데이터를 가져오는 Dao
-    @Query("SELECT * FROM mainFeedEntity")
+    @Query("SELECT * FROM mainFeeds")
     fun getItemPager() : PagingSource<Int, MainFeedEntity>
 
-    @Query("DELETE FROM mainFeedEntity")
+    @Query("DELETE FROM mainFeeds")
     fun clearAll()
 }

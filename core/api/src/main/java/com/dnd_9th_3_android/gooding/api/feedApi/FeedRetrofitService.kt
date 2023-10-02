@@ -14,8 +14,8 @@ interface FeedRetrofitService {
     // 관심사 기반 데이터 조회
     @GET("api/v1/feed/{userId}")
     suspend fun getUserFeedFromId(
-        @Path("userId") userId : Int,
-        @Query("interestCodes") interestCodes : List<String>,
+        @Path("userId") userId : Int?,
+        @Query("interestCodes") interestCodes : List<String>?,
         @Query("page") page : Int,
         @Query("size") size : Int,
     ) : List<MainFeedEntity>

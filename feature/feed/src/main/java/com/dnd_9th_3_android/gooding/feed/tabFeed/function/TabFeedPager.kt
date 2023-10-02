@@ -24,20 +24,17 @@ fun TabFeedPager(
     optionViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel: MainFeedViewModel = hiltViewModel()
 ) {
-    feedViewModel.initMainFeed(LocalContext.current,0, listOf("1","2","3"))
-    val lazyPagingItems = feedViewModel.feedDataList?.collectAsLazyPagingItems()
+    val lazyPagingItems = feedViewModel.feedDataList.collectAsLazyPagingItems()
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         optionViewModel.pagerState?.let { feedPager ->
-            lazyPagingItems?.let{
-                VerticalPager(
-                    count = lazyPagingItems.itemCount,
-                    state = feedPager.postingFeedPagerState
-                ) {page->
-                    OneFeedItem(feed = lazyPagingItems[page]!!.toMainFeed())
-                }
+            VerticalPager(
+                count = lazyPagingItems.itemCount,
+                state = feedPager.postingFeedPagerState
+            ) { page ->
+                OneFeedItem(feed = lazyPagingItems[page]!!)
             }
         }
     }

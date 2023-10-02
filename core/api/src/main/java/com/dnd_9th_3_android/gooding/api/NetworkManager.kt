@@ -2,23 +2,26 @@ package com.dnd_9th_3_android.gooding.api
 
 import android.content.Context
 import com.dnd_9th_3_android.gooding.api.feedApi.FeedRetrofitService
-import com.dnd_9th_3_android.gooding.model.feed.Feed
+import com.dnd_9th_3_android.gooding.model.feed.model.OnBoard
+import com.dnd_9th_3_android.gooding.model.user.UserData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkManager() {
+class NetworkManager(
+    private val context : Context
+) {
     companion object {
         private val instance : Retrofit? = null
-
+        private var userData : UserData? = null
         // 레트로핏 생성
         private fun getRetrofit(context:Context) : Retrofit {
-            val tokenData = TokenSharedPreferences(context)
+            val tokenData = UserInfoSharedPreferences(context)
             val header = Interceptor{
                 val original = it.request()
-                if (tokenData.accessToken!=null){
+                if (tokenData.accessToken!=null && tokenData.accessToken!=""){
                     val request = original.newBuilder()
                         .header("Authorization","Bearer ${tokenData.accessToken}")
                         .build()
@@ -53,12 +56,16 @@ class NetworkManager() {
         }
     }
 
-    fun getLoginApiService(context: Context) =
+    fun getLoginApiService() :LoginRetrofitService =
         getRetrofit(context).create(LoginRetrofitService::class.java)
 
-    fun getUserApiService(context : Context) =
+    fun getUserApiService() : UserApiService =
         getRetrofit(context).create(UserApiService::class.java)
 
-    fun getFeedApiService(context: Context) =
+    fun getFeedApiService(): FeedRetrofitService =
         getRetrofit(context).create(FeedRetrofitService::class.java)
+
+    fun getUserData() : UserData? = userData
+
+    fun setUserData(user: UserData){ userData = user }
 }

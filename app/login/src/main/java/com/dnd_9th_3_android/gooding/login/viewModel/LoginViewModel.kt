@@ -2,7 +2,7 @@ package com.dnd_9th_3_android.gooding.login.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.dnd_9th_3_android.gooding.api.RetrofitUtil
-import com.dnd_9th_3_android.gooding.api.UserInfo
+import com.dnd_9th_3_android.gooding.api.UserLoginInfo
 //import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
@@ -18,18 +18,18 @@ class LoginViewModel @Inject constructor(): ViewModel(){
         if(isUser) {
             RetrofitUtil.userOauth?.let { oauth ->
                 RetrofitUtil.userApiService?.getUserInfo(oauth)
-                    ?.enqueue(object : Callback<com.dnd_9th_3_android.gooding.model.user.UserInfo> {
+                    ?.enqueue(object : Callback<com.dnd_9th_3_android.gooding.model.user.UserData> {
                         override fun onResponse(
-                            call: Call<com.dnd_9th_3_android.gooding.model.user.UserInfo>,
-                            response: Response<com.dnd_9th_3_android.gooding.model.user.UserInfo>
+                            call: Call<com.dnd_9th_3_android.gooding.model.user.UserData>,
+                            response: Response<com.dnd_9th_3_android.gooding.model.user.UserData>
                         ) {
                             if (response.isSuccessful) {
-                                UserInfo.myData = response.body()!!
+                                UserLoginInfo.myData = response.body()!!
                             }
                         }
 
                         override fun onFailure(
-                            call: Call<com.dnd_9th_3_android.gooding.model.user.UserInfo>,
+                            call: Call<com.dnd_9th_3_android.gooding.model.user.UserData>,
                             t: Throwable
                         ) {
                         }

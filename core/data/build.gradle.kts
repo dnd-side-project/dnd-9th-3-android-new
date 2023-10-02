@@ -50,9 +50,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // module
-    implementation(project(":core:model"))
-
     // compose
     val composeVersion = "1.4.3"
     implementation("androidx.compose.material:material:$composeVersion")
@@ -73,6 +70,12 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+
     val pagingVersion = "3.1.1"
     // paging dependencies 추가
     implementation("androidx.paging:paging-runtime:$pagingVersion")
@@ -86,5 +89,17 @@ dependencies {
     implementation ("androidx.room:room-paging:$roomVersion")
     testImplementation ("androidx.room:room-testing:$roomVersion")
 
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-compiler:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    // compose hilt viewModel
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    // gson
+    implementation("com.google.code.gson:gson:2.9.0")
+
+    // module
+    implementation(project(":core:model"))
     implementation(project(":core:api"))
 }

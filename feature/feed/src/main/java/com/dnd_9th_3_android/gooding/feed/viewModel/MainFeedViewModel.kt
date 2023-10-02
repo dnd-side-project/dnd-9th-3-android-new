@@ -18,23 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainFeedViewModel @Inject constructor(
-    private val repository: MainFeedRepository
+    repository: MainFeedRepository
 ): ViewModel(){
-    private var _feedDataList : Flow<PagingData<MainFeedEntity>>? = null
-    val feedDataList get() = _feedDataList
-    var currentFeed = MutableLiveData<MainFeed>()
-    fun initMainFeed(
-        context: Context,
-        userId : Int,
-        interestCodes: List<String>
-    ){
-        _feedDataList =  repository.getMainFeedPager(
-            context,userId,interestCodes
-        ).cachedIn(viewModelScope)
-    }
+    var feedDataList : Flow<PagingData<MainFeedEntity>> =
+        repository.getMainFeedPager().cachedIn(viewModelScope)
 
-    fun setCurrentFeed(feed : MainFeedDto){
-        currentFeed.value = feed.toMainFeed()
+    var currentFeed = MutableLiveData<MainFeed>()
+
+    fun setCurrentFeed(feed : MainFeedEntity?){
+        currentFeed.value = feed?.toMainFeed()
     }
 
     fun setRomantic(per : Int){

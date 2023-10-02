@@ -1,35 +1,39 @@
 package com.dnd_9th_3_android.gooding.data.sampleData.sampleFeedListUp
 
 import com.dnd_9th_3_android.gooding.model.feed.FileData
-import com.dnd_9th_3_android.gooding.model.user.UserInfo
+import com.dnd_9th_3_android.gooding.model.user.UserData
 
 object SubSampleData {
-    val user1 = UserInfo(
+    val user1 = UserData(
         11,
         "예리나",
         "https://dnd9th-3.s3.ap-northeast-2.amazonaws.com/images/2792642b-dd50-4e61-8768-dcc071e3e059e54608be-7a31-45d5-943e-0f806ef4742c.svg",
         "",
+        listOf(),
         listOf()
     )
-    val user2 = UserInfo(
+    val user2 = UserData(
         12,
         "지호",
         "https://dnd9th-3.s3.ap-northeast-2.amazonaws.com/images/2792642b-dd50-4e61-8768-dcc071e3e059e54608be-7a31-45d5-943e-0f806ef4742c.svg",
         "",
+        listOf(),
         listOf()
     )
-    val user3 = UserInfo(
+    val user3 = UserData(
         13,
         "해용",
         "https://dnd9th-3.s3.ap-northeast-2.amazonaws.com/images/2792642b-dd50-4e61-8768-dcc071e3e059e54608be-7a31-45d5-943e-0f806ef4742c.svg",
         "",
+        listOf(),
         listOf()
     )
-    val user4 = UserInfo(
+    val user4 = UserData(
         14,
         "진우",
         "https://dnd9th-3.s3.ap-northeast-2.amazonaws.com/images/2792642b-dd50-4e61-8768-dcc071e3e059e54608be-7a31-45d5-943e-0f806ef4742c.svg",
         "",
+        listOf(),
         listOf()
     )
 

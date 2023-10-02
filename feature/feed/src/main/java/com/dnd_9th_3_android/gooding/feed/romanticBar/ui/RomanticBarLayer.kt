@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.coustomShadow
@@ -33,6 +34,7 @@ fun RomanticBarLayer(
     optionalViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel : MainFeedViewModel = hiltViewModel()
 ) {
+    val lazyPagingItems = feedViewModel.feedDataList?.collectAsLazyPagingItems()
     // 현재 진행 상태
     val currentValue = remember {
         mutableStateOf(initBarData)
@@ -49,11 +51,14 @@ fun RomanticBarLayer(
 
 //     페이지 변화 감지
     optionalViewModel.pagerState?.let{ feedPager->
+
         LaunchedEffect(feedPager.postingFeedPagerState){
-            snapshotFlow { feedPager.postingFeedPagerState.currentPage }.collect { page->
-                feedViewModel.setCurrentFeed(feedViewModel.feedList[page])
-                feedViewModel.currentFeed.value.let{
-                    currentValue.value = it?.recordScore?.toFloat() ?: 0.0f
+            if (feedPager.postingFeedPagerState.pageCount!=0) {
+                snapshotFlow { feedPager.postingFeedPagerState.currentPage }.collect { page ->
+                    feedViewModel.setCurrentFeed(lazyPagingItems?.get(page))
+                    feedViewModel.currentFeed.value.let {
+                        currentValue.value = it?.recordScore?.toFloat() ?: 0.0f
+                    }
                 }
             }
         }

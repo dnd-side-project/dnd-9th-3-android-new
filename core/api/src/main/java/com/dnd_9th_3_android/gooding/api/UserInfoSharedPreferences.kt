@@ -3,7 +3,7 @@ package com.dnd_9th_3_android.gooding.api
 import android.content.Context
 import android.content.SharedPreferences
 
-class TokenSharedPreferences(context : Context) {
+class UserInfoSharedPreferences(context : Context) {
     private val prefsFilename = "token_prefs"
     private val accessTokenKey = "accessToken"
     private val accessTokenTimeDateKey = "accessTokenTimeDate"

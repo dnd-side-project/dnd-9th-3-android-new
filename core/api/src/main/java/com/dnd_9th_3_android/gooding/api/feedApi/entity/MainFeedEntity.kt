@@ -17,7 +17,7 @@ data class MainFeedEntity (
     val interestType : String,
     val user : UserInfo,
     val files : List<FeedFile>,
-    val readCount : Int, // user가 몇번 접근했는지 확인
-    val isNumbering : Boolean, // user가 지수 평가를 했는지 확인
-    val recordScore : Int
+    val readCount : Int = 0, // user가 몇번 접근했는지 확인
+    val isNumbering : Boolean  = false, // user가 지수 평가를 했는지 확인
+    val recordScore : Int = 0 // 평가 점수
 )
