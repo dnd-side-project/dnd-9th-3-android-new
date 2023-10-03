@@ -1,18 +1,15 @@
 package com.dnd_9th_3_android.gooding.feed.viewModel
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.dnd_9th_3_android.gooding.api.feedApi.dto.MainFeedDto
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
-import com.dnd_9th_3_android.gooding.data.feedData.repository.MainFeedRepository
-import com.dnd_9th_3_android.gooding.data.feedData.toMainFeed
+import com.dnd_9th_3_android.gooding.data.dataFeed.repository.MainFeedRepository
+import com.dnd_9th_3_android.gooding.data.dataFeed.toMainFeed
 import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
