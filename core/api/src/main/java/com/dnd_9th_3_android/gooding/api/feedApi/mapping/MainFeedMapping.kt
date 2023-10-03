@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.feedData
+package com.dnd_9th_3_android.gooding.data.dataFeed
 
 import com.dnd_9th_3_android.gooding.api.feedApi.dto.MainFeedDto
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity

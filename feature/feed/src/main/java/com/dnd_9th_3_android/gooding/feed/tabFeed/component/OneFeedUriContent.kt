@@ -4,7 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.dnd_9th_3_android.gooding.data.video.CheckUrl
+import com.dnd_9th_3_android.gooding.data.utils.video.CheckUrl
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
