@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import com.dnd_9th_3_android.gooding.common.bottomBar.BottomBar
 import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import com.dnd_9th_3_android.gooding.my.mainScreen.SettingScreen
 import com.dnd_9th_3_android.gooding.search.SearchScreen
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -34,6 +35,11 @@ fun MainNaviHost(
             //Search view
             composable(ScreenRoot.MAIN_SEARCH){
                 SearchScreen(appState)
+            }
+
+            // my Setting view
+            composable(ScreenRoot.MY_SETTING){
+                SettingScreen()
             }
         }
     }

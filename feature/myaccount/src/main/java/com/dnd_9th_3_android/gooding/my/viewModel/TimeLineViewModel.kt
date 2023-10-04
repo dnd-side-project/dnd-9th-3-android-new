@@ -15,7 +15,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrentTimeLineViewModel @Inject constructor(): ViewModel() {
+class TimeLineViewModel @Inject constructor(): ViewModel() {
     val currentTimeLine = mutableStateListOf<MyFeed>()
     // if prev != current -> load
     var prevDate = ""

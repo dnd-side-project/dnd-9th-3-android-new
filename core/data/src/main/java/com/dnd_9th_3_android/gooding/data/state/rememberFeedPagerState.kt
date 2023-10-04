@@ -10,11 +10,11 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn( ExperimentalPagerApi::class)
 @Composable
-fun rememberPagerState(
+fun rememberFeedPagerState(
     topFeedPagerState: PagerState = rememberPagerState(),
     postingFeedPagerState: PagerState = rememberPagerState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
-    )=remember(topFeedPagerState,postingFeedPagerState) {
+    )=remember(topFeedPagerState,postingFeedPagerState,coroutineScope) {
     FeedPagerState(
         topFeedPagerState,
         postingFeedPagerState,

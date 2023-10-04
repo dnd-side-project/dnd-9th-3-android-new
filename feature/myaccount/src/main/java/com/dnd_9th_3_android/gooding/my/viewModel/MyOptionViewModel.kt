@@ -1,12 +1,15 @@
 package com.dnd_9th_3_android.gooding.my.viewModel
 
+import android.util.Log
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dnd_9th_3_android.gooding.data.dataMy.MonthPickerImpl
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import com.dnd_9th_3_android.gooding.data.state.MyAccountState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -16,10 +19,13 @@ class MyOptionViewModel @Inject constructor(
 
 ) : ViewModel(){
     private var _applicationState : ApplicationState? = null
-    var applicationState get() = _applicationState
+    val applicationState get() = _applicationState
 
     private var _screenWidth : Dp = 360.dp
     val screenWidth get() = _screenWidth
+
+    private var _myAccountState : MyAccountState? = null
+    val myAccountState get() = _myAccountState
 
     // today Date , Month Picker
     var monthPicker = MonthPickerImpl()
@@ -35,11 +41,20 @@ class MyOptionViewModel @Inject constructor(
     }
 
 
-    fun initAppState(
-        appState : ApplicationState,
-        appWidth : Dp
-    ){
+    fun initAppState(appState : ApplicationState, appWidth : Dp){
         _applicationState = appState
         _screenWidth = appWidth
+    }
+
+    fun initMyAccountState(accountState: MyAccountState){
+        _myAccountState = accountState
+    }
+
+    fun naviToSetting(){
+        applicationState?.navController?.navigate(ScreenRoot.MY_SETTING)
+    }
+
+    fun setOtherViewState(){
+        myAccountState?.otherViewState != myAccountState?.otherViewState
     }
 }

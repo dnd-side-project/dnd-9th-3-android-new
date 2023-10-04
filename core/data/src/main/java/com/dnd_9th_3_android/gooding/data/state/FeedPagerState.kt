@@ -12,6 +12,4 @@ class FeedPagerState(
     val topFeedPagerState: PagerState, //가로
     val postingFeedPagerState: PagerState, // 세로
     val coroutineScope: CoroutineScope
-) {
-
-}
+){}

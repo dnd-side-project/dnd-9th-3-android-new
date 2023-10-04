@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.my.mainTabLayout.SaveFeedScreen
 import com.dnd_9th_3_android.gooding.my.mainTabLayout.TimeLineScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -26,20 +28,31 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.customRowTab.CustomRowTabBar
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.customRowTab.myPages
+import com.dnd_9th_3_android.gooding.data.state.SwipingStates
+import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 // bottom 확장 뷰
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BottomTabScreen(
-    isVisibleTop: Boolean,
-    setMaxScreen : ()->Unit //원래 뷰로 돌아가기
+    isVisibleTop: MutableState<Boolean>,
+    setMaxScreen : ()->Unit, //원래 뷰로 돌아가기
+    viewModel: MyOptionViewModel = hiltViewModel()
 ){
-    val pageState = rememberPagerState()
-    val coroutineScope = rememberCoroutineScope()
+    val pageState = viewModel.myAccountState?.bottomPageState.let{pagerState ->
+         pagerState ?: rememberPagerState()
+    }
+    val coroutineScope = viewModel.applicationState?.coroutineScope.let{coroutineScope ->
+        coroutineScope ?: rememberCoroutineScope()
+    }
+
     Column(
         modifier =
-        if (!isVisibleTop) Modifier
+        if (!isVisibleTop.value) Modifier
             .background(
                 color = colorResource(id = R.color.tab_background),
                 RoundedCornerShape(
@@ -52,11 +65,12 @@ fun BottomTabScreen(
     ) {
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
         // button : 축소
-        if (isVisibleTop){
+        if (isVisibleTop.value){
             Box(
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.arrow_size))
                     .clickable {
+                        isVisibleTop.value = false
                         setMaxScreen()
                     },
                 contentAlignment = Alignment.Center

@@ -4,14 +4,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.res.dimensionResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
+import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 
 @Composable
 fun ItemMainFeedScreen(
     feed : MyFeed,
-    onDeleteView : (Boolean) -> Unit
+    todayViewModel: MyOptionViewModel = hiltViewModel(),
 ) {
+    // is delete view ?
+    val showDeleteView = todayViewModel.myAccountState?.showDeleteView.let{ deleteView ->
+        deleteView?: remember { mutableStateOf(-1) }
+    }
+
     Row(
         Modifier
             .fillMaxWidth()
@@ -32,7 +39,7 @@ fun ItemMainFeedScreen(
         ) {
             TopInfoLayout(timeData = feed.recordDate, onDelete = {
                 // delete feed
-                onDeleteView(true)
+                showDeleteView.value = feed.id
             })
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_15)))
             CenterFeedLayout(feed)
