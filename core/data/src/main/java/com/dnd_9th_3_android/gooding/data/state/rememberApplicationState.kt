@@ -13,7 +13,7 @@ fun rememberApplicationState(
     navController: NavHostController = rememberNavController(),
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
-) = remember(bottomBarState,navController){
+) = remember(bottomBarState,navController,scaffoldState,coroutineScope){
     ApplicationState(
         bottomBarState,
         navController,

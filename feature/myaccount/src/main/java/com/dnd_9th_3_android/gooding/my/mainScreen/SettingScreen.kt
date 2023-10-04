@@ -11,11 +11,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 @Composable
-fun SettingScreen() {
+fun SettingScreen(
+    viewModel: MyOptionViewModel = hiltViewModel()
+) {
+    BackHandler(enabled = true, onBack = {
+        viewModel.setOtherViewState()
+        viewModel.applicationState?.navController?.popBackStack()
+    })
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(colorResource(id = R.color.blue_gray_7))){
+        .background(colorResource(id = R.color.blue_gray_7))
+    ){
 
     }
 }

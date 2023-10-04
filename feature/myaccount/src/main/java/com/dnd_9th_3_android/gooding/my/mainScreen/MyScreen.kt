@@ -17,17 +17,13 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.state.SwipingStates
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.my.subLayout.BottomTabScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.LevelScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.TopMenuScreen
-import com.dnd_9th_3_android.gooding.my.subLayout.UserInfoScreen
 import com.dnd_9th_3_android.gooding.my.tabTop.ui.MainTopClickScreen
 import com.dnd_9th_3_android.gooding.my.tabTop.ui.MainTopScreen
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
@@ -40,10 +36,13 @@ import kotlinx.coroutines.*
 fun MyScreen(
     viewModel: MyOptionViewModel = hiltViewModel()
 ) {
-    // swipe state
-    val swipingState = rememberSwipeableState(initialValue = SwipingStates.EXPANDED)
+    val swipeState = viewModel.myAccountState?.swipingState.let { swipeState ->
+        swipeState ?: rememberSwipeableState(initialValue = SwipingStates.COLLAPSED)
+    }
     // top visible
-    var topBottom by remember { mutableStateOf(false) }
+    val bottomExtended = viewModel.myAccountState?.bottomExtendState.let { bottomState ->
+        bottomState ?: remember { mutableStateOf(false) }
+    }
     BoxWithConstraints( //to get the max height
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +55,7 @@ fun MyScreen(
                 override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                     val delta = available.y
                     return if (delta < 0) {
-                        swipingState.performDrag(delta).toOffset()
+                        swipeState.performDrag(delta).toOffset()
                     } else {
                         Offset.Zero
                     }
@@ -69,7 +68,7 @@ fun MyScreen(
                     source: NestedScrollSource
                 ): Offset {
                     val delta = available.y
-                    return swipingState.performDrag(delta).toOffset()
+                    return swipeState.performDrag(delta).toOffset()
                 }
 
                 // Fling
@@ -77,7 +76,7 @@ fun MyScreen(
                     consumed: Velocity,
                     available: Velocity
                 ): Velocity {
-                    swipingState.performFling(velocity = available.y)
+                    swipeState.performFling(velocity = available.y)
                     return super.onPostFling(consumed, available)
                 }
 
@@ -90,7 +89,7 @@ fun MyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .swipeable(
-                    state = swipingState,
+                    state = swipeState,
                     thresholds = { _, _ ->
                         FractionalThreshold(0.05f) //general
                     },
@@ -105,10 +104,10 @@ fun MyScreen(
             // swipe progress
             val computedProgress by remember {
                 derivedStateOf {
-                    if (swipingState.progress.to == SwipingStates.COLLAPSED) {
-                        swipingState.progress.fraction
+                    if (swipeState.progress.to == SwipingStates.COLLAPSED) {
+                        swipeState.progress.fraction
                     } else {
-                        1f - swipingState.progress.fraction
+                        1f - swipeState.progress.fraction
                     }
                 }
             }
@@ -146,14 +145,6 @@ fun MyScreen(
                         this.top.linkTo(header.bottom, 0.dp)
                         this.bottom.linkTo(parent.bottom, 0.dp)
                     }
-                    // top bottom Visible
-                    if (swipingState.currentValue == SwipingStates.COLLAPSED) {
-                        topBottom = true
-                        viewModel.applicationState?.bottomBarState?.value = false
-                    } else {
-                        topBottom = false
-                        viewModel.applicationState?.bottomBarState?.value = true
-                    }
                 },
                 progress = computedProgress
             ) {
@@ -164,9 +155,13 @@ fun MyScreen(
                         .layoutId("header")
                         .fillMaxWidth()
                         .wrapContentHeight()
-                ){
+                ) {
                     // click content (top menu)
-                    MainTopClickScreen()
+                    MainTopClickScreen(
+                        goSetting = {
+                            viewModel.naviToSetting()
+                        }
+                    )
                 }
                 // id - body view
                 Box(
@@ -174,12 +169,14 @@ fun MyScreen(
                         .layoutId("body")
                         .fillMaxWidth()
                 ) {
-                    BottomTabScreen(topBottom, setMaxScreen = {
-                        topBottom = false
-                        GlobalScope.launch(Dispatchers.Main) {
-                            swipingState.snapTo(SwipingStates.EXPANDED)
+                    BottomTabScreen(
+                        bottomExtended,
+                        setMaxScreen = {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                swipeState.snapTo(SwipingStates.EXPANDED)
+                            }
                         }
-                    })
+                    )
                 }
             }
         }

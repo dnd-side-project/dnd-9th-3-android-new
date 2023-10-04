@@ -34,6 +34,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.data.state.rememberFeedPagerState
+
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun FeedScreen(
@@ -47,13 +49,7 @@ fun FeedScreen(
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     viewModel.initAppState(appState,screenWidth)
     // pager State 저장
-    viewModel.initPagerState(
-        FeedPagerState(
-            rememberPagerState(),
-            rememberPagerState(),
-            appState.coroutineScope
-        )
-    )
+    viewModel.initPagerState(rememberFeedPagerState())
 
     Box (
         modifier = Modifier

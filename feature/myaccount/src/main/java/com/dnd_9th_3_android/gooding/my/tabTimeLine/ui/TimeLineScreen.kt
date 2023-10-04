@@ -8,7 +8,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.poppins
-import com.dnd_9th_3_android.gooding.my.viewModel.TodayViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,53 +21,26 @@ import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import com.dnd_9th_3_android.gooding.my.itemFeed.ItemMainFeedScreen
 import com.dnd_9th_3_android.gooding.my.mainScreen.DefaultTimeLineScreen
 import com.dnd_9th_3_android.gooding.my.selectMonth.SelectMonthBottomSheet
-import com.dnd_9th_3_android.gooding.my.viewModel.CurrentTimeLineViewModel
+import com.dnd_9th_3_android.gooding.my.viewModel.TimeLineViewModel
+import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 
 @Composable
 fun TimeLineScreen(
-    todayViewModel: TodayViewModel = hiltViewModel(),
-    timeLineViewModel : CurrentTimeLineViewModel = hiltViewModel()
+    todayViewModel: MyOptionViewModel = hiltViewModel(),
+    timeLineViewModel : TimeLineViewModel = hiltViewModel()
 ) {
     // curent month data
     val currentKey = todayViewModel.monthPicker.monthDataList[todayViewModel.monthPicker.currentPickIndex].keyDate
-    // is delete view ?
-    var  showDeleteView by remember {
-        mutableStateOf(false)
-    }
+
     // is monthPicker view?
-    var showSelectView by remember {
-        mutableStateOf(false)
+    val showSelectView = todayViewModel.myAccountState?.showMonthPickerView.let{ monthView ->
+        monthView?: remember { mutableStateOf(false) }
     }
+
 
     val todayDate = currentKey.replace(".","")
     timeLineViewModel.setCurrentTimeLine(1, todayDate)
-    // 오류 있음 수정 필요
-//    if (showDeleteView){
-//        DeleteFeedBottomSheet(0,
-//            onDelete = {
-//                // delete feed/ //
-//            },
-//            onClose = {
-//                // close view
-//                showDeleteView = false
-//            },
-//        )
-//    }
-    if (showSelectView){
-        SelectMonthBottomSheet(todayViewModel =todayViewModel,onClose = {
-            todayViewModel.monthPicker.apply {
-                if (!this.isChange){
-                    this.resetData()
-                }else{
-                    // 데이터 초기화
-                    this.isChange = false
-                    timeLineViewModel.loadData = currentKey
-                }
-            }
-            showSelectView = false
 
-        })
-    }
     // month picker view
     Column(
         // padding 적용 ! 모든 타임라인 18Dp
@@ -84,7 +56,7 @@ fun TimeLineScreen(
         Row(
             Modifier
                 .clickable {
-                    showSelectView = true
+                    showSelectView.value = true
                 }
                 .wrapContentSize()
         ){
@@ -109,9 +81,7 @@ fun TimeLineScreen(
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_6)))
         if (timeLineViewModel.currentTimeLine.isNotEmpty()){
             // get data
-            FeedList(timeLineViewModel.currentTimeLine, onDeleteData = {
-                showDeleteView = it
-            })
+            FeedList(timeLineViewModel.currentTimeLine)
         }else {
             // no user record
             DefaultTimeLineScreen()
@@ -120,12 +90,10 @@ fun TimeLineScreen(
 }
 
 @Composable
-fun FeedList(feeds: SnapshotStateList<MyFeed>,onDeleteData : (Boolean)->Unit) {
+fun FeedList(feeds: SnapshotStateList<MyFeed>) {
     LazyColumn(modifier = Modifier.fillMaxSize()){
         items(feeds) { feed ->
-            ItemMainFeedScreen(feed, onDeleteView = {
-                onDeleteData(it)
-            })
+            ItemMainFeedScreen(feed)
         }
     }
 }

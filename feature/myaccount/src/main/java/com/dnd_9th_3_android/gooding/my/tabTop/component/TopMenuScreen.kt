@@ -34,13 +34,14 @@ fun TopMenuScreen() {
         Text(
             text = "마이 굳잉",
             modifier = Modifier.align(Alignment.Center),
-            color = Color.Transparent,
+            color = Color.White,
             fontSize = dimensionResource(R.dimen.main_text_sp).value.sp,
             fontFamily = pretendardBold
         )
         Box(
             Modifier.align(Alignment.CenterEnd)
                 .size(24.dp)
+
         ) {
             Image(
                 painter = painterResource(id = R.drawable.settings),

@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.my.tabTop.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.BoxText
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledVerticalPointerInputScrollPost
+import com.dnd_9th_3_android.gooding.data.preventScroll.disabledVerticalPointerInputScrollPrev
 import com.dnd_9th_3_android.gooding.my.subLayout.LevelScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.TopMenuScreen
 import com.dnd_9th_3_android.gooding.my.subLayout.UserInfoScreen
@@ -29,10 +32,11 @@ import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 
 @Composable
 fun MainTopClickScreen(
-    viewModel : MyOptionViewModel = hiltViewModel()
+    goSetting:() -> Unit
 ) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier
@@ -58,7 +62,7 @@ fun MainTopClickScreen(
                     Modifier.align(Alignment.CenterEnd)
                         .size(24.dp)
                         .clickable {
-                            viewModel.naviToSetting()
+                            goSetting()
                         }
                 )
             }
@@ -112,16 +116,23 @@ fun MainTopClickScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 // 프로필 수정 menu
-                BoxText(
-                    listOf(Color.Transparent,Color.Transparent),
-                    RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
-                    Color.Transparent,
-                    "프로필 수정",
-                    dimensionResource(id = R.dimen.text_12).value.sp,
-                    Color.Transparent,
-                    dimensionResource(id = R.dimen.padding_6),
-                    dimensionResource(id = R.dimen.padding_10)
-                )
+                Box(modifier = Modifier
+                    .wrapContentSize()
+                    .clickable {
+                        // go 프로필 수정 ~
+                    }
+                ) {
+                    BoxText(
+                        listOf(Color.Transparent, Color.Transparent),
+                        RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
+                        Color.Transparent,
+                        "프로필 수정",
+                        dimensionResource(id = R.dimen.text_12).value.sp,
+                        Color.Transparent,
+                        dimensionResource(id = R.dimen.padding_6),
+                        dimensionResource(id = R.dimen.padding_10)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
         }

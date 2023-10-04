@@ -21,18 +21,22 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.component.BoxText
+import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 import com.dnd_9th_3_android.gooding.my.viewModel.TodayViewModel
 import com.holix.android.bottomsheetdialog.compose.BottomSheetBehaviorProperties
 import kotlinx.coroutines.launch
 
 @Composable
 fun SelectMonthBottomSheet(
-    todayViewModel : TodayViewModel,
+    todayViewModel : MyOptionViewModel = hiltViewModel(),
     onClose : () -> Unit
 ) {
     val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
+    val coroutineScope = todayViewModel.applicationState?.coroutineScope.let{coroutineScope ->
+        coroutineScope ?: rememberCoroutineScope()
+    }
     var click by remember{
         mutableStateOf(false)
     }
