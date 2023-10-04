@@ -1,11 +1,13 @@
 package com.dnd_9th_3_android.gooding.my.viewModel
 
+import android.util.Log
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dnd_9th_3_android.gooding.data.dataMy.MonthPickerImpl
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -16,7 +18,7 @@ class MyOptionViewModel @Inject constructor(
 
 ) : ViewModel(){
     private var _applicationState : ApplicationState? = null
-    var applicationState get() = _applicationState
+    val applicationState get() = _applicationState
 
     private var _screenWidth : Dp = 360.dp
     val screenWidth get() = _screenWidth
@@ -41,5 +43,13 @@ class MyOptionViewModel @Inject constructor(
     ){
         _applicationState = appState
         _screenWidth = appWidth
+    }
+
+    fun naviToSetting(){
+        Log.d("navi","navi to setting ")
+        if (applicationState?.navController == null) {
+            Log.d("navi", "navi not to setting ")
+        }
+        applicationState?.navController?.navigate(ScreenRoot.MY_SETTING)
     }
 }
