@@ -39,10 +39,7 @@ fun MyScreen(
     val swipeState = viewModel.myAccountState?.swipingState.let { swipeState ->
         swipeState ?: rememberSwipeableState(initialValue = SwipingStates.COLLAPSED)
     }
-    // top visible
-    val bottomExtended = viewModel.myAccountState?.bottomExtendState.let { bottomState ->
-        bottomState ?: remember { mutableStateOf(false) }
-    }
+
     BoxWithConstraints( //to get the max height
         modifier = Modifier
             .fillMaxSize()
@@ -170,7 +167,6 @@ fun MyScreen(
                         .fillMaxWidth()
                 ) {
                     BottomTabScreen(
-                        bottomExtended,
                         setMaxScreen = {
                             GlobalScope.launch(Dispatchers.Main) {
                                 swipeState.snapTo(SwipingStates.EXPANDED)

@@ -54,7 +54,8 @@ class MyOptionViewModel @Inject constructor(
         applicationState?.navController?.navigate(ScreenRoot.MY_SETTING)
     }
 
-    fun setOtherViewState(){
-        myAccountState?.otherViewState != myAccountState?.otherViewState
+    fun naviToRecord(){
+        applicationState?.navController?.navigate(ScreenRoot.MAIN_RECORD)
     }
+
 }

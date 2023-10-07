@@ -6,8 +6,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,10 +39,9 @@ import kotlinx.coroutines.launch
 
 
 // bottom 확장 뷰
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun BottomTabScreen(
-    isVisibleTop: MutableState<Boolean>,
     setMaxScreen : ()->Unit, //원래 뷰로 돌아가기
     viewModel: MyOptionViewModel = hiltViewModel()
 ){
@@ -49,10 +51,13 @@ fun BottomTabScreen(
     val coroutineScope = viewModel.applicationState?.coroutineScope.let{coroutineScope ->
         coroutineScope ?: rememberCoroutineScope()
     }
+    val bottomExtend = viewModel.myAccountState?.bottomExtendState.let{ extendedState->
+        extendedState ?: mutableStateOf(false)
+    }
 
     Column(
         modifier =
-        if (!isVisibleTop.value) Modifier
+        if (!bottomExtend.value) Modifier
             .background(
                 color = colorResource(id = R.color.tab_background),
                 RoundedCornerShape(
@@ -65,12 +70,12 @@ fun BottomTabScreen(
     ) {
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
         // button : 축소
-        if (isVisibleTop.value){
+        if (bottomExtend.value){
             Box(
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.arrow_size))
                     .clickable {
-                        isVisibleTop.value = false
+                        bottomExtend.value = false
                         setMaxScreen()
                     },
                 contentAlignment = Alignment.Center
