@@ -15,6 +15,5 @@ class MyAccountState(
    val bottomPageState : PagerState ,
    // -1 : off , over 0 : index ( or id )
    val showDeleteView : MutableState<Int>,
-   val showMonthPickerView : MutableState<Boolean>,
-   val otherViewState : MutableState<Boolean>
+   val showMonthPickerView : MutableState<Boolean>
 ) {}

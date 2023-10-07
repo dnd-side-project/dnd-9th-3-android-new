@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.my.mainScreen
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,13 +12,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 @Composable
-fun SettingScreen(
-    viewModel: MyOptionViewModel = hiltViewModel()
-) {
-    BackHandler(enabled = true, onBack = {
-        viewModel.setOtherViewState()
-        viewModel.applicationState?.navController?.popBackStack()
-    })
+fun SettingScreen() {
 
     Box(modifier = Modifier
         .fillMaxSize()

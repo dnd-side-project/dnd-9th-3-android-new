@@ -15,12 +15,14 @@ import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.holix.android.bottomsheetdialog.compose.BottomSheetDialog
 import com.holix.android.bottomsheetdialog.compose.BottomSheetDialogProperties
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.component.BoxText
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
@@ -58,75 +60,78 @@ fun SelectMonthBottomSheet(
                 .background(
                     color = colorResource(id = R.color.blue_gray_6),
                     shape = RoundedCornerShape(
-                        topStart = dimensionResource(id = R.dimen.padding_24),
-                        topEnd = dimensionResource(id = R.dimen.padding_24),
+                        topStart = 24.dp,
+                        topEnd = 24.dp,
                     ),
                 )
-                .padding(
-                    start = dimensionResource(id = R.dimen.padding_18),
-                    bottom = dimensionResource(id = R.dimen.padding_18),
-                )
+                .padding(start = 18.dp)
                 .wrapContentHeight()
                 .fillMaxWidth()
 
         ){
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_36)))
+            Spacer(modifier = Modifier.height(36.dp))
 
-            Row{
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(end = 13.dp)
+            ){
                 Text(
                     text = "월 선택하기",
                     color = Color.White,
                     fontFamily = pretendardBold,
-                    fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp
+                    fontSize = 16.sp,
+                    modifier = Modifier.align(Alignment.CenterStart)
                 )
-                Spacer(modifier = Modifier.weight(1f))
                 Box(
                     modifier = Modifier
+                        .align(Alignment.CenterEnd)
                         .clickable {
                             onClose()
                         }
-                        .size(dimensionResource(id = R.dimen.padding_24)),
+                        .size(24.dp),
                     contentAlignment = Alignment.Center
                 ){
                     Image(
-                        painter = painterResource(id = R.drawable.new_close_button),
+                        painter = painterResource(id = R.drawable.close_my),
                         contentDescription = null,
-                        modifier = Modifier.wrapContentSize()
                     )
                 }
-                Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_13)))
             }
-            
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_18)))
-
-            LazyColumn(
+            Box(
                 modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.size_144))
+                    .height(206.dp)
                     .fillMaxWidth()
-                , state = listState
+                    .padding(bottom = 10.dp),
+                contentAlignment = Alignment.Center
             ){
-                todayViewModel.monthPicker.let{ monthPicker->
-                    items(monthPicker.getListData()){data->
-                        monthPicker.selectedIndex.let {
-                            if (it>0){
-                                coroutineScope.launch { listState.animateScrollToItem(it-1) }
+                LazyColumn(
+                    modifier = Modifier
+                        .height(144.dp)
+                        .fillMaxWidth(),
+                    state = listState,
+                ){
+                    todayViewModel.monthPicker.let{ monthPicker->
+                        items(monthPicker.getListData()){data->
+                            monthPicker.selectedIndex.let {
+                                if (it>0){
+                                    coroutineScope.launch { listState.animateScrollToItem(it-1) }
+                                }
                             }
+                            ItemMonthData(data, onclick = { pick ->
+                                // 데이터 수정 요청
+                                monthPicker.fixPicData(pick)
+                                click = true
+                            })
                         }
-                        ItemMonthData(data, onclick = { pick ->
-                            // 데이터 수정 요청
-                            monthPicker.fixPicData(pick)
-                            click = true
-                        })
-                    }
-                    // 클릭 감지 후 데이터 리셋
-                    if (click){
-//                        itemsIndexed(monthPicker.getListData()){ _,_-> }
-                        click = false
+                        // 클릭 감지 후 데이터 리셋
+                        if (click){
+                            click = false
+                        }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_18)))
 
             // 완료 -> is change true
             Box(
@@ -138,24 +143,24 @@ fun SelectMonthBottomSheet(
                         }
                         onClose()
                     }
-                    .padding(end = dimensionResource(id = R.dimen.padding_18))
+                    .padding(end = 18.dp)
             ) {
                 BoxText(
                     borderColor = listOf(
                         colorResource(id = R.color.blue_gray_7),
                         colorResource(id = R.color.blue_gray_7)
                     ),
-                    borderShape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_8)),
+                    borderShape = RoundedCornerShape(8.dp),
                     borderBackground = colorResource(id = R.color.secondary_1),
                     text = "선택 완료",
-                    fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                    fontSize = 16.sp,
                     fontColor = colorResource(id = R.color.blue_gray_7),
-                    hoPadding = dimensionResource(id = R.dimen.padding_11_5),
-                    verPadding = dimensionResource(id = R.dimen.zero)
+                    hoPadding = 11.5.dp,
+                    verPadding = 0.dp
                 )
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
+            Spacer(modifier = Modifier.height(28.dp))
         }
     }
 }

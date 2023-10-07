@@ -19,14 +19,12 @@ fun rememberMyState(
     // -1 : off , over 0 : index ( or id )
     showDeleteView : MutableState<Int> = remember{ mutableStateOf(-1) },
     showMonthPickerView : MutableState<Boolean> = remember { mutableStateOf(false)},
-    otherViewState : MutableState<Boolean> = remember { mutableStateOf(false) }
-) = remember(swipingState,bottomExtendState,bottomPageState,showDeleteView,showMonthPickerView,otherViewState){
+) = remember(swipingState,bottomExtendState,bottomPageState,showDeleteView,showMonthPickerView){
     MyAccountState(
         swipingState,
         bottomExtendState,
         bottomPageState,
         showDeleteView,
         showMonthPickerView,
-        otherViewState
     )
 }

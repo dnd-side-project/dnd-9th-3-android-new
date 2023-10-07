@@ -6,8 +6,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,10 +39,9 @@ import kotlinx.coroutines.launch
 
 
 // bottom 확장 뷰
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun BottomTabScreen(
-    isVisibleTop: MutableState<Boolean>,
     setMaxScreen : ()->Unit, //원래 뷰로 돌아가기
     viewModel: MyOptionViewModel = hiltViewModel()
 ){
@@ -49,28 +51,31 @@ fun BottomTabScreen(
     val coroutineScope = viewModel.applicationState?.coroutineScope.let{coroutineScope ->
         coroutineScope ?: rememberCoroutineScope()
     }
+    val bottomExtend = viewModel.myAccountState?.bottomExtendState.let{ extendedState->
+        extendedState ?: mutableStateOf(false)
+    }
 
     Column(
         modifier =
-        if (!isVisibleTop.value) Modifier
+        if (!bottomExtend.value) Modifier
             .background(
                 color = colorResource(id = R.color.tab_background),
                 RoundedCornerShape(
-                    topStart = dimensionResource(id = R.dimen.padding_24),
-                    topEnd = dimensionResource(id = R.dimen.padding_24)
+                    topStart = 24.dp,
+                    topEnd = 24.dp
                 )
             )
         else Modifier.background(colorResource(id = R.color.tab_background))
         ,horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
+        Spacer(modifier = Modifier.height(24.dp))
         // button : 축소
-        if (isVisibleTop.value){
+        if (bottomExtend.value){
             Box(
                 modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.arrow_size))
+                    .size(24.dp)
                     .clickable {
-                        isVisibleTop.value = false
+                        bottomExtend.value = false
                         setMaxScreen()
                     },
                 contentAlignment = Alignment.Center
@@ -81,13 +86,13 @@ fun BottomTabScreen(
                 )
             }
         }else{
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_3)))
+            Spacer(modifier = Modifier.height(3.dp))
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_6)))
+        Spacer(modifier = Modifier.height(6.dp))
 
         // tab selector
         Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_18)))
+            Spacer(modifier = Modifier.width(18.dp))
             CustomRowTabBar(
                 pagerState = pageState,
                 coroutineScope = coroutineScope,
@@ -97,11 +102,11 @@ fun BottomTabScreen(
                     blurRadius = 4f
                 ),
                 fontFamily = pretendardBold,
-                fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                fontSize = 16.sp,
                 fontSelectColor = Color.White,
-                colorResource(id = R.color.blue_gray_3),
+                fontUnSelectColor= colorResource(id = R.color.blue_gray_3),
                 boxHeight = 0.dp,
-                7.dp,
+                horizontalMargin = 7.dp,
                 indicator = true
             )
         }
@@ -109,7 +114,7 @@ fun BottomTabScreen(
         Divider(
             modifier = Modifier
                 .background(colorResource(id = R.color.blue_gray))
-                .height(dimensionResource(id = R.dimen.border_size))
+                .height(1.dp)
         )
         // tab pager
         HorizontalPager(
