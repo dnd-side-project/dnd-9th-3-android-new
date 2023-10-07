@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.model.month.MonthData
 import com.dnd_9th_3_android.gooding.my.viewModel.TodayViewModel
@@ -24,10 +25,6 @@ fun ItemMonthData(
     monthData : MonthData,
     onclick : (MonthData) -> Unit
 ) {
-//
-//    val changeColor by remember {
-//        mutableStateOf(monthData.isSelected)
-//    }
     val colorState by  animateColorAsState(
         if (monthData.isSelected) colorResource(id = R.color.secondary_1)
         else colorResource(id = R.color.blue_gray_3)
@@ -35,10 +32,7 @@ fun ItemMonthData(
 
     Box(
         modifier = Modifier
-            .padding(
-                top = dimensionResource(id = R.dimen.padding_8),
-                bottom = dimensionResource(id = R.dimen.padding_8)
-            )
+            .padding(vertical = 8.dp)
             .wrapContentHeight()
             .fillMaxWidth()
             .clickable {

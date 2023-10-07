@@ -120,7 +120,7 @@ fun MyScreen(
                     val body = createRefFor("body")
                     constrain(header) {
                         this.width = Dimension.matchParent
-                        this.height = Dimension.value(401.dp)
+                        this.height = Dimension.value(397.dp)
                     }
                     constrain(body) {
                         this.width = Dimension.matchParent

@@ -61,19 +61,19 @@ fun BottomTabScreen(
             .background(
                 color = colorResource(id = R.color.tab_background),
                 RoundedCornerShape(
-                    topStart = dimensionResource(id = R.dimen.padding_24),
-                    topEnd = dimensionResource(id = R.dimen.padding_24)
+                    topStart = 24.dp,
+                    topEnd = 24.dp
                 )
             )
         else Modifier.background(colorResource(id = R.color.tab_background))
         ,horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
+        Spacer(modifier = Modifier.height(24.dp))
         // button : 축소
         if (bottomExtend.value){
             Box(
                 modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.arrow_size))
+                    .size(24.dp)
                     .clickable {
                         bottomExtend.value = false
                         setMaxScreen()
@@ -86,13 +86,13 @@ fun BottomTabScreen(
                 )
             }
         }else{
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_3)))
+            Spacer(modifier = Modifier.height(3.dp))
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_6)))
+        Spacer(modifier = Modifier.height(6.dp))
 
         // tab selector
         Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_18)))
+            Spacer(modifier = Modifier.width(18.dp))
             CustomRowTabBar(
                 pagerState = pageState,
                 coroutineScope = coroutineScope,
@@ -102,11 +102,11 @@ fun BottomTabScreen(
                     blurRadius = 4f
                 ),
                 fontFamily = pretendardBold,
-                fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                fontSize = 16.sp,
                 fontSelectColor = Color.White,
-                colorResource(id = R.color.blue_gray_3),
+                fontUnSelectColor= colorResource(id = R.color.blue_gray_3),
                 boxHeight = 0.dp,
-                7.dp,
+                horizontalMargin = 7.dp,
                 indicator = true
             )
         }
@@ -114,7 +114,7 @@ fun BottomTabScreen(
         Divider(
             modifier = Modifier
                 .background(colorResource(id = R.color.blue_gray))
-                .height(dimensionResource(id = R.dimen.border_size))
+                .height(1.dp)
         )
         // tab pager
         HorizontalPager(
