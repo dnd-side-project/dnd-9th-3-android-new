@@ -15,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 @Composable
 fun BoxText(
@@ -25,12 +26,13 @@ fun BoxText(
     fontSize: TextUnit,
     fontColor: Color,
     hoPadding : Dp,
-    verPadding : Dp
+    verPadding : Dp,
+    letterSpacing : TextUnit
 ) {
     val boxModifier =
         if (verPadding != 0.dp) Modifier
             .border(
-                width = dimensionResource(id = R.dimen.border_size),
+                width = 1.dp,
                 shape = borderShape,
                 brush = Brush.linearGradient(
                     colors = borderColor,
@@ -45,7 +47,7 @@ fun BoxText(
         else Modifier.fillMaxWidth()
             .wrapContentHeight()
             .border(
-                width = dimensionResource(id = R.dimen.border_size),
+                width = 1.dp,
                 shape = borderShape,
                 brush = Brush.linearGradient(
                     colors = borderColor,
@@ -72,7 +74,8 @@ fun BoxText(
                 end = verPadding,
                 top = hoPadding,
                 bottom = hoPadding
-            )
+            ),
+            letterSpacing = letterSpacing
         )
     }
 

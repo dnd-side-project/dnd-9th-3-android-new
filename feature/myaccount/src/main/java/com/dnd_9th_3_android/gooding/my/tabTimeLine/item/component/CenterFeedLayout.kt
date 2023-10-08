@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
@@ -45,6 +46,7 @@ fun CenterFeedLayout(
         data = feed.thumbnailUrl,
         builder = { crossfade(true) }
     )
+
     // location
     Row(
         verticalAlignment = Alignment.CenterVertically
@@ -52,33 +54,33 @@ fun CenterFeedLayout(
         Image(
             painter = painterResource(id = R.drawable.map_pin),
             contentDescription = null,
-            modifier = Modifier.size(dimensionResource(id = R.dimen.padding_12))
+            modifier = Modifier.size(12.dp)
         )
-        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_4)))
+        Spacer(modifier = Modifier.width(4.dp))
+
         Text(
             text = feed.placeTitle,
             color = colorResource(id = R.color.secondary_1),
-            fontSize = dimensionResource(id = R.dimen.text_14_sp).value.sp,
+            fontSize = 14.sp,
             fontFamily = pretendardBold
         )
     }
 
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_12)))
+    Spacer(modifier = Modifier.height(12.dp))
+
     // center image
-    Row(
+    Box(
         modifier = Modifier.wrapContentSize()
     ) {
         Card(
             modifier = Modifier
-                .height(dimensionResource(id = R.dimen.image_h))
-                .width(dimensionResource(id = R.dimen.image_w))
-                .align(Alignment.Bottom)
-            ,
-
-            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
-            backgroundColor = Color.Transparent,
+                .height(333.dp)
+                .width(218.dp)
+                .align(Alignment.CenterStart),
+            shape = RoundedCornerShape(4.dp),
+            backgroundColor = Color.Transparent
         ){
-            Box{
+            Box(modifier = Modifier.fillMaxSize()){
                 Image(
                     painter = painter, contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
@@ -97,35 +99,33 @@ fun CenterFeedLayout(
                     Row(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(dimensionResource(id = R.dimen.padding_12))
+                            .padding(start = 12.dp, bottom = 11.dp)
                             .align(Alignment.BottomStart)
                     ){
                         Image(
                             painter= painterResource(id = R.drawable.play_button),
                             contentDescription = null,
-                            modifier = Modifier.size(dimensionResource(id = R.dimen.padding_16))
+                            modifier = Modifier.size(16.dp)
                         )
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = "00:${videoTime}",
                             color = Color.White,
-                            fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+                            fontSize = 12.sp,
                             fontFamily = pretendardRegular
                         )
                     }
                 }
             }
         }
-
-        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_11)))
         // 이미지 여러장인 경우 이미지 테스트 등록
         if (feed.files.size>1) {
             Text(
                 modifier = Modifier
-                    .align(Alignment.Bottom)
-                    .wrapContentSize(),
+                    .align(Alignment.BottomEnd),
                 text = "+${feed.files.size - 1}",
                 color = colorResource(id = R.color.blue_gray_3),
-                fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+                fontSize = 12.sp,
                 fontFamily = pretendardBold
             )
         }

@@ -13,8 +13,10 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import androidx.compose.foundation.Image
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun BottomFeedLayout(
@@ -22,28 +24,30 @@ fun BottomFeedLayout(
     content : String,
     onMoreInfo : () -> Unit
 ) {
+
     Text(
         text = subject,
-        fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+        fontSize = 12.sp,
         fontFamily = pretendardBold,
         color = Color.White,
         modifier = Modifier
             .wrapContentHeight()
-            .width(dimensionResource(id = R.dimen.text_w_content))
+            .width(268.dp),
+        overflow = TextOverflow.Ellipsis
     )
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_4)))
+    Spacer(modifier = Modifier.height(4.dp))
     Text(
         text = content,
-        fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+        fontSize = 12.sp,
         fontFamily = pretendardRegular,
         color = Color.White,
         maxLines = 2,
         modifier = Modifier
             .wrapContentHeight()
-            .width(dimensionResource(id = R.dimen.text_w_content)),
+            .width(268.dp),
         overflow = TextOverflow.Ellipsis
     )
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_12)))
+    Spacer(modifier = Modifier.height(12.dp))
 
     Row(
         modifier = Modifier
@@ -51,18 +55,19 @@ fun BottomFeedLayout(
             .clickable {
                 onMoreInfo()
                 // go detail
-            }
+            },
+        verticalAlignment = Alignment.CenterVertically
     ){
         Text(
             text = "더보기",
             fontFamily = pretendardBold,
-            fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+            fontSize = 12.sp,
             color = colorResource(id = R.color.blue_gray_3)
         )
+        Spacer(modifier = Modifier.width(5.5.dp))
         Image(
             painter = painterResource(id = R.drawable.left_side_mini),
             contentDescription = null,
-            modifier = Modifier.size(dimensionResource(id = R.dimen.padding_18))
         )
     }
 }

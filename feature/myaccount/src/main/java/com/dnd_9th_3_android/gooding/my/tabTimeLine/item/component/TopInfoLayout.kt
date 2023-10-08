@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.utils.TimeDataChanger
 import com.dnd_9th_3_android.gooding.core.data.R
@@ -22,23 +23,22 @@ fun TopInfoLayout(
     timeData : String,
     onDelete : () -> Unit
 ) {
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        verticalAlignment = Alignment.CenterVertically
     ){
         Text(
             text = TimeDataChanger().getRecordText(timeData),
-            fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+            fontSize = 16.sp,
             fontFamily = pretendardBold,
-            color = Color.White
+            color = Color.White,
+            modifier = Modifier.align(Alignment.CenterStart)
         )
-        Spacer(modifier = Modifier.weight(1f))
         // delete box
         Box(
             modifier = Modifier
-                .padding(end = dimensionResource(id = R.dimen.padding_18))
+                .align(Alignment.CenterEnd)
                 .wrapContentSize()
                 .clickable {
                     // delete
@@ -47,13 +47,14 @@ fun TopInfoLayout(
         ){
             BoxText(
                 borderColor = listOf(colorResource(id = R.color.blue_gray_3),colorResource(id = R.color.blue_gray_3)),
-                borderShape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
+                borderShape = RoundedCornerShape(4.dp),
                 borderBackground = Color.Transparent,
                 text = "삭제",
-                fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+                fontSize = 12.sp,
                 fontColor =  colorResource(id = R.color.blue_gray_2),
-                hoPadding = dimensionResource(id = R.dimen.padding_6),
-                verPadding = dimensionResource(id = R.dimen.padding_10)
+                hoPadding = 6.dp,
+                verPadding = 10.dp,
+                0.sp
             )
         }
     }

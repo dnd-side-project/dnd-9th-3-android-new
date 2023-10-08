@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.BoxText
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
@@ -36,39 +37,44 @@ fun UserInfoScreen() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                start = dimensionResource(id = R.dimen.padding_20),
-                end = dimensionResource(id = R.dimen.padding_20)
+                start = 20.dp,
+                end = 20.dp
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         // user image
-        Image(
-            painter = painterResource(id = R.drawable.profile_nomal),
-            contentDescription = null,
-//            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(dimensionResource(id = R.dimen.profile_image_size))
-                .clip(CircleShape)
-        )
-        Spacer(modifier =Modifier.width(dimensionResource(id = R.dimen.padding_10)))
+        Box(
+            modifier = Modifier.size(32.dp)
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.profile_nomal),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(CircleShape)
+            )
+        }
+        Spacer(modifier =Modifier.width(10.dp))
         // user name
         Text(
             text =  "username",
-            fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+            fontSize = 16.sp,
             color = Color.White,
-            fontFamily = pretendardBold
+            fontFamily = pretendardBold,
+            letterSpacing = (-0.25).sp
         )
         Spacer(modifier = Modifier.weight(1f))
         // 프로필 수정 menu
         BoxText(
             listOf(colorResource(id = R.color.blue_gray),colorResource(id = R.color.blue_gray)),
-            RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
+            RoundedCornerShape(4.dp),
             colorResource(id = R.color.blue_gray),
             "프로필 수정",
-            dimensionResource(id = R.dimen.text_12).value.sp,
+            12.sp,
             Color.White,
-            dimensionResource(id = R.dimen.padding_6),
-            dimensionResource(id = R.dimen.padding_10)
+            6.dp,
+            10.dp,
+            (-0.25).sp
         )
     }
 }
