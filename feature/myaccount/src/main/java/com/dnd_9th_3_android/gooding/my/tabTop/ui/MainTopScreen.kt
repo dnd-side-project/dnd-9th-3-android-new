@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.my.subLayout.LevelScreen
@@ -24,16 +25,16 @@ fun MainTopScreen() {
                 .wrapContentHeight()
         ) {
             // main content (top menu)
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.top_margin)))
+            Spacer(modifier = Modifier.height(53.dp))
             TopMenuScreen()
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_36)))
+            Spacer(modifier = Modifier.height(36.dp))
             LevelScreen(
                 painterResource(id = R.drawable.level_icon),
                 "LV1.초보 낭만러"
             )
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_28)))
+            Spacer(modifier = Modifier.height(27.98.dp))
             UserInfoScreen()
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
+            Spacer(modifier = Modifier.height(27.dp))
         }
     }
 }

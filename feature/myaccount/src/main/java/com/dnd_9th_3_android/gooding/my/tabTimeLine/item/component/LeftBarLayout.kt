@@ -21,26 +21,23 @@ fun LeftBarLayout(
     recordScore : Int,
 ) {
     Column(
-        modifier = Modifier.padding(
-            top = dimensionResource(id = R.dimen.border_size_2), // 2+12 = 14
-            end = dimensionResource(id = R.dimen.padding_16)
-        )
-    ) {
-        // 나중에 수정 - 이미지 낭만 지수에 따라서 변화
+        modifier = Modifier.wrapContentSize(),
+        verticalArrangement = Arrangement.Center
+    ){
         Image(
             painter = painterResource(RecordScoreType(recordScore)),
-            modifier = Modifier.size(dimensionResource(id = R.dimen.size_26)),
+            modifier = Modifier.size(26.dp),
             contentDescription = null
         )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_14)))
-        // padding 제외하고 1 weight
+        Spacer(modifier = Modifier.height(14.dp))
+
         Divider(
             modifier = Modifier
                 .height(503.dp)
-                .width(dimensionResource(id = R.dimen.border_size_2))
+                .width(2.dp)
                 .background(
                     color = colorResource(id = R.color.blue_gray_4),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_20))
+                    shape = RoundedCornerShape(20.dp)
                 )
                 .align(Alignment.CenterHorizontally)
         )

@@ -10,42 +10,49 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.BoxText
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 
 @Composable
-fun DefaultTimeLineScreen() {
+fun DefaultTimeLineScreen(
+    goRecord : () -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(end = dimensionResource(id = R.dimen.padding_18)),
+            .padding(
+                start = 18.dp,
+                end = 18.dp,
+                bottom = 27.dp
+            ),
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
         Text(
             text = "이번달의 첫번째 굳이데이 기록을 남겨보세요.",
-            fontSize = dimensionResource(id = R.dimen.text_14_sp).value.sp,
+            fontSize = 14.sp,
             fontFamily = pretendardBold,
-            color = colorResource(id = R.color.blue_gray_3)
+            color = colorResource(id = R.color.blue_gray_3),
+            letterSpacing = (-0.25).sp
         )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_12)))
+        Spacer(modifier = Modifier.height(12.dp))
         //record button
         Box(
-            modifier = Modifier.clickable {
-                //go record activity
-            }
+            modifier = Modifier.clickable { goRecord() }
         ){
             BoxText(
                 borderColor = listOf(colorResource(id = R.color.blue_gray_3),colorResource(id = R.color.blue_gray_3)),
-                borderShape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_8)),
+                borderShape = RoundedCornerShape(8.dp),
                 borderBackground = Color.Transparent,
                 text = "기록하기",
-                fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                fontSize = 16.sp,
                 fontColor = Color.White ,
-                hoPadding = dimensionResource(id = R.dimen.padding_11_5),
-                verPadding = dimensionResource(id = R.dimen.zero)
+                hoPadding = 11.5.dp,
+                verPadding = 0.dp,
+                (-0.25).sp
             )
         }
     }

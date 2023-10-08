@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.BoxText
@@ -23,7 +25,7 @@ import com.holix.android.bottomsheetdialog.compose.BottomSheetDialogProperties
 fun DeleteFeedBottomSheet(
     feedId : Int,
     onClose : () -> Unit,
-    onDelete : () -> Unit
+    onDelete : (Int) -> Unit
 ) {
 
     BottomSheetDialog(
@@ -41,65 +43,74 @@ fun DeleteFeedBottomSheet(
             .background(
                 color = colorResource(id = R.color.blue_gray_6),
                 shape = RoundedCornerShape(
-                    topStart = dimensionResource(id = R.dimen.padding_24),
-                    topEnd = dimensionResource(id = R.dimen.padding_24)
+                    topStart = 24.dp,
+                    topEnd = 24.dp
                 ),
             )
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        Row(
-            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_36))
-        ) {
-            Text(
-                modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.padding_18),
-                ),
-                text = "삭제하시겠습니까?",
-                fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
-                fontFamily = pretendardBold,
-                color = Color.White
-            )
-            Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(36.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(
+                    start = 18.dp,
+                    end = 13.dp
+                )
+        ){
+            Column(modifier = Modifier.align(Alignment.CenterStart)) {
+                Text(
+                    text = "삭제하시겠습니까?",
+                    fontSize = 16.sp,
+                    fontFamily = pretendardBold,
+                    color = Color.White
+                )
+                Text(
+                    text = "삭제된 이미지와 글은 복구가 불가능합니다.",
+                    fontSize = 16.sp,
+                    fontFamily = pretendardBold,
+                    color = Color.White
+                )
+            }
+
             Box(
                 modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.padding_24))
+                    .size(24.dp)
+                    .align(Alignment.TopEnd)
                     .clickable {
                         onClose()
                     }
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.close_button),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(end = dimensionResource(id = R.dimen.padding_13)),
+                    painter = painterResource(id = R.drawable.close_my),
+                    modifier = Modifier.fillMaxSize(),
                     contentDescription = null
                 )
             }
         }
-        Text(
-            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_18)),
-            text = "삭제된 이미지와 글은 복구가 불가능합니다.",
-            fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
-            fontFamily = pretendardBold,
-            color = Color.White
-        )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_36)))
-        Box(modifier = Modifier.clickable { 
-            onDelete()
-            onClose()
-        }){
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Box(modifier = Modifier
+            .clickable {
+                onDelete(feedId)
+                onClose()
+            }
+        ){
             BoxText(
                 borderColor = listOf(colorResource(id = R.color.blue_gray_3),colorResource(id = R.color.blue_gray_3)),
-                borderShape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_8)),
+                borderShape = RoundedCornerShape(8.dp),
                 borderBackground = Color.Transparent ,
                 text = "삭제하기",
-                fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                fontSize = 16.sp,
                 fontColor = Color.White ,
-                hoPadding = dimensionResource(id = R.dimen.padding_11_5),
-                verPadding = dimensionResource(id = R.dimen.zero)
+                hoPadding = 11.5.dp,
+                verPadding = 0.dp,
+                (-0.25).sp
             )
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_28)))
+        Spacer(modifier = Modifier.height(28.dp))
     }
 }

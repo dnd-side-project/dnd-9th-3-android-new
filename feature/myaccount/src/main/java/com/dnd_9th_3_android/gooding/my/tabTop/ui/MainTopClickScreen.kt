@@ -44,7 +44,7 @@ fun MainTopClickScreen(
                 .wrapContentHeight()
         ) {
             // main content (top menu)
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.top_margin)))
+            Spacer(modifier = Modifier.height(53.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -55,8 +55,9 @@ fun MainTopClickScreen(
                     text = "마이 굳잉",
                     modifier = Modifier.align(Alignment.Center),
                     color = Color.Transparent,
-                    fontSize = dimensionResource(R.dimen.main_text_sp).value.sp,
-                    fontFamily = pretendardBold
+                    fontSize = 18.sp,
+                    fontFamily = pretendardBold,
+                    letterSpacing = (-0.25).sp
                 )
                 Box(
                     Modifier.align(Alignment.CenterEnd)
@@ -66,53 +67,55 @@ fun MainTopClickScreen(
                         }
                 )
             }
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_36)))
+            Spacer(modifier = Modifier.height(36.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth().wrapContentHeight()
             ) {
                 Box(
                     modifier = Modifier
-                        .height(dimensionResource(id = R.dimen.level_image_h))
-                        .width(dimensionResource(id = R.dimen.level_image_w))
+                        .height(147.02.dp)
+                        .width(166.28.dp)
                 )
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 BoxText(
                     listOf(Color.Transparent, Color.Transparent),
-                    RoundedCornerShape(dimensionResource(id = R.dimen.corner_6)),
+                    RoundedCornerShape(6.dp),
                     Color.Transparent,
                     "text Transparent",
-                    dimensionResource(id = R.dimen.text_12).value.sp,
+                    12.sp,
                     Color.Transparent,
-                    dimensionResource(id = R.dimen.padding_6),
-                    dimensionResource(id = R.dimen.padding_10)
+                    6.dp,
+                    10.dp,
+                    (-0.25).sp
                 )
 
             }
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_28)))
+            Spacer(modifier = Modifier.height(27.98.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = dimensionResource(id = R.dimen.padding_20),
-                        end = dimensionResource(id = R.dimen.padding_20)
+                        start = 20.dp,
+                        end = 20.dp
                     ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // user image
                 Box(
                     modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.profile_image_size))
+                        .size(32.dp)
                         .clip(CircleShape)
                 )
-                Spacer(modifier =Modifier.width(dimensionResource(id = R.dimen.padding_10)))
+                Spacer(modifier =Modifier.width(10.dp))
                 // user name
                 Text(
                     text =  "username",
-                    fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
+                    fontSize = 16.sp,
                     color = Color.Transparent,
-                    fontFamily = pretendardBold
+                    fontFamily = pretendardBold,
+                    letterSpacing = (-0.25).sp
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 // 프로필 수정 menu
@@ -124,17 +127,18 @@ fun MainTopClickScreen(
                 ) {
                     BoxText(
                         listOf(Color.Transparent, Color.Transparent),
-                        RoundedCornerShape(dimensionResource(id = R.dimen.corner_4)),
+                        RoundedCornerShape(4.dp),
                         Color.Transparent,
                         "프로필 수정",
-                        dimensionResource(id = R.dimen.text_12).value.sp,
+                        12.sp,
                         Color.Transparent,
-                        dimensionResource(id = R.dimen.padding_6),
-                        dimensionResource(id = R.dimen.padding_10)
+                        6.dp,
+                        10.dp,
+                        (-0.25).sp
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_24)))
+            Spacer(modifier = Modifier.height(27.dp))
         }
     }
 }

@@ -156,7 +156,8 @@ fun SelectMonthBottomSheet(
                     fontSize = 16.sp,
                     fontColor = colorResource(id = R.color.blue_gray_7),
                     hoPadding = 11.5.dp,
-                    verPadding = 0.dp
+                    verPadding = 0.dp,
+                    (-0.25).sp
                 )
             }
 

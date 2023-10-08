@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomText (
@@ -27,6 +28,7 @@ fun CustomText (
             fontFamily = fontFamily,
             shadow = textShadow,
             color = fontColor
-        )
+        ),
+        letterSpacing = if (text.length>2) (-0.25).sp else 0.sp
     )
 }

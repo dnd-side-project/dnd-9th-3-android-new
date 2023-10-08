@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.BoxText
@@ -27,20 +28,21 @@ fun LevelScreen(
         Image(
             painter = painter, contentDescription = null,
             modifier = Modifier
-                .height(dimensionResource(id = R.dimen.level_image_h))
-                .width(dimensionResource(id = R.dimen.level_image_w))
+                .height(147.02.dp)
+                .width(166.28.dp)
         )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
+        Spacer(modifier = Modifier.height(16.dp))
 
         BoxText(
             listOf(colorResource(id = R.color.for_grada_1),colorResource(id = R.color.secondary_1)),
-            RoundedCornerShape(dimensionResource(id = R.dimen.corner_6)),
+            RoundedCornerShape(6.dp),
             Color.Transparent,
             levelText,
-            dimensionResource(id = R.dimen.text_12).value.sp,
+            12.sp,
             Color.White,
-            dimensionResource(id = R.dimen.padding_6),
-            dimensionResource(id = R.dimen.padding_10)
+            6.dp,
+            10.dp,
+            0.sp
         )
 
     }
