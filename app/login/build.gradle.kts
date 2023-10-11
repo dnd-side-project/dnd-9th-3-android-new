@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services") version "4.3.10" apply true
+    id("com.google.gms.google-services") version "4.3.15" apply true
 
 
 }

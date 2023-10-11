@@ -5,7 +5,8 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services") version "4.3.10" apply true
+
+    id("com.google.gms.google-services") version "4.3.15" apply true
 //    id("com.google.firebase.crashlytics")
 }
 android {

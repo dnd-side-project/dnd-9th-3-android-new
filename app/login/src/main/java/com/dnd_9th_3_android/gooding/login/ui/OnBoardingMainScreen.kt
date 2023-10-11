@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.login.type.BottomTextBoxType
 
 @Composable

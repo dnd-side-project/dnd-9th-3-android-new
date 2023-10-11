@@ -1,6 +1,8 @@
 package com.dnd_9th_3_android.gooding
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -10,7 +12,7 @@ class GlobalApplication : Application() {
         super.onCreate()
 
         instance = this
-
+        FirebaseApp.initializeApp(this)
         // kakao sdk 초기화
         KakaoSdk.init(this, "a244014544b5323246b6853ca1d8ca93")
     }
