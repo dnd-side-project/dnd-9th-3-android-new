@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.login.data
+package com.dnd_9th_3_android.gooding.login.data.repository
 
 import android.content.ContentValues
 import android.content.Context
@@ -8,26 +8,36 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import com.dnd_9th_3_android.gooding.api.NetworkManager
+import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
+import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
+import com.dnd_9th_3_android.gooding.model.user.AccessToken
+import com.dnd_9th_3_android.gooding.model.user.UserData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
-class GoogleLoginImpl @Inject constructor() : GoogleLoginInterface {
-    override fun toastMessage(context: Context, message: String) {
+class GoogleLoginImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val networkManager: NetworkManager
+) : GoogleLoginInterface {
+    override fun toastMessage( message: String) {
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
     }
 
     override fun setLauncher(
-        context: Context,
         result: ActivityResult,
         firebaseAuth: FirebaseAuth,
         loginCallback: (String?) -> Unit
@@ -53,7 +63,7 @@ class GoogleLoginImpl @Inject constructor() : GoogleLoginInterface {
                                         Log.e(ContentValues.TAG, "googleSignInToken : $googleSignInToken")
                                         loginCallback(googleSignInToken)
                                     } else {
-                                        toastMessage(context,"null token")
+                                        toastMessage("null token")
                                         Log.e(ContentValues.TAG, "googleSignInToken이 null")
                                         loginCallback(null)
                                     }
@@ -71,7 +81,6 @@ class GoogleLoginImpl @Inject constructor() : GoogleLoginInterface {
     }
 
     override fun login(
-        context: Context,
         clientId: String,
         launcher: ActivityResultLauncher<Intent>
     ) {
@@ -85,5 +94,20 @@ class GoogleLoginImpl @Inject constructor() : GoogleLoginInterface {
             launcher.launch(signInIntent)
         }
     }
+
+    override fun loginRequest(idToken:String,result:(AccessToken?)->Unit) {
+        networkManager.getLoginApiService()
+            .loginGoogle(idToken)
+            .enqueue(object : Callback<AccessToken> {
+                override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
+                    result(response.body())
+                }
+                override fun onFailure(call: Call<AccessToken>, t: Throwable) {
+                    result(null)
+                }
+
+            })
+    }
+
 
 }

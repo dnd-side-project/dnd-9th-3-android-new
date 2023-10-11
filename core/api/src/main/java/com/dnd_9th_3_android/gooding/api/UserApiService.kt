@@ -45,13 +45,4 @@ interface UserApiService {
     ) : Call<UserData>
 
 
-    // 관심사 기반 데이터 조회
-    @GET("api/v1/feed/{userId}")
-    fun getUserFeedFromId(
-        @Path("userId") userId : Int,
-        @Query("interestCodes") interestCodes : List<OnBoardingData>,
-        @Query("page") page : Int,
-        @Query("size") size : Int,
-    ) : Call<GetMainFeedList>
-
 }

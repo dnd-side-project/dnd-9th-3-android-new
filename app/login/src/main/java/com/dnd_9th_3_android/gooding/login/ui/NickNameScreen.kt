@@ -22,11 +22,9 @@ import com.dnd_9th_3_android.gooding.login.viewModel.OnBoardingObject
 @Composable
 fun NickNameScreen(
     navController: NavHostController,
-    onStepChange : (Int) -> Unit,
-    loginViewModel : LoginViewModel = hiltViewModel()
+    onStepChange : (Int) -> Unit
 ) {
     // info update - > 나중에 수정
-    loginViewModel.userInfoData()
     onStepChange(0)
 
     // 뒤로가기 제어

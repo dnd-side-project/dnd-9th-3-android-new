@@ -2,7 +2,9 @@ package com.dnd_9th_3_android.gooding.login.ui
 
 import android.content.Intent
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Image
@@ -10,7 +12,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.SemanticsProperties.Text
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -18,47 +19,42 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import com.dnd_9th_3_android.gooding.api.RetrofitUtil
-import com.dnd_9th_3_android.gooding.login.data.GoogleLoginInterface
-import com.dnd_9th_3_android.gooding.login.data.KaKaoLoginInterface
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
+import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
+import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 
 @Composable
-fun SosLoginScreen(
-    launcher: ActivityResultLauncher<Intent>,
-    callback : (OAuthToken?, Throwable?) -> Unit,
-    kaKaoLogin : KaKaoLoginInterface,
-    googleLogin : GoogleLoginInterface,
+fun SsoLoginScreen(
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
     // 뒤로가기 제어
     BackHandler(enabled = true, onBack = {})
 
-    var isGoogleLogin by remember{
-        mutableStateOf(false)
+    val firebaseAuth = FirebaseAuth.getInstance()
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(), onResult ={ result->
+            viewModel.setLauncher(result,firebaseAuth)
+        }
+    )
+    val callback : (OAuthToken?,Throwable?) -> Unit = { token, error->
+        viewModel.setCallback(error, token)
     }
-    var isKaKaoLogin by remember{
-        mutableStateOf(false)
-    }
+
+    var isGoogleLogin by remember{ mutableStateOf(false) }
+    var isKaKaoLogin by remember{ mutableStateOf(false) }
+
     if (isGoogleLogin){
-        googleLogin.login(
-            LocalContext.current,
-            "1025089687385-2jeq6l8c296ekcdecjg76i0382a4j0fg.apps.googleusercontent.com",
-            launcher
-        )
+        viewModel.goggleLogin(launcher)
+        isGoogleLogin = false
     }
     if (isKaKaoLogin){
-        if (!kaKaoLogin.checkLogin()) {
-            kaKaoLogin.kaKaoLogin(
-                LocalContext.current,
-                callback,
-                loginCallback = {
-                    if (it == null) { //사용자 의도로 로그인 취소
-                        /// do
-                        isKaKaoLogin = false
-                    }
-                })
+        if (!viewModel.checkKaKaoLogin()) {
+            viewModel.kaKaoLogin(callback)
         }
+        isKaKaoLogin = false
     }
     Box(modifier = Modifier.fillMaxSize()) {
 

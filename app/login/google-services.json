@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1025089687385:android:be489fe5e3b8b8e243c648",
         "android_client_info": {
-          "package_name": "com.dnd_9th_3_android.gooding"
+          "package_name": "com.dnd_9th_3_android.gooding.login"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "1025089687385-n76p4g1pabdt53pcf0j737rvitckhl8a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.dnd_9th_3_android.gooding",
+            "package_name": "com.dnd_9th_3_android.gooding.login",
             "certificate_hash": "6c2cb00088ef7772d72f90925a813001ff022adc"
           }
         },

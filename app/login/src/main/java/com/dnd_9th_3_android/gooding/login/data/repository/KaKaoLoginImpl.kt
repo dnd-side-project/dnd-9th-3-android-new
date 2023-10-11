@@ -1,8 +1,11 @@
-package com.dnd_9th_3_android.gooding.login.data
+package com.dnd_9th_3_android.gooding.login.data.repository
 
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.dnd_9th_3_android.gooding.api.NetworkManager
+import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
+import com.dnd_9th_3_android.gooding.model.user.AccessToken
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -10,18 +13,23 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.AccessTokenInfo
-import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
-class KaKaoLoginImpl @Inject constructor() : KaKaoLoginInterface {
+class KaKaoLoginImpl @Inject constructor(
+    @ApplicationContext private val context : Context,
+    private val networkManager: NetworkManager
+) : KaKaoLoginInterface {
     override fun initCallback(
         error: Throwable?,
         token: OAuthToken?,
-        context: Context,
         loginCallback: (String?) -> Unit
     ) {
         if (error != null){
-            toastMessage(context,"카카오 로그인 실패 $error")
+            toastMessage("카카오 로그인 실패 $error")
             loginCallback(null)
         }else if (token != null){
             // 로그인 성공
@@ -30,11 +38,11 @@ class KaKaoLoginImpl @Inject constructor() : KaKaoLoginInterface {
         }
     }
 
-    override fun toastMessage(context:Context,message:String) {
+    override fun toastMessage(message:String) {
         Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun kaKaoLogin(context:Context,callback : (OAuthToken?, Throwable?)  -> Unit,loginCallback: (String?) -> Unit) {
+    override fun kaKaoLogin(callback : (OAuthToken?, Throwable?)  -> Unit,loginCallback: (String?) -> Unit) {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)){ //앱 설치 상태
             UserApiClient.instance.loginWithKakaoTalk(context){ _, error ->
                 if (error != null){
@@ -81,19 +89,33 @@ class KaKaoLoginImpl @Inject constructor() : KaKaoLoginInterface {
         return check
     }
 
-    override fun getUserInfo(context: Context,loginCallback: (AccessTokenInfo?) -> Unit) {
+    override fun getUserInfo(loginCallback: (AccessTokenInfo?) -> Unit) {
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if (error != null){
                 loginCallback(null)
-                toastMessage(context,"토큰 정보 불러오기 실패:$error")
+                toastMessage("토큰 정보 불러오기 실패:$error")
             }
             else if (tokenInfo != null){
                 loginCallback(tokenInfo) // 로그인 정보와 만료 기간 전송
             }
             else {
                 loginCallback(null)
-                toastMessage(context,"토큰 정보 불러오기 실패 error")
+                toastMessage("토큰 정보 불러오기 실패 error")
             }
         }
+    }
+
+    override fun loginRequest(accessToken:String,result:(AccessToken?)->Unit) {
+        networkManager.getLoginApiService()
+            .loginKaKao(accessToken)
+            .enqueue(object : Callback<AccessToken> {
+                override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
+                    result(response.body())
+                }
+                override fun onFailure(call: Call<AccessToken>, t: Throwable) {
+                    result(null)
+                }
+
+            })
     }
 }
