@@ -15,6 +15,7 @@ import com.dnd_9th_3_android.gooding.login.component.EditTextBox
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
 import com.dnd_9th_3_android.gooding.login.viewModel.OnBoardingObject
@@ -32,15 +33,15 @@ fun NickNameScreen(
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(top = dimensionResource(id = R.dimen.padding_133))
+        .padding(top = 133.dp)
     ) {
         Text(
             text = "굳잉에서 사용할",
             fontWeight = FontWeight.Bold,
             color = Color.White,
-            fontSize = dimensionResource(id = R.dimen.text_18_sp).value.sp,
+            fontSize = 18.sp,
             modifier = Modifier.padding(
-                start = dimensionResource(id = R.dimen.padding_18),
+                start = 18.dp,
             )
         )
 
@@ -48,13 +49,13 @@ fun NickNameScreen(
             text = "닉네임을 설정해주세요.",
             fontWeight = FontWeight.Bold,
             color = Color.White,
-            fontSize = dimensionResource(id = R.dimen.text_18_sp).value.sp,
+            fontSize = 18.sp,
             modifier = Modifier.padding(
-                start = dimensionResource(id = R.dimen.padding_18),
+                start = 18.dp,
             )
         )
 
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_40)))
+        Spacer(modifier = Modifier.height(40.dp))
 
         var text by remember {
             mutableStateOf(TextFieldValue(OnBoardingObject.userName))
@@ -90,32 +91,32 @@ fun NickNameScreen(
         if (errorType == 1 && !possibleText) {
             Box(
                 modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.padding_18),
-                    top = dimensionResource(id = R.dimen.padding_8)
+                    start = 18.dp,
+                    top = 8.dp
                 )
             ) {
                 // 155 21
                 Image(
                     painter = painterResource(id = R.drawable.nickname_error_1),
                     modifier = Modifier
-                        .width(dimensionResource(id = R.dimen.size_155))
-                        .height(dimensionResource(id = R.dimen.padding_21)),
+                        .width(155.dp)
+                        .height(21.dp),
                     contentDescription = null
                 )
             }
         } else if (errorType == 2 && !possibleText) {
             Box(
                 modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.padding_18),
-                    top = dimensionResource(id = R.dimen.padding_8)
+                    start = 18.dp,
+                    top = 8.dp
                 )
             ) {
                 // 155 21
                 Image(
                     painter = painterResource(id = R.drawable.nickname_error_2),
                     modifier = Modifier
-                        .width(dimensionResource(id = R.dimen.size_155))
-                        .height(dimensionResource(id = R.dimen.padding_21)),
+                        .width(155.dp)
+                        .height(21.dp),
                     contentDescription = null
                 )
             }

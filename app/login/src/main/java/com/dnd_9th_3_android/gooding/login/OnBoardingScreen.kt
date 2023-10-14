@@ -32,7 +32,9 @@ fun OnBoardingScreen(
             )
             LocalContext.current.startActivity(intent)
         }
-        false -> { } // onBoaring 진행
+        false -> {
+
+        } // onBoaring 진행
         else -> { // 오류
             navController.navigate("ssoScreen")
         }

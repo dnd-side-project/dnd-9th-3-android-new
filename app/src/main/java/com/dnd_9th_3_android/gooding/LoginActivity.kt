@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.dnd_9th_3_android.gooding.api.RetrofitUtil
+import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.data.SplashLayer
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme
 import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
@@ -72,6 +73,10 @@ class LoginActivity : AppCompatActivity() {
         binding.loginComposeView.apply{
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
+                UserInfoSharedPreferences(context).apply {
+                  this.accessToken = null
+                  this.userOauth = null
+                }
                 GoodingTheme {
                     LoginScreen()
                 }

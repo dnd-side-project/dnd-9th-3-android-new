@@ -14,7 +14,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 //import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import com.dnd_9th_3_android.gooding.model.user.Category
 
@@ -35,14 +37,13 @@ fun CategoryBox(
                 .aspectRatio(1f)
                 .background(
                     color = colorResource(id = R.color.blue_gray_6),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_10))
+                    shape = RoundedCornerShape(10.dp)
                 )
                 .border(
                     border = BorderStroke(
-                        width = dimensionResource(id = R.dimen.padding_1_5),
-                        color = colorResource(id = R.color.secondary_1)
+                        width = 1.5.dp, color = colorResource(id = R.color.secondary_1)
                     ),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_10))
+                    shape = RoundedCornerShape(10.dp)
                 )
                 .clickable {
                     isSelect = !isSelect
@@ -53,7 +54,7 @@ fun CategoryBox(
                 .aspectRatio(1f)
                 .background(
                     color = colorResource(id = R.color.blue_gray_6),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_10))
+                    shape = RoundedCornerShape(10.dp)
                 )
                 .clickable {
                     isSelect = !isSelect
@@ -64,10 +65,11 @@ fun CategoryBox(
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_3))
+            modifier = Modifier.padding(top = 2.62.dp)
         ){
             Box(modifier = Modifier
-                .size(dimensionResource(id = R.dimen.size_50)),
+                .size(oneWidth / 2)
+                .aspectRatio(1f),
             ){
                 Image(
                     modifier = Modifier.fillMaxSize(),
@@ -76,13 +78,13 @@ fun CategoryBox(
                 )
             }
 
-            dimensionResource(id = R.dimen.size_5_37)
+            Spacer(modifier = Modifier.height(5.38.dp))
 
             Text(
                 text = category.name,
-                fontWeight = FontWeight.Bold,
+                fontFamily = pretendardBold,
                 color = Color.White,
-                fontSize = dimensionResource(id = R.dimen.text_12).value.sp,
+                fontSize = 12.sp
             )
 
         }

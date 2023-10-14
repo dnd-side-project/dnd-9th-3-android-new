@@ -1,6 +1,8 @@
 package com.dnd_9th_3_android.gooding.login.data.repository
 
 import android.content.Context
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
 import com.dnd_9th_3_android.gooding.api.NetworkManager
 import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.login.data.domain.LoginRepository
@@ -27,6 +29,7 @@ class LoginRepositoryImpl @Inject constructor(
         return when (networkManager.getUserData()?.onboardYn){
             "yes"-> true
             "no" -> false
+            null -> false
             else -> null
         }
     }
@@ -80,5 +83,13 @@ class LoginRepositoryImpl @Inject constructor(
                 })
             }else{ result(null) }
         }
+    }
+
+    override fun accessMainActivity() {
+        // main으로 이동
+        val intent = Intent(
+            context, Class.forName("com.dnd_9th_3_android.gooding.MainActivity")
+        )
+        context.startActivity(intent)
     }
 }
