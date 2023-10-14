@@ -23,4 +23,6 @@ interface LoginRepository {
         result: (UserData?) -> Unit
     )
 
+    fun accessMainActivity()
+
 }

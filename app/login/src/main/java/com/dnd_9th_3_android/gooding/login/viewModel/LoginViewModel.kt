@@ -5,20 +5,17 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
-import com.dnd_9th_3_android.gooding.api.UserLoginInfo
 import com.dnd_9th_3_android.gooding.login.clientId
 import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
 import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
 import com.dnd_9th_3_android.gooding.login.data.domain.LoginRepository
 import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import com.dnd_9th_3_android.gooding.model.user.AccessToken
+import com.dnd_9th_3_android.gooding.model.user.Category
 import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 //import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -80,7 +77,7 @@ class LoginViewModel @Inject constructor(
         googleLogin.login(clientId,launcher)
     }
 
-    fun loginUser(userToken : AccessToken){
+    private fun loginUser(userToken : AccessToken){
         loginRepository.setUserInfoData(userToken, result = {
             if (it!=null){
                 inOnBoarding()
@@ -91,11 +88,51 @@ class LoginViewModel @Inject constructor(
     private fun inOnBoarding(){
         navController?.navigate("onBoardingScreen")
     }
+    private fun inMainActivity(){
+        loginRepository.accessMainActivity()
+    }
 
     fun checkUser() : Boolean?{
         return loginRepository.checkOnBoarding()
     }
 
+    fun getCheckCategorySize() : Int{
+        return loginRepository.checkCategoryCount
+    }
+    fun getCategoryList() : List<Category>{
+        return loginRepository.categoryList
+    }
+    fun getCategoryListSize() : Int{
+        return loginRepository.categoryList.size
+    }
 
+    fun plusCheckCategory(){
+        if (loginRepository.checkCategoryCount<9)
+            loginRepository.checkCategoryCount+=1
+    }
+    fun minusCheckCategory(){
+        if (loginRepository.checkCategoryCount>0)
+            loginRepository.checkCategoryCount-=1
+    }
 
+    fun setUserName(name : String){
+        loginRepository.username = name
+    }
+
+    fun getUserName() : String {
+        return loginRepository.username
+    }
+
+    fun setCategoryState(index : Int){
+        loginRepository.categoryList[index].selected =
+            !loginRepository.categoryList[index].selected
+    }
+
+    fun getCategoryState() : List<String>{
+        val dataList = arrayListOf<String>()
+        loginRepository.categoryList.forEach {
+            dataList.add(it.index.toString())
+        }
+        return dataList.toList()
+    }
 }

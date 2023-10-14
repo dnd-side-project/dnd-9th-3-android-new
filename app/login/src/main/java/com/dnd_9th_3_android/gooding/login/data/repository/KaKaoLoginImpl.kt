@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.dnd_9th_3_android.gooding.api.NetworkManager
+import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
 import com.dnd_9th_3_android.gooding.model.user.AccessToken
 import com.kakao.sdk.auth.AuthApiClient
@@ -106,6 +107,7 @@ class KaKaoLoginImpl @Inject constructor(
     }
 
     override fun loginRequest(accessToken:String,result:(AccessToken?)->Unit) {
+
         networkManager.getLoginApiService()
             .loginKaKao(accessToken)
             .enqueue(object : Callback<AccessToken> {

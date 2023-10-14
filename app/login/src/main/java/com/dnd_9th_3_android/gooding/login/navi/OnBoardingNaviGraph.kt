@@ -44,7 +44,7 @@ fun OnBoardingNaviGraph(
         }
         composable("checkCategoryScreen"){
             onProgressChange(66f)
-            CheckCategoryScreen(navController, onStepChange = {
+            CheckCategoryScreen( onStepChange = {
                 onStepChange(it)
             },loginViewModel)
         }

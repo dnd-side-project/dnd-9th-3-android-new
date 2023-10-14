@@ -20,7 +20,6 @@ fun FinishScreen(
     onStepChange : (Int) -> Unit,
     loginViewModel : LoginViewModel = hiltViewModel()
 ) {
-    Log.d("2f3l23jfl", OnBoardingObject.userName)
     if (OnBoardingObject.userName!="" && OnBoardingObject.userName.length>0){
         onStepChange(3)
     }else{
