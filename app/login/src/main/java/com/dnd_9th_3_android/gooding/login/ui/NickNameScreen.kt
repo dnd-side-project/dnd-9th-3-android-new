@@ -18,14 +18,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
-import com.dnd_9th_3_android.gooding.login.viewModel.OnBoardingObject
 
 @Composable
 fun NickNameScreen(
-    navController: NavHostController,
-    onStepChange : (Int) -> Unit
+    onStepChange : (Int) -> Unit,
+    viewModel: LoginViewModel
 ) {
-    // info update - > 나중에 수정
     onStepChange(0)
 
     // 뒤로가기 제어
@@ -57,8 +55,7 @@ fun NickNameScreen(
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        var text by remember {
-            mutableStateOf(TextFieldValue(OnBoardingObject.userName))
+        val text = remember { mutableStateOf(TextFieldValue(viewModel.getUserName()))
         }
         var possibleText by remember {
             mutableStateOf(true)
@@ -68,24 +65,24 @@ fun NickNameScreen(
             mutableStateOf(0)
         }
 
+        text.value.text.apply {
+            viewModel.setUserName(text.value.text)
+            if (this.length > 15) { // 글자 수 초과
+                possibleText = false
+                errorType = 2
+            } else if (this=="굳잉" || this=="gooding") {
+                // 닉네임 중복
+                possibleText = false
+                errorType = 1
+            } else {
+                possibleText = true
+            }
+        }
+
         EditTextBox(
             text,
             possibleText,
             "닉네임 입력 (15자 이내)",
-            onTexting = {
-                OnBoardingObject.userName = it.text
-                text = it
-                if (text.text.length > 15) { // 글자 수 초과
-                    possibleText = false
-                    errorType = 2
-                } else if (text.text=="굳잉" || text.text=="gooding") {
-                    // 닉네임 중복
-                    possibleText = false
-                    errorType = 1
-                } else {
-                    possibleText = true
-                }
-            }
         )
 
         if (errorType == 1 && !possibleText) {
@@ -122,9 +119,9 @@ fun NickNameScreen(
             }
         }
 
-        if (possibleText && text.text.length>0){
+        if (possibleText && text.value.text.isNotEmpty()){
             onStepChange(1)
-        }else if (!possibleText && text.text.length>0){
+        }else if (!possibleText && text.value.text.isNotEmpty()){
             onStepChange(0)
         }
 

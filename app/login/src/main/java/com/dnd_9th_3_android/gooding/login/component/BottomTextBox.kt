@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.login.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
@@ -25,17 +27,18 @@ fun BottomTextBox(
         modifier = Modifier
             .background(
                 color = backGroundColor,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_8))
+                shape = RoundedCornerShape(8.dp)
             )
-            .width(dimensionResource(id = R.dimen.size_324))
-            .height(dimensionResource(id = R.dimen.size_47)),
+            .fillMaxWidth()
+            .height(47.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text =text,
             color = textColor,
-            fontSize = dimensionResource(id = R.dimen.text_16_sp).value.sp,
-            fontFamily = pretendardBold
+            fontSize = 16.sp,
+            fontFamily = pretendardBold,
+            letterSpacing = (-0.25).sp
         )
     }
 }

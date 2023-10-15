@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.login.navi
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,38 +22,31 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnBoardingNaviGraph(
     navController: NavHostController,
-    onStepChange : (Int) -> Unit,
+    nextStepButtonType : MutableState<Int>,
     onProgressChange : (Float) -> Unit,
-    loginViewModel : LoginViewModel = hiltViewModel()
+    loginViewModel : LoginViewModel
 ) {
     NavHost(
         navController = navController,
-        startDestination = "splashScreen"
+        startDestination = "nickNameScreen"
     ){
-        composable("splashScreen"){
-            SplashLayer()
-            rememberCoroutineScope().launch {
-                delay(1000)
-                navController.navigate("nickNameScreen")
-            }
-        }
         composable("nickNameScreen"){
             onProgressChange(33f)
-            NickNameScreen(navController, onStepChange = {
-                onStepChange(it)
-            })
+            NickNameScreen( onStepChange = {
+                nextStepButtonType.value = it
+            },loginViewModel)
         }
         composable("checkCategoryScreen"){
             onProgressChange(66f)
             CheckCategoryScreen( onStepChange = {
-                onStepChange(it)
+                nextStepButtonType.value = it
             },loginViewModel)
         }
         composable("finishScreen"){
             onProgressChange(100f)
-            FinishScreen(navController, onStepChange = {
-                onStepChange(it)
-            })
+            FinishScreen( onStepChange = {
+                nextStepButtonType.value = it
+            },loginViewModel)
         }
     }
 }

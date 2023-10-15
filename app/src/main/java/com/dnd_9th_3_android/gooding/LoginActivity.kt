@@ -5,13 +5,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dnd_9th_3_android.gooding.api.RetrofitUtil
 import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.data.SplashLayer
+import com.dnd_9th_3_android.gooding.data.state.rememberApplicationState
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme
 import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
 import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
@@ -30,8 +34,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    private var _binding : ActivityLoginBinding? = null
-    private val binding get() = _binding!!
 //    @Inject lateinit var kaKaoLogin : KaKaoLoginInterface
 //    @Inject lateinit var googleLogin : GoogleLoginInterface
 //    // firebase
@@ -69,20 +71,17 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding  = ActivityLoginBinding.inflate(this@LoginActivity.layoutInflater)
-        binding.loginComposeView.apply{
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                UserInfoSharedPreferences(context).apply {
-                  this.accessToken = null
-                  this.userOauth = null
-                }
-                GoodingTheme {
-                    LoginScreen()
-                }
+
+        setContent {
+            UserInfoSharedPreferences(this@LoginActivity).apply {
+                this.accessToken = null
+                this.userOauth = null
+            }
+            GoodingTheme {
+                LoginScreen(rememberNavController())
             }
         }
-        setContentView(binding.root)
+
 
 
 //        // init firebase

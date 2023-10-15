@@ -26,8 +26,7 @@ fun MyAccountScreen(
     appState : ApplicationState,
     viewModel : MyOptionViewModel = hiltViewModel()
 ) {
-    // 뒤로가기 동작 제어
-    BackHandler(enabled = true, onBack = {})
+
 
     // app State 저장
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp

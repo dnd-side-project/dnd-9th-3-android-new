@@ -17,7 +17,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.login.component.CategoryBox
 //import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
-import com.dnd_9th_3_android.gooding.login.viewModel.OnBoardingObject
 import androidx.compose.material.Text
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -27,8 +26,9 @@ import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 @Composable
 fun CheckCategoryScreen(
     onStepChange : (Int) -> Unit,
-    loginViewModel : LoginViewModel = hiltViewModel()
+    loginViewModel : LoginViewModel
 ) {
+    onStepChange(0)
     // check state
     if (loginViewModel.getCheckCategorySize()>=3){ onStepChange(1) }
     else{ onStepChange(0) }

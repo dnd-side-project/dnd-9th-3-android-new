@@ -27,39 +27,45 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.api.UserInfoSharedPreferences
 import com.dnd_9th_3_android.gooding.login.type.BottomTextBoxType
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun OnBoardingMainScreen(
-    nextStepButtonType : Int,
+    nextStepButtonType : MutableState<Int>,
     navController : NavHostController,
-    isClick : (Int) -> Unit,
     progress : Float,
-    loginViewModel: LoginViewModel = hiltViewModel()
+    loginViewModel : LoginViewModel
 ) {
 
+    val scope = rememberCoroutineScope()
     var isNextClick by remember {
         mutableStateOf(false)
     }
+    val current = navController.currentDestination?.route
     Box(modifier = Modifier.fillMaxSize()) {
         // top box
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(dimensionResource(id = R.dimen.size_97))
+                .height(97.dp)
                 .align(Alignment.TopCenter)
         ) {
             // back button
             Box(
                 modifier = Modifier
                     .padding(
-                        start = dimensionResource(id = R.dimen.padding_11),
-                        top = dimensionResource(id = R.dimen.padding_55)
+                        start = 11.dp,
+                        top = 55.dp
                     )
-                    .size(dimensionResource(id = R.dimen.padding_24))
+                    .size(24.dp)
                     .clickable {
                         // pop back stack
-                        if (progress!=33f){
-                            navController.popBackStack()
+                        scope.launch {
+                            if (progress > 33f && current != "nickNameScreen") {
+                                navController.popBackStack()
+                            }
+                            delay(100)
                         }
                     }
                     .align(Alignment.TopStart)
@@ -73,9 +79,9 @@ fun OnBoardingMainScreen(
 
             CustomProgressBar(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.padding_4)))
+                    .clip(RoundedCornerShape(4.dp))
                     .align(Alignment.BottomStart)
-                    .height(dimensionResource(id = R.dimen.padding_4)),
+                    .height(4.dp),
                 width = LocalConfiguration.current.screenWidthDp.dp,
                 backgroundColor = colorResource(id = R.color.blue_gray_5),
                 foregroundColor = Brush.horizontalGradient(
@@ -93,9 +99,9 @@ fun OnBoardingMainScreen(
                 .wrapContentHeight()
                 .align(Alignment.BottomCenter)
                 .padding(
-                    start = dimensionResource(id = R.dimen.padding_18),
-                    end = dimensionResource(id = R.dimen.padding_18),
-                    bottom = dimensionResource(id = R.dimen.padding_28)
+                    start = 18.dp,
+                    end = 18.dp,
+                    bottom = 28.dp
                 )
                 .clickable {
                     isNextClick = true
@@ -106,14 +112,16 @@ fun OnBoardingMainScreen(
 
         // 다음 동작 제어
         if (isNextClick) {
-            if (progress == 33f && nextStepButtonType == 1) {
-                isClick(2)
+            if (progress == 33f && nextStepButtonType.value == 1) {
+                nextStepButtonType.value = 2
                 navController.navigate("checkCategoryScreen")
-            } else if (progress == 66f && nextStepButtonType == 1) {
-                isClick(2)
+            } else if (progress == 66f && nextStepButtonType.value == 1) {
+                nextStepButtonType.value = 2
                 navController.navigate("finishScreen")
-            } else if (progress == 100f && nextStepButtonType == 3) {
-                isClick(4)
+            } else if (progress == 100f && nextStepButtonType.value == 3) {
+                nextStepButtonType.value = 4
+                // 기록
+                loginViewModel.recordUserOnBoarding()
                 // main으로 이동
                 val intent = Intent(
                     LocalContext.current.applicationContext,

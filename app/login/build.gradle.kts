@@ -85,7 +85,8 @@ dependencies {
     // compose navi
     implementation("androidx.navigation:navigation-compose:2.7.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
-
+    // live data
+    implementation ("androidx.compose.runtime:runtime-livedata:1.3.1")
     // module
     implementation(project(":core:model"))
     implementation(project(":core:data"))
