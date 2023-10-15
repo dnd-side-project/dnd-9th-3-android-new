@@ -19,26 +19,7 @@ import com.dnd_9th_3_android.gooding.login.navi.OnBoardingNaviGraph
 import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
 
 @Composable
-fun OnBoardingScreen(
-    navController : NavHostController,
-    loginViewModel : LoginViewModel = hiltViewModel()
-) {
-    when (loginViewModel.checkUser()){
-        true -> { // onBoarding 완료
-            // main으로 이동
-            val intent = Intent(
-                LocalContext.current.applicationContext,
-                Class.forName("com.dnd_9th_3_android.gooding.MainActivity")
-            )
-            LocalContext.current.startActivity(intent)
-        }
-        false -> {
-
-        } // onBoaring 진행
-        else -> { // 오류
-            navController.navigate("ssoScreen")
-        }
-    }
+fun OnBoardingScreen() {
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -46,9 +27,7 @@ fun OnBoardingScreen(
     // main login
     {
         // 현재 진행 상태
-        val currentValue = remember {
-            mutableStateOf(0f)
-        }
+        val currentValue = remember { mutableStateOf(0f) }
         // progress animation
         val progressAnimDuration = 700
         val progressAnimation by animateFloatAsState(
@@ -58,28 +37,24 @@ fun OnBoardingScreen(
             )
         )
 
-        var nextStepButtonType by remember{
-            mutableStateOf(0)
-        }
         val onBoardNavController = rememberNavController()
+        val nextStepButtonType = remember{ mutableStateOf(0) }
+        val loginViewModel : LoginViewModel = hiltViewModel()
         // 각 화면 네비
         OnBoardingNaviGraph(
             navController = onBoardNavController,
-            onStepChange = {
-                nextStepButtonType = it
-            },
+            nextStepButtonType,
             onProgressChange = {
                 currentValue.value = it
-            }
+            },
+            loginViewModel
         )
 
         OnBoardingMainScreen(
             nextStepButtonType = nextStepButtonType,
             navController = onBoardNavController,
             progress = progressAnimation,
-            isClick = {
-                nextStepButtonType = it
-            }
+            loginViewModel
         )
 
     }

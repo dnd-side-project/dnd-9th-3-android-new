@@ -1,8 +1,11 @@
 package com.dnd_9th_3_android.gooding.login.viewModel
 
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.login.clientId
@@ -12,10 +15,12 @@ import com.dnd_9th_3_android.gooding.login.data.domain.LoginRepository
 import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import com.dnd_9th_3_android.gooding.model.user.AccessToken
 import com.dnd_9th_3_android.gooding.model.user.Category
+import com.dnd_9th_3_android.gooding.model.user.UserData
 import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 //import com.dnd_9th_3_android.gooding.login.type.CategoryListType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,24 +29,21 @@ class LoginViewModel @Inject constructor(
      private val googleLogin : GoogleLoginInterface,
      private val loginRepository: LoginRepository
 ): ViewModel() {
-    private var navController : NavHostController? = null
     init { loginRepository.categoryList = CategoryListType().categoryImageList }
 
-    fun initNavi(navi: NavHostController){
-        navController = navi
-    }
     fun setCallback(
         error: Throwable?,
         token: OAuthToken?,
+        loginState : (UserData?)->Unit,
     ){
         kaKaoLogin.initCallback(error,token,loginCallback={
             if (it!=null){
                 kaKaoLogin.loginRequest(it, result = {userToken->
                     if (userToken!=null){
-                        loginUser(userToken)
-                    }
+                        loginUser(userToken,loginState = {state -> loginState(state)})
+                    } else {loginState(null)}
                 })
-            }
+            } else {loginState(null)}
         })
     }
 
@@ -61,15 +63,16 @@ class LoginViewModel @Inject constructor(
     fun setLauncher(
         result: ActivityResult,
         firebaseAuth : FirebaseAuth,
+        loginState : (UserData?)->Unit
     ){
         googleLogin.setLauncher(result,firebaseAuth, loginCallback = {
             if (it!=null){
                 googleLogin.loginRequest(it, result = {userToken->
                     if (userToken!=null){
-                        loginUser(userToken)
-                    }
+                        loginUser(userToken,loginState = {state -> loginState(state)})
+                    }  else {loginState(null)}
                 })
-            }
+            }  else {loginState(null)}
         })
     }
 
@@ -77,17 +80,10 @@ class LoginViewModel @Inject constructor(
         googleLogin.login(clientId,launcher)
     }
 
-    private fun loginUser(userToken : AccessToken){
-        loginRepository.setUserInfoData(userToken, result = {
-            if (it!=null){
-                inOnBoarding()
-            }
-        })
+    private fun loginUser(userToken : AccessToken,loginState : (UserData?)->Unit ){
+        loginRepository.setUserInfoData(userToken, result = { loginState(it) })
     }
 
-    private fun inOnBoarding(){
-        navController?.navigate("onBoardingScreen")
-    }
     private fun inMainActivity(){
         loginRepository.accessMainActivity()
     }
@@ -128,11 +124,15 @@ class LoginViewModel @Inject constructor(
             !loginRepository.categoryList[index].selected
     }
 
-    fun getCategoryState() : List<String>{
+    private fun getCategoryState() : List<String>{
         val dataList = arrayListOf<String>()
         loginRepository.categoryList.forEach {
-            dataList.add(it.index.toString())
+            if(it.selected) dataList.add(it.index.toString())
         }
         return dataList.toList()
+    }
+
+    fun recordUserOnBoarding(){
+        loginRepository.recordOnBoarding(getCategoryState(), result = {})
     }
 }

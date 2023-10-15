@@ -1,14 +1,15 @@
 package com.dnd_9th_3_android.gooding.login.type
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.colorResource
 import com.dnd_9th_3_android.gooding.login.component.BottomTextBox
 import com.dnd_9th_3_android.gooding.core.data.R
 @Composable
 fun BottomTextBoxType(
-    nextStepButtonType : Int
+    nextStepButtonType : MutableState<Int>
 ) {
-    when (nextStepButtonType) {
+    when (nextStepButtonType.value) {
         1 -> { // 선택 가능
             BottomTextBox(
                 "다음",

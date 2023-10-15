@@ -1,6 +1,7 @@
 package com.dnd_9th_3_android.gooding.data
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,6 +21,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun SplashLayer(
 ) {
+    // 뒤로가기 동작 제어
+    BackHandler(enabled = true, onBack = {})
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -30,11 +35,12 @@ fun SplashLayer(
             contentDescription = null,
             modifier = Modifier
                 .padding(
-                    start = dimensionResource(id = R.dimen.padding_101),
-                    top = dimensionResource(id = R.dimen.padding_264)
+                    start = 0.62.dp,
+                    bottom = 49.6.dp
                 )
-                .width(dimensionResource(id = R.dimen.spl_image_w))
-                .height(dimensionResource(id = R.dimen.spl_image_h))
+                .width(158.62.dp)
+                .height(177.4.dp)
+                .align(Alignment.Center)
         )
 
         // text image
@@ -44,10 +50,10 @@ fun SplashLayer(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(
-                    bottom = dimensionResource(id = R.dimen.padding_78)
+                    bottom = 78.dp
                 )
-                .width(dimensionResource(id = R.dimen.size_135))
-                .height(dimensionResource(id = R.dimen.size_37))
+                .width(135.dp)
+                .height(37.dp)
         )
     }
 }

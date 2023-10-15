@@ -17,16 +17,21 @@ import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardRegular
 import androidx.compose.material.Text
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EditTextBox(
-    text : TextFieldValue,
+    text : MutableState<TextFieldValue>,
     possibleText : Boolean,
     hintText: String,
-    onTexting : (TextFieldValue)-> Unit
 ) {
     val cursorColor by animateColorAsState(
         if (possibleText){
@@ -40,12 +45,12 @@ fun EditTextBox(
         IconButton(
             onClick = {
                 // text 삭제
-                onTexting(TextFieldValue(""))
+                text.value = TextFieldValue("")
             }
         ) {
             Box(
                 modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.padding_24))
+                    .size(24.dp)
                 ,contentAlignment = Alignment.Center
             ){
                 Icon(
@@ -53,59 +58,65 @@ fun EditTextBox(
                     contentDescription = "",
                     Modifier
                         .background(colorResource(id = R.color.blue_gray_3), CircleShape)
-                        .padding(dimensionResource(id = R.dimen.size_5))
+                        .padding(5.dp)
                 )
             }
         }
     }
 
+    val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
     Surface( // 배경
         modifier = Modifier
+            .fillMaxWidth()
             .padding(
-                start = dimensionResource(id = R.dimen.padding_18),
-                end = dimensionResource(id = R.dimen.padding_18),
+                start = 18.dp,
+                end = 18.dp,
             ),
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_6)),
+        shape = RoundedCornerShape(6.dp),
         // 배경 칼라 적용
-        border = if (text.text.isNotEmpty() && possibleText)
-            BorderStroke(
-            dimensionResource(id = R.dimen.padding_1_5),
-            colorResource(id = R.color.secondary_1_50)
-        ) else if (text.text.isNotEmpty() && !possibleText)
-            BorderStroke(
-                dimensionResource(id = R.dimen.padding_1_5),
-                colorResource(id = R.color.warn_color)
-            )
+        border = if (text.value.text.isNotEmpty() && possibleText)
+            BorderStroke(1.5.dp, colorResource(id = R.color.secondary_1_50)
+        ) else if (text.value.text.isNotEmpty() && !possibleText)
+            BorderStroke(1.5.dp, colorResource(id = R.color.warn_color))
         else null
         , color = colorResource(id = R.color.blue_gray_6)
     ) {
-        TextField(
-            value = text,
-            onValueChange = {newText ->
-                onTexting(newText)
-            }, //값 변경 시 동작
+        BasicTextField(
+            value = text.value,
+            singleLine = true,
+            textStyle = TextStyle(
+                color = Color.White,
+                fontSize =  14.sp,
+                fontFamily =  pretendardRegular
+            ),
+            onValueChange = {text.value = it }, //값 변경 시 동작
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp)
-                .height(dimensionResource(id = R.dimen.padding_53)),
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Color.White,
-                backgroundColor = colorResource(id = R.color.blue_gray_6),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                cursorColor = cursorColor,
-            ),
-            placeholder = {
-                Text(
-                    text = hintText,
-                    color = Color.White,
-                    fontSize = dimensionResource(id = R.dimen.text_14_sp).value.sp,
-                    fontFamily = pretendardRegular
-                )
-            }, //힌트 (텍스트 ,칼라 적용 )
-            trailingIcon = if (text.text.isNotEmpty()) trailingIconView else null,
-        )
+                .wrapContentHeight(),
+            cursorBrush  = SolidColor(cursorColor),
+            interactionSource = interactionSource
+        ){
+            TextFieldDefaults.TextFieldDecorationBox(
+                value = text.value.text,
+                innerTextField = it,
+                enabled = true,
+                singleLine = true,
+                visualTransformation = VisualTransformation.None,
+                interactionSource = interactionSource,
+                placeholder = {
+                    Text(
+                        text = hintText,
+                        color = colorResource(id = R.color.blue_gray_3),
+                        fontSize = 14.sp,
+                        fontFamily = pretendardRegular,
+                        letterSpacing = (-0.25).sp
+                    )
+                }, //힌트 (텍스트 ,칼라 적용 )
+                trailingIcon = if (text.value.text.isNotEmpty()) trailingIconView else null,
+                contentPadding = TextFieldDefaults.textFieldWithoutLabelPadding(14.dp),
+                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
+            )
+        }
     }
 
 }

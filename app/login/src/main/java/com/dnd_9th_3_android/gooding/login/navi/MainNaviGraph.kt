@@ -26,14 +26,8 @@ fun MainNaviGraph(
         navController = navController,
         startDestination = "splashScreen"
     ){
-        composable("splashScreen"){
-            SplashLayer()
-            rememberCoroutineScope().launch {
-                delay(1000)
-                navController.navigate("ssoScreen")
-            }
-        }
-        composable("ssoScreen"){ SsoLoginScreen() }
-        composable("onBoardingScreen"){ OnBoardingScreen(navController) }
+        composable("splashScreen"){ SplashLayer() }
+        composable("ssoScreen"){ SsoLoginScreen(navController) }
+        composable("onBoardingScreen"){ OnBoardingScreen() }
     }
 }

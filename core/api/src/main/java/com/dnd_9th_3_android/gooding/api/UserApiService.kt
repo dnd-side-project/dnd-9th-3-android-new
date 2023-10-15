@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.api
 
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeedList
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
+import com.dnd_9th_3_android.gooding.model.user.OnBoardingCode
 import com.dnd_9th_3_android.gooding.model.user.OnBoardingData
 import com.dnd_9th_3_android.gooding.model.user.UserData
 import retrofit2.Call
@@ -42,7 +43,7 @@ interface UserApiService {
         @Path("userId") userId: Int,
         @Field("nickName") nickName:String,
         @Field("interestCodes") interestCodes : List<String>
-    ) : Call<UserData>
+    ) : Call<OnBoardingCode>
 
 
 }
