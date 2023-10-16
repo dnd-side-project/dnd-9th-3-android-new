@@ -23,7 +23,6 @@ import com.dnd_9th_3_android.gooding.data.preventScroll.disabledHorizontalPointe
 import com.dnd_9th_3_android.gooding.feed.feedScreen.OneFeedUriContent
 import com.dnd_9th_3_android.gooding.feed.itemFeed.midInfoFunction.GradientBoxState
 import com.dnd_9th_3_android.gooding.feed.viewModel.MainFeedViewModel
-import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
 
 // refactoring
 @OptIn(ExperimentalFoundationApi::class)
@@ -64,7 +63,7 @@ fun OneFeedItem(
                 )
         ){
             Spacer(modifier = Modifier.height(95.dp))
-            UserInfoLayer(userInfo = feed.user)
+            UserInfoLayer(userData = feed.user)
         }
 
         // bottom Box - add shadow

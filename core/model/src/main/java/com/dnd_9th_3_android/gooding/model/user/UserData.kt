@@ -5,6 +5,6 @@ data class UserData(
     val nickname : String,
     val profileImgUrl : String,
     val onboardYn : String,
-    val onboardings : List<OnBoardingData>,
-    val onboardingStrings : List<String>
+    val onboards : List<OnBoardingData>,
+    var onboardingStrings : List<String>
 ) : java.io.Serializable

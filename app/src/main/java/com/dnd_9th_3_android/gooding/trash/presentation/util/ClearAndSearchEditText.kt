@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher

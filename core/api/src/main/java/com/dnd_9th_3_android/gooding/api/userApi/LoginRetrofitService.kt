@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.api
+package com.dnd_9th_3_android.gooding.api.userApi
 
 import com.dnd_9th_3_android.gooding.model.user.AccessToken
 import retrofit2.Call

@@ -77,7 +77,7 @@ class GoogleLoginImpl @Inject constructor(
                 e.printStackTrace()
                 loginCallback(null)
             }
-        }
+        }else { loginCallback(null) }
     }
 
     override fun login(

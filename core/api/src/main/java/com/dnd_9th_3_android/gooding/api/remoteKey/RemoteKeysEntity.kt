@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.api.feedApi.entity
+package com.dnd_9th_3_android.gooding.api.remoteKey
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

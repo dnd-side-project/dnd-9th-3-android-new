@@ -3,7 +3,7 @@ package com.dnd_9th_3_android.gooding.my.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dnd_9th_3_android.gooding.data.dataMy.MonthPickerImpl
+import com.dnd_9th_3_android.gooding.data.dataMy.repository.MonthPickerImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

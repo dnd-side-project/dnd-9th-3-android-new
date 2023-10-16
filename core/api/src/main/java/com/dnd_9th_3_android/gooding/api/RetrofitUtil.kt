@@ -1,12 +1,12 @@
 package com.dnd_9th_3_android.gooding.api
 
-import androidx.lifecycle.LiveData
+import com.dnd_9th_3_android.gooding.api.userApi.LoginRetrofitService
+import com.dnd_9th_3_android.gooding.api.userApi.UserApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 // SingleTon
 object RetrofitUtil {

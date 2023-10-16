@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.tooling.preview.Preview
 import com.dnd_9th_3_android.gooding.MainActivity
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme
 import com.dnd_9th_3_android.gooding.databinding.FragmentFeedBinding
-import com.dnd_9th_3_android.gooding.feed.FeedScreen
-import com.dnd_9th_3_android.gooding.search.SearchScreen
 
 
 class FeedFragment : Fragment() {

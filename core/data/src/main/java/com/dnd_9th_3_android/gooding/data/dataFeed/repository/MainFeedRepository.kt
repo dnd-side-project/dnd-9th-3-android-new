@@ -6,7 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.dnd_9th_3_android.gooding.api.NetworkManager
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
-import com.dnd_9th_3_android.gooding.data.dataFeed.database.MainFeedDatabase
+import com.dnd_9th_3_android.gooding.data.dataFeed.local.database.MainFeedDatabase
 import com.dnd_9th_3_android.gooding.data.dataFeed.remote.MainFeedRemoteMediator
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

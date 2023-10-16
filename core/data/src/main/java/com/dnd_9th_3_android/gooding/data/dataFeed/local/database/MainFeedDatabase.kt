@@ -1,14 +1,14 @@
-package com.dnd_9th_3_android.gooding.data.dataFeed.database
+package com.dnd_9th_3_android.gooding.data.dataFeed.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
-import com.dnd_9th_3_android.gooding.api.feedApi.entity.RemoteKeysEntity
+import com.dnd_9th_3_android.gooding.api.remoteKey.RemoteKeysEntity
 import com.dnd_9th_3_android.gooding.data.converter.FileListConverters
 import com.dnd_9th_3_android.gooding.data.converter.UserStringConverters
 import com.dnd_9th_3_android.gooding.data.dataFeed.local.MainFeedDao
-import com.dnd_9th_3_android.gooding.data.dataFeed.local.RemoteKeysDao
+import com.dnd_9th_3_android.gooding.data.di.remoteKey.RemoteKeysDao
 
 @Database(entities = [MainFeedEntity::class, RemoteKeysEntity::class]
     , version = 1)

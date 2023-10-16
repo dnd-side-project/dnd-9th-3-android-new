@@ -2,7 +2,9 @@ package com.dnd_9th_3_android.gooding.api
 
 import android.content.Context
 import com.dnd_9th_3_android.gooding.api.feedApi.FeedRetrofitService
-import com.dnd_9th_3_android.gooding.model.feed.model.OnBoard
+import com.dnd_9th_3_android.gooding.api.recordApi.RecordApiService
+import com.dnd_9th_3_android.gooding.api.userApi.LoginRetrofitService
+import com.dnd_9th_3_android.gooding.api.userApi.UserApiService
 import com.dnd_9th_3_android.gooding.model.user.UserData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -56,7 +58,7 @@ class NetworkManager(
         }
     }
 
-    fun getLoginApiService() :LoginRetrofitService =
+    fun getLoginApiService() : LoginRetrofitService =
         getRetrofit(context).create(LoginRetrofitService::class.java)
 
     fun getUserApiService() : UserApiService =
@@ -65,7 +67,17 @@ class NetworkManager(
     fun getFeedApiService(): FeedRetrofitService =
         getRetrofit(context).create(FeedRetrofitService::class.java)
 
+    fun getRecordApiService() : RecordApiService =
+        getRetrofit(context).create(RecordApiService::class.java)
+
     fun getUserData() : UserData? = userData
 
-    fun setUserData(user: UserData){ userData = user }
+    fun setUserData(user: UserData){
+        userData = user
+        val stringCode = arrayListOf<String>()
+        userData?.onboards?.forEach {
+            stringCode.add(it.interestCode)
+        }
+        userData?.onboardingStrings = stringCode.toList()
+    }
 }

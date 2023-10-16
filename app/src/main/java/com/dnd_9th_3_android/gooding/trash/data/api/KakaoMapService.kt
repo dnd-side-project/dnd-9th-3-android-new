@@ -3,7 +3,6 @@ package com.dnd_9th_3_android.gooding.trash.data.api
 
 import com.dnd_9th_3_android.gooding.trash.data.model.map.KakaoMapResponse
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 // 카카오맵 api Service

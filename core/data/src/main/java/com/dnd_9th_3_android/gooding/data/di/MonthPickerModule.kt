@@ -1,8 +1,7 @@
 package com.dnd_9th_3_android.gooding.data.di
 
 
-import com.dnd_9th_3_android.gooding.data.dataMy.MonthPickerImpl
-import dagger.Binds
+import com.dnd_9th_3_android.gooding.data.dataMy.repository.MonthPickerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

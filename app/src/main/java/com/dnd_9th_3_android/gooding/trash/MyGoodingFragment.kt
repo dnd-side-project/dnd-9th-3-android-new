@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.dnd_9th_3_android.gooding.MainActivity
 import com.dnd_9th_3_android.gooding.databinding.FragmentMyGoodingBinding
-import com.dnd_9th_3_android.gooding.my.MyAccountScreen
 import com.dnd_9th_3_android.gooding.ui.theme.GoodingTheme
 
 

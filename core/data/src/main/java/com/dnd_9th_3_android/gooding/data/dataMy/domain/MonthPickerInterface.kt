@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.dataMy
+package com.dnd_9th_3_android.gooding.data.dataMy.domain
 
 import androidx.lifecycle.LiveData
 import com.dnd_9th_3_android.gooding.model.month.MonthData

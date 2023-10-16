@@ -40,19 +40,26 @@ fun SsoLoginScreen(
     // 뒤로가기 제어
     BackHandler(enabled = true, onBack = {})
 
+    var isGoogleLogin by remember{ mutableStateOf(false) }
+    var isKaKaoLogin by remember{ mutableStateOf(false) }
+
     val userState : MutableState<UserData?> = remember{ mutableStateOf(null)}
     val firebaseAuth = FirebaseAuth.getInstance()
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(), onResult = { result ->
-            viewModel.setLauncher(result, firebaseAuth, loginState = { state -> userState.value = state })
+            viewModel.setLauncher(result, firebaseAuth, loginState = { state ->
+                if (state==null) isGoogleLogin = false
+                userState.value = state
+            })
         }
     )
     val callback : (OAuthToken?,Throwable?) -> Unit = { token, error->
-        viewModel.setCallback(error, token, loginState =  {state-> userState.value = state })
+        if (token==null) isKaKaoLogin = false
+        viewModel.setCallback(error, token, loginState =  {state->
+            userState.value = state
+        })
     }
 
-    var isGoogleLogin by remember{ mutableStateOf(false) }
-    var isKaKaoLogin by remember{ mutableStateOf(false) }
     if (userState.value!=null) {
         WaitState(navController,userState.value, LocalContext.current.applicationContext, finish = {
             isGoogleLogin = false
@@ -64,7 +71,9 @@ fun SsoLoginScreen(
     if (isGoogleLogin){ viewModel.goggleLogin(launcher) }
     if (isKaKaoLogin){
         if (!viewModel.checkKaKaoLogin()) {
-            viewModel.kaKaoLogin(callback)
+            viewModel.kaKaoLogin(callback, loginState = {
+                if (it==null) isKaKaoLogin = false
+            })
         }
     }
 
