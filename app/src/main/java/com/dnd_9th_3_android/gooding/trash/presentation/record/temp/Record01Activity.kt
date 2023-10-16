@@ -2,8 +2,6 @@ package com.dnd_9th_3_android.gooding.trash.presentation.record.temp
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ActivityRecord01Binding
-import com.dnd_9th_3_android.gooding.trash.presentation.gallery.GalleryFileUiData
 import com.dnd_9th_3_android.gooding.trash.presentation.record.search.SearchGoodieDayPlaceActivity
 import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 import dagger.hilt.android.AndroidEntryPoint

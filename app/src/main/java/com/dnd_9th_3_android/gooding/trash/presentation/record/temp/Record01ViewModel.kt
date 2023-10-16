@@ -1,6 +1,5 @@
 package com.dnd_9th_3_android.gooding.trash.presentation.record.temp
 
-import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

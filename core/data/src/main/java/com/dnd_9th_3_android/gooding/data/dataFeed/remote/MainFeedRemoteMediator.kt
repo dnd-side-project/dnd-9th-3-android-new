@@ -28,8 +28,7 @@ class MainFeedRemoteMediator constructor(
         loadType: LoadType,
         state: PagingState<Int, MainFeedEntity>
     ): MediatorResult {
-        val pageKeyData = getKeyPageData(loadType,state)
-        val page = when (pageKeyData) {
+        val page = when (val pageKeyData = getKeyPageData(loadType,state)) {
             is MediatorResult.Success -> {
                 return pageKeyData
             }

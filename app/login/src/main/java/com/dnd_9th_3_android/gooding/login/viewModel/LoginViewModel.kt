@@ -49,10 +49,11 @@ class LoginViewModel @Inject constructor(
 
     fun kaKaoLogin(
         callback : (OAuthToken?, Throwable?)  -> Unit,
+        loginState : (String?)->Unit,
     ){
         kaKaoLogin.kaKaoLogin(
             callback,
-            loginCallback = {}
+            loginCallback = { loginState(it) }
         )
     }
 

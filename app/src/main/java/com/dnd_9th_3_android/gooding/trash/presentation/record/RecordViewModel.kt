@@ -2,7 +2,6 @@ package com.dnd_9th_3_android.gooding.trash.presentation.record
 
 import android.net.Uri
 import android.os.Parcelable
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

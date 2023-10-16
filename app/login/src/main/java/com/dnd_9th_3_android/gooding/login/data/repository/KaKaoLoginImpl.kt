@@ -34,7 +34,6 @@ class KaKaoLoginImpl @Inject constructor(
             loginCallback(null)
         }else if (token != null){
             // 로그인 성공
-            Log.e("token",token.toString())
             loginCallback(token.accessToken)
         }
     }

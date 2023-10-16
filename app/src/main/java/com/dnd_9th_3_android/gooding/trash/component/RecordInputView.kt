@@ -9,6 +9,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.dnd_9th_3_android.gooding.R
 import com.dnd_9th_3_android.gooding.databinding.ViewRecordInputBinding
+
 import com.dnd_9th_3_android.gooding.trash.presentation.util.fromDpToPx
 
 

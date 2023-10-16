@@ -1,14 +1,5 @@
 package com.dnd_9th_3_android.gooding.trash.presentation.record.temp
 
-import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.setFragmentResult
-import com.dnd_9th_3_android.gooding.R
-import com.dnd_9th_3_android.gooding.databinding.BottomSheetSelectCategoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetSelectCategory: BottomSheetDialogFragment() {
