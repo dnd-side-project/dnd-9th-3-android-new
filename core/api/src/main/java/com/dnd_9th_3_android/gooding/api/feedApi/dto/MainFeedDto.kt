@@ -1,8 +1,8 @@
 package com.dnd_9th_3_android.gooding.api.feedApi.dto
 
 
-import com.dnd_9th_3_android.gooding.model.feed.model.FeedFile
-import com.dnd_9th_3_android.gooding.model.feed.model.UserInfo
+import com.dnd_9th_3_android.gooding.model.feed.model.FeedData
+import com.dnd_9th_3_android.gooding.model.feed.model.UserData
 
 data class MainFeedDto (
     val recordId :Int,
@@ -13,6 +13,6 @@ data class MainFeedDto (
     val placeLongitude : Int,
     val thumbnailUrl : String,
     val interestType : String,
-    val user : UserInfo,
-    val files : List<FeedFile>,
+    val user : UserData,
+    val files : List<FeedData>,
 )

@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.api.userApi
 
+import com.dnd_9th_3_android.gooding.api.myApi.entity.MyRecordEntity
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeedList
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import com.dnd_9th_3_android.gooding.model.user.OnBoardingCode
@@ -16,20 +17,6 @@ import retrofit2.http.Query
 
 interface UserApiService {
 
-    // 내 모든 기록
-    @GET("api/v1/record/my-record")
-    fun getMyRecords(
-        @Query("userId") userId: Int,
-    ) : Call<ArrayList<MyFeed>>
-
-    // 날짜 데이터 얻기
-    @GET("api/v1/record/date")
-    fun getMyDateRecords(
-        @Query("userId") userId: Int,
-        @Query("recordDate") recordDate: Int,
-    ) : Call<ArrayList<MyFeed>>
-
-
     // oauthId로 사용자 조회
     @GET("api/v1/user/{oauthId}")
     fun getUserInfo(
@@ -45,6 +32,4 @@ interface UserApiService {
         @Field("nickName") nickName:String,
         @Field("interestCodes") interestCodes : List<String>
     ) : Call<OnBoardingCode>
-
-
 }

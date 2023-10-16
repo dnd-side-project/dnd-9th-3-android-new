@@ -14,5 +14,5 @@ data class MyFeed (
     val recordScore : Int,
     val recordOpen : String,
     val thumbnailUrl : String,
-    val files : ArrayList<FileData>
+    val files : List<FileData>
 ) : Serializable

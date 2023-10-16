@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.api
 
 import android.content.Context
 import com.dnd_9th_3_android.gooding.api.feedApi.FeedRetrofitService
+import com.dnd_9th_3_android.gooding.api.recordApi.RecordApiService
 import com.dnd_9th_3_android.gooding.api.userApi.LoginRetrofitService
 import com.dnd_9th_3_android.gooding.api.userApi.UserApiService
 import com.dnd_9th_3_android.gooding.model.user.UserData
@@ -65,6 +66,9 @@ class NetworkManager(
 
     fun getFeedApiService(): FeedRetrofitService =
         getRetrofit(context).create(FeedRetrofitService::class.java)
+
+    fun getRecordApiService() : RecordApiService =
+        getRetrofit(context).create(RecordApiService::class.java)
 
     fun getUserData() : UserData? = userData
 

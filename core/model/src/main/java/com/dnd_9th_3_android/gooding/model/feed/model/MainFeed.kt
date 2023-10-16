@@ -9,8 +9,8 @@ data class MainFeed (
     val placeLongitude : Int,
     val thumbnailUrl : String,
     val interestType : String,
-    val user : UserInfo,
-    val files : List<FeedFile>,
+    val user : UserData,
+    val files : List<FeedData>,
     val readCount : Int = 0, // user가 몇번 접근했는지 확인
     val isNumbering : Boolean = false, // user가 지수 평가를 했는지 확인
     var recordScore : Int = 0,

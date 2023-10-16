@@ -23,15 +23,15 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.ui.unit.dp
-import com.dnd_9th_3_android.gooding.model.feed.model.UserInfo
+import com.dnd_9th_3_android.gooding.model.feed.model.UserData
 
 // refactoring
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun UserInfoLayer(userInfo: UserInfo) {
+fun UserInfoLayer(userData: UserData) {
     // 임시 수정 해야댐
     val painter = rememberImagePainter(
-        data = userInfo.profileImgUrl,
+        data = userData.profileImgUrl,
         builder = {
             crossfade(true)
         }
@@ -80,7 +80,7 @@ fun UserInfoLayer(userInfo: UserInfo) {
         Spacer(modifier = Modifier.width(6.dp))
 
         Text(
-            text = userInfo.nickname,
+            text = userData.nickname,
             style = TextStyle(
                 color = Color.White,
                 shadow = Shadow(
