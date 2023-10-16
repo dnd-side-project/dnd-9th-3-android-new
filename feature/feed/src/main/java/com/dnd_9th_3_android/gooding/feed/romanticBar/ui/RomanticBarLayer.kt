@@ -34,7 +34,7 @@ fun RomanticBarLayer(
     optionalViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel : MainFeedViewModel = hiltViewModel()
 ) {
-    val lazyPagingItems = feedViewModel.feedDataList?.collectAsLazyPagingItems()
+    val lazyPagingItems = feedViewModel.feedDataList.collectAsLazyPagingItems()
     // 현재 진행 상태
     val currentValue = remember {
         mutableStateOf(initBarData)
@@ -55,7 +55,7 @@ fun RomanticBarLayer(
         LaunchedEffect(feedPager.postingFeedPagerState){
             if (feedPager.postingFeedPagerState.pageCount!=0) {
                 snapshotFlow { feedPager.postingFeedPagerState.currentPage }.collect { page ->
-                    feedViewModel.setCurrentFeed(lazyPagingItems?.get(page))
+                    feedViewModel.setCurrentFeed(lazyPagingItems[page])
                     feedViewModel.currentFeed.value.let {
                         currentValue.value = it?.recordScore?.toFloat() ?: 0.0f
                     }

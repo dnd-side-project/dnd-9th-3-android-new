@@ -1,12 +1,13 @@
 package com.dnd_9th_3_android.gooding.data.dataFeed.remote
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.dnd_9th_3_android.gooding.api.NetworkManager
-import com.dnd_9th_3_android.gooding.data.dataFeed.database.MainFeedDatabase
+import com.dnd_9th_3_android.gooding.data.dataFeed.local.database.MainFeedDatabase
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.MainFeedEntity
 import com.dnd_9th_3_android.gooding.api.feedApi.entity.RemoteKeysEntity
 import kotlinx.coroutines.Dispatchers
@@ -38,13 +39,14 @@ class MainFeedRemoteMediator constructor(
         }
 
         try {
+            val userData = networkManager.getUserData()!!
             val response = networkManager.getFeedApiService()
                 .getUserFeedFromId(
-                    networkManager.getUserData()!!.id,
-                    networkManager.getUserData()!!.onboardingStrings,
+                    userData.id,
+                    userData.onboardingStrings,
                     page,
                     state.config.pageSize
-                )
+                ).content
             val endOfList = response.isEmpty()
             db.withTransaction {
                 if (loadType == LoadType.REFRESH){

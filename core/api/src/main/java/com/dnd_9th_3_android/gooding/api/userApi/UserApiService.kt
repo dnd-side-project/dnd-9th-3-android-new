@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.api
+package com.dnd_9th_3_android.gooding.api.userApi
 
 import com.dnd_9th_3_android.gooding.model.feed.GetMainFeedList
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
@@ -37,6 +37,7 @@ interface UserApiService {
     ): Call<UserData>
 
 
+    // onboarding 추가
     @POST("api/v1/onboard/update/{userId}")
     @FormUrlEncoded
     fun saveUserOnBoarding(

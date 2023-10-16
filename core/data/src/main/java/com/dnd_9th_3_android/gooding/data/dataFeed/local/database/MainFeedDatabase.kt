@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.data.dataFeed.database
+package com.dnd_9th_3_android.gooding.data.dataFeed.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

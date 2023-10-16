@@ -11,17 +11,26 @@ import com.dnd_9th_3_android.gooding.data.dataFeed.toMainFeed
 import com.dnd_9th_3_android.gooding.model.feed.model.MainFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainFeedViewModel @Inject constructor(
-    repository: MainFeedRepository
+    private val repository: MainFeedRepository
 ): ViewModel(){
+    private val _feedDataList =
+        MutableStateFlow<PagingData<MainFeedEntity>>(PagingData.empty())
     var feedDataList : Flow<PagingData<MainFeedEntity>> =
-        repository.getMainFeedPager().cachedIn(viewModelScope)
+        _feedDataList.asStateFlow()
 
     var currentFeed = MutableLiveData<MainFeed>()
 
+    fun getMainFeedPagingData() = viewModelScope.launch {
+        feedDataList = repository.getMainFeedPager().cachedIn(viewModelScope)
+    }
     fun setCurrentFeed(feed : MainFeedEntity?){
         currentFeed.value = feed?.toMainFeed()
     }

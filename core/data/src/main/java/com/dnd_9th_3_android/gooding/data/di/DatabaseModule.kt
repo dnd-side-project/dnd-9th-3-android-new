@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.dnd_9th_3_android.gooding.data.converter.FileListConverters
 import com.dnd_9th_3_android.gooding.data.converter.UserStringConverters
-import com.dnd_9th_3_android.gooding.data.dataFeed.database.MainFeedDatabase
+import com.dnd_9th_3_android.gooding.data.dataFeed.local.database.MainFeedDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

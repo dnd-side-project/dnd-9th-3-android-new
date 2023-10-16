@@ -1,7 +1,7 @@
 package com.dnd_9th_3_android.gooding.data.di
 
 import com.dnd_9th_3_android.gooding.api.NetworkManager
-import com.dnd_9th_3_android.gooding.data.dataFeed.database.MainFeedDatabase
+import com.dnd_9th_3_android.gooding.data.dataFeed.local.database.MainFeedDatabase
 import com.dnd_9th_3_android.gooding.data.dataFeed.repository.MainFeedRepository
 import dagger.Module
 import dagger.Provides

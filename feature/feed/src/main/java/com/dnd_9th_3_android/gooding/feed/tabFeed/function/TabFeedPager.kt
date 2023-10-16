@@ -3,6 +3,7 @@ package com.dnd_9th_3_android.gooding.feed.tabFeed.function
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -21,6 +22,7 @@ fun TabFeedPager(
     optionViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel: MainFeedViewModel = hiltViewModel()
 ) {
+    feedViewModel.getMainFeedPagingData()
     val lazyPagingItems = feedViewModel.feedDataList.collectAsLazyPagingItems()
 
     Box(
