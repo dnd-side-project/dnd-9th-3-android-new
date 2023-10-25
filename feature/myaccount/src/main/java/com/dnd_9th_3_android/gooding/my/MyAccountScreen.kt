@@ -66,7 +66,7 @@ fun MyAccountScreen(
                             this.isChange = false
                         }
                     }
-                    mySate.showMonthPickerView.value =false
+                    mySate.showMonthPickerView.value = false
                 }
             )
         }

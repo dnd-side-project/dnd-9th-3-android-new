@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyOptionViewModel @Inject constructor(
-
+    val monthPicker : MonthPickerImpl
 ) : ViewModel(){
     private var _applicationState : ApplicationState? = null
     val applicationState get() = _applicationState
@@ -26,9 +26,7 @@ class MyOptionViewModel @Inject constructor(
     private var _myAccountState : MyAccountState? = null
     val myAccountState get() = _myAccountState
 
-    // today Date , Month Picker
-    var monthPicker = MonthPickerImpl()
-    var _todayCalendar = MutableLiveData<Calendar>() //오늘 데이터
+    private var _todayCalendar = MutableLiveData<Calendar>() //오늘 데이터
     val todayCalendar : LiveData<Calendar> get() = _todayCalendar
     var todayYear  = 0
     var todayMonth  = 0

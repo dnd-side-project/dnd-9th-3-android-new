@@ -6,13 +6,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dnd_9th_3_android.gooding.api.myApi.entity.MyRecordEntity
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
 
 @Composable
 fun ItemMainFeedScreen(
-    feed : MyFeed,
+    feed : MyRecordEntity,
     todayViewModel: MyOptionViewModel = hiltViewModel(),
 ) {
     // is delete view ?

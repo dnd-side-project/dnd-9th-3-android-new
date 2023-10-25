@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.dnd_9th_3_android.gooding.api.myApi.entity.MyRecordEntity
 import com.dnd_9th_3_android.gooding.data.utils.video.CheckUrl
 import com.dnd_9th_3_android.gooding.data.utils.video.VideoThumbnailUtil
 import com.dnd_9th_3_android.gooding.core.data.R
@@ -30,7 +31,7 @@ import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun CenterFeedLayout(
-    feed : MyFeed
+    feed : MyRecordEntity
 ) {
     // is video check
     val isVideo = CheckUrl.isVideo(feed.thumbnailUrl)
