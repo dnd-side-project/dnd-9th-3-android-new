@@ -15,7 +15,7 @@ interface RecordApiService {
 
     // 날짜 데이터 얻기 + paging
     @GET("api/v1/record/date")
-    fun getMyDateRecords(
+    suspend fun getMyDateRecords(
         @Query("userId") userId: Int,
         @Query("recordDate") recordDate: String,
     ) : List<MyRecordEntity>

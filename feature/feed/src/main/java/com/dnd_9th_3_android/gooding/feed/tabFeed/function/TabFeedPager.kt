@@ -22,7 +22,6 @@ fun TabFeedPager(
     optionViewModel : FeedOptionViewModel = hiltViewModel(),
     feedViewModel: MainFeedViewModel = hiltViewModel()
 ) {
-    feedViewModel.getMainFeedPagingData()
     val lazyPagingItems = feedViewModel.feedDataList.collectAsLazyPagingItems()
 
     Box(

@@ -12,11 +12,16 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.dnd_9th_3_android.gooding.api.myApi.entity.MyRecordEntity
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import com.dnd_9th_3_android.gooding.my.itemFeed.ItemMainFeedScreen
 import com.dnd_9th_3_android.gooding.my.mainScreen.DefaultTimeLineScreen
@@ -28,18 +33,19 @@ fun TimeLineScreen(
     optionViewModel: MyOptionViewModel = hiltViewModel(),
     timeLineViewModel : TimeLineViewModel = hiltViewModel()
 ) {
-    // curent month data
-    val currentKey = optionViewModel.monthPicker
-        .monthDataList[optionViewModel.monthPicker.currentPickIndex].keyDate
+    var currentKey = ""
+    // current month data observer
+    optionViewModel.monthPicker.isChange.observeAsState().value?.let {
+        currentKey = optionViewModel.monthPicker
+            .monthDataList[optionViewModel.monthPicker.currentPickIndex].keyDate
+    }
 
     // is monthPicker view?
     val showSelectView = optionViewModel.myAccountState?.showMonthPickerView.let{ monthView ->
         monthView?: remember { mutableStateOf(false) }
     }
 
-    // 수정 ! -> 유저 데이터 불러오기 적용 (페이징 )
-    val todayDate = currentKey.replace(".","")
-    timeLineViewModel.setCurrentTimeLine(1, todayDate)
+    val lazyPagingItems = timeLineViewModel.currentTimeLineList.collectAsLazyPagingItems()
 
     // month picker view
     Column(
@@ -75,9 +81,9 @@ fun TimeLineScreen(
             }
         }
         Spacer(modifier = Modifier.height(6.dp))
-        if (timeLineViewModel.currentTimeLine.isNotEmpty()){
+        if (lazyPagingItems.itemCount!=0){
             // get data
-            FeedList(timeLineViewModel.currentTimeLine)
+            FeedList(lazyPagingItems)
         }else {
             // no user record
             DefaultTimeLineScreen(
@@ -90,9 +96,9 @@ fun TimeLineScreen(
 }
 
 @Composable
-fun FeedList(feeds: SnapshotStateList<MyFeed>) {
+fun FeedList(feeds: LazyPagingItems<MyRecordEntity>) {
     LazyColumn(modifier = Modifier.fillMaxSize()){
-        items(feeds) { feed ->
+        items(feeds.itemSnapshotList.items) { feed ->
             ItemMainFeedScreen(feed)
         }
     }

@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.data.dataMy.remote
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -62,6 +63,7 @@ class MyRecordRemoteMediator constructor(
             }
             return MediatorResult.Success(endOfPaginationReached = endOfList)
         }catch (e : Exception){
+            Log.d("eeeeeeeee",e.toString())
             return MediatorResult.Error(e)
         }
     }

@@ -94,6 +94,8 @@ dependencies {
     // colorful bar
     implementation ("com.github.SmartToolFactory:Compose-Colorful-Sliders:1.2.0")
 
+
+
     val pagingVersion = "3.1.1"
     // paging dependencies 추가
     implementation("androidx.paging:paging-runtime:$pagingVersion")
@@ -106,6 +108,8 @@ dependencies {
     kapt ("androidx.room:room-compiler:$roomVersion")
     implementation ("androidx.room:room-paging:$roomVersion")
     testImplementation ("androidx.room:room-testing:$roomVersion")
+
+    implementation ("androidx.compose.runtime:runtime-livedata:1.3.1")
 
 
     // module

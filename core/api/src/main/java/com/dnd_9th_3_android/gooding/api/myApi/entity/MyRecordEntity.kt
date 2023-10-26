@@ -2,8 +2,7 @@ package com.dnd_9th_3_android.gooding.api.myApi.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dnd_9th_3_android.gooding.model.feed.FileData
-import com.dnd_9th_3_android.gooding.model.feed.model.FeedData
+import com.dnd_9th_3_android.gooding.model.file.FileData
 import com.dnd_9th_3_android.gooding.model.feed.model.UserData
 
 @Entity(tableName = "myRecords")

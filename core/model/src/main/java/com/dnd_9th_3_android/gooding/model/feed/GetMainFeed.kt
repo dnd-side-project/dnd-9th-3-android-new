@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.model.feed
 
+import com.dnd_9th_3_android.gooding.model.file.FileData
 import com.dnd_9th_3_android.gooding.model.user.UserData
 
 data class GetMainFeed(

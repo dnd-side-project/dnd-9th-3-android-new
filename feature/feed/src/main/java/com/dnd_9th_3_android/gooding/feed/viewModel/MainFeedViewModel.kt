@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.feed.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,13 +27,18 @@ class MainFeedViewModel @Inject constructor(
     var feedDataList : Flow<PagingData<MainFeedEntity>> =
         _feedDataList.asStateFlow()
 
-    var currentFeed = MutableLiveData<MainFeed>()
+    private var _currentFeed = MutableLiveData<MainFeed>()
+    val currentFeed : LiveData<MainFeed> get() = _currentFeed
+
+    init {
+        getMainFeedPagingData()
+    }
 
     fun getMainFeedPagingData() = viewModelScope.launch {
         feedDataList = repository.getMainFeedPager().cachedIn(viewModelScope)
     }
     fun setCurrentFeed(feed : MainFeedEntity?){
-        currentFeed.value = feed?.toMainFeed()
+        _currentFeed.value = feed?.toMainFeed()
     }
 
     fun setRomantic(per : Int){

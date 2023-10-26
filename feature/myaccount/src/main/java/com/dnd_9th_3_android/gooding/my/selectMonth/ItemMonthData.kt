@@ -18,7 +18,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.model.month.MonthData
-import com.dnd_9th_3_android.gooding.my.viewModel.TodayViewModel
 
 @Composable
 fun ItemMonthData(
