@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -29,34 +30,9 @@ class MainActivity : ComponentActivity(){
         super.onCreate(savedInstanceState)
         setContent {
             GoodingTheme {
-//                // sample
-//                val networkManager = NetworkManager(this@MainActivity)
-//
-//                networkManager
-//                    .getLoginApiService()
-//                    .getTemporaryToken()
-//                    .enqueue(object : Callback<AccessToken>{
-//                        override fun onResponse(
-//                            call: Call<AccessToken>,
-//                            response: Response<AccessToken>
-//                        ) {
-//
-//                            if (response.isSuccessful){
-//                                networkManager.setUserData(UserData(
-//                                    0,
-//                                    "jinwoo",
-//                                    "",
-//                                    "true",
-//                                    listOf(),
-//                                    listOf("1","2","3")
-//                                ))
-//                                UserInfoSharedPreferences(this@MainActivity).accessToken =
-//                                    response.body()!!.accessToken
-//                            }
-//                        }
-//                        override fun onFailure(call: Call<AccessToken>, t: Throwable) {}
-//                    })
-//                //
+                // 뒤로가기 제어
+                BackHandler(enabled = true, onBack = {})
+
                 val appState = rememberApplicationState()
                 val navBackStackEntry by appState.navController.currentBackStackEntryAsState()
                 ManageBottomBarState(

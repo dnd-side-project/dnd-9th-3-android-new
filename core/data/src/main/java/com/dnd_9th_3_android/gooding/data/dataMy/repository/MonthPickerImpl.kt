@@ -1,5 +1,7 @@
 package com.dnd_9th_3_android.gooding.data.dataMy.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.dnd_9th_3_android.gooding.data.dataMy.domain.MonthPickerInterface
 import com.dnd_9th_3_android.gooding.model.month.MonthData
 import javax.inject.Inject
@@ -9,7 +11,9 @@ class MonthPickerImpl @Inject constructor(
     override var monthDataList =  ArrayList<MonthData>()
     override var selectedIndex: Int = 0 //현재 뷰 데이터
     override var currentPickIndex: Int = 0 //이전 데이터
-    override var isChange: Boolean = false
+    override var _isChange = MutableLiveData(true)
+    override val isChange: LiveData<Boolean>
+        get() = _isChange
     override fun makeKeyData(year: Int, month: Int) : String {
         return if (month < 10){
             "$year.0$month"

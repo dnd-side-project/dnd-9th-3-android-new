@@ -12,8 +12,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,18 +33,18 @@ fun TimeLineScreen(
     optionViewModel: MyOptionViewModel = hiltViewModel(),
     timeLineViewModel : TimeLineViewModel = hiltViewModel()
 ) {
-    // curent month data
-    val currentKey = optionViewModel.monthPicker
-        .monthDataList[optionViewModel.monthPicker.currentPickIndex].keyDate
+    var currentKey = ""
+    // current month data observer
+    optionViewModel.monthPicker.isChange.observeAsState().value?.let {
+        currentKey = optionViewModel.monthPicker
+            .monthDataList[optionViewModel.monthPicker.currentPickIndex].keyDate
+    }
 
     // is monthPicker view?
     val showSelectView = optionViewModel.myAccountState?.showMonthPickerView.let{ monthView ->
         monthView?: remember { mutableStateOf(false) }
     }
 
-    // 유저 데이터 불러오기
-    val todayDate = currentKey.replace(".","")
-    timeLineViewModel.setCurrentTimeLine(todayDate)
     val lazyPagingItems = timeLineViewModel.currentTimeLineList.collectAsLazyPagingItems()
 
     // month picker view

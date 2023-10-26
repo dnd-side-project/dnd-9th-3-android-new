@@ -26,14 +26,11 @@ class MyOptionViewModel @Inject constructor(
     private var _myAccountState : MyAccountState? = null
     val myAccountState get() = _myAccountState
 
-    private var _todayCalendar = MutableLiveData<Calendar>() //오늘 데이터
-    val todayCalendar : LiveData<Calendar> get() = _todayCalendar
-    var todayYear  = 0
-    var todayMonth  = 0
+    private var todayCalendar = MutableLiveData<Calendar>() //오늘 데이터
     init {
-        _todayCalendar.value = Calendar.getInstance()
-        todayYear = todayCalendar.value!!.get(Calendar.YEAR)
-        todayMonth = todayCalendar.value!!.get(Calendar.MONTH)+1
+        todayCalendar.value = Calendar.getInstance()
+        val todayYear = todayCalendar.value!!.get(Calendar.YEAR)
+        val todayMonth = todayCalendar.value!!.get(Calendar.MONTH)+1
         monthPicker.makeDataList(todayYear,todayMonth,monthPicker.selectedIndex)
     }
 
@@ -47,6 +44,20 @@ class MyOptionViewModel @Inject constructor(
         _myAccountState = accountState
     }
 
+    fun closeMonthPicker(){
+        if (!monthPicker.isChange.value!!){
+            monthPicker.resetData()
+        } else{
+            monthPicker._isChange.value = false
+        }
+        myAccountState?.showMonthPickerView?.value = false
+    }
+
+    fun changeMonthData(){
+        monthPicker._isChange.value = true
+        monthPicker.setCurrentPickData()
+        closeMonthPicker()
+    }
     fun naviToSetting(){
         applicationState?.navController?.navigate(ScreenRoot.MY_SETTING)
     }

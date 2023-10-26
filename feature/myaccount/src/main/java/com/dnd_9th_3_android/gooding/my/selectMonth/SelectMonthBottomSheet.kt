@@ -26,13 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.component.BoxText
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
-import com.dnd_9th_3_android.gooding.my.viewModel.TodayViewModel
+import com.dnd_9th_3_android.gooding.my.viewModel.TimeLineViewModel
 import com.holix.android.bottomsheetdialog.compose.BottomSheetBehaviorProperties
 import kotlinx.coroutines.launch
 
 @Composable
 fun SelectMonthBottomSheet(
     todayViewModel : MyOptionViewModel = hiltViewModel(),
+    timeLineViewModel : TimeLineViewModel = hiltViewModel(),
     onClose : () -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -137,11 +138,10 @@ fun SelectMonthBottomSheet(
             Box(
                 modifier = Modifier
                     .clickable {
-                        todayViewModel.monthPicker.apply {
-                            isChange = true
-                            setCurrentPickData()
-                        }
-                        onClose()
+                        todayViewModel.changeMonthData()
+                        val currentKey = todayViewModel.monthPicker
+                            .monthDataList[todayViewModel.monthPicker.selectedIndex].keyDate
+                        timeLineViewModel.setCurrentTimeLine(currentKey.replace(".", ""))
                     }
                     .padding(end = 18.dp)
             ) {

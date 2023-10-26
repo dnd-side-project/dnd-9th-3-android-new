@@ -109,6 +109,7 @@ dependencies {
     implementation ("androidx.room:room-paging:$roomVersion")
     testImplementation ("androidx.room:room-testing:$roomVersion")
 
+    implementation ("androidx.compose.runtime:runtime-livedata:1.3.1")
     // module
     implementation(project(":core:model"))
     implementation(project(":core:data"))

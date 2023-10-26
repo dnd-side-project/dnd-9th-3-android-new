@@ -9,6 +9,7 @@ import androidx.paging.cachedIn
 import com.dnd_9th_3_android.gooding.data.sampleData.SampleRecordData
 import com.dnd_9th_3_android.gooding.api.RetrofitUtil
 import com.dnd_9th_3_android.gooding.api.myApi.entity.MyRecordEntity
+import com.dnd_9th_3_android.gooding.data.dataMy.repository.MonthPickerImpl
 import com.dnd_9th_3_android.gooding.data.dataMy.repository.MyRecordRepository
 import com.dnd_9th_3_android.gooding.model.feed.MyFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,13 +24,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimeLineViewModel @Inject constructor(
-    private val repository: MyRecordRepository
+    private val repository: MyRecordRepository,
+    private val monthPicker : MonthPickerImpl
 ): ViewModel() {
+
     private val _currentTimeLineList =
         MutableStateFlow<PagingData<MyRecordEntity>>(PagingData.empty())
     var currentTimeLineList : Flow<PagingData<MyRecordEntity>> =
         _currentTimeLineList.asStateFlow()
 
+    init {
+        val currentKey = monthPicker
+            .monthDataList[monthPicker.selectedIndex].keyDate
+        setCurrentTimeLine(currentKey)
+    }
     fun setCurrentTimeLine(recordDate : String) = viewModelScope.launch {
         currentTimeLineList = repository.getMyRecordPager(recordDate).cachedIn(viewModelScope)
     }

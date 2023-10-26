@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,6 +18,7 @@ import com.dnd_9th_3_android.gooding.my.itemFeed.DeleteFeedBottomSheet
 import com.dnd_9th_3_android.gooding.my.mainScreen.MyScreen
 import com.dnd_9th_3_android.gooding.my.selectMonth.SelectMonthBottomSheet
 import com.dnd_9th_3_android.gooding.my.viewModel.MyOptionViewModel
+import com.dnd_9th_3_android.gooding.my.viewModel.TimeLineViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 // just nav controller view
@@ -24,7 +26,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun MyAccountScreen(
     appState : ApplicationState,
-    viewModel : MyOptionViewModel = hiltViewModel()
+    viewModel : MyOptionViewModel = hiltViewModel(),
+    timeLineViewModel: TimeLineViewModel = hiltViewModel()
 ) {
 
 
@@ -36,11 +39,13 @@ fun MyAccountScreen(
     val myAccountState = rememberMyState()
     viewModel.initMyAccountState(myAccountState)
 
+    // main view
     MyScreen()
 
 
     // bottom sheet state
     viewModel.myAccountState?.let{ mySate ->
+
         if (mySate.showDeleteView.value!=-1){
             DeleteFeedBottomSheet(
                 feedId = mySate.showDeleteView.value,
@@ -58,15 +63,7 @@ fun MyAccountScreen(
         if (mySate.showMonthPickerView.value){
             SelectMonthBottomSheet(
                 onClose = {
-                    viewModel.monthPicker.apply {
-                        if (!this.isChange){
-                            this.resetData()
-                        }else{
-                            // 데이터 초기화
-                            this.isChange = false
-                        }
-                    }
-                    mySate.showMonthPickerView.value = false
+                    viewModel.closeMonthPicker()
                 }
             )
         }

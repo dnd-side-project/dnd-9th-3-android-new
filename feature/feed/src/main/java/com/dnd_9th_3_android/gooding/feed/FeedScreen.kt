@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -35,27 +36,29 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.state.rememberFeedPagerState
+import com.dnd_9th_3_android.gooding.feed.viewModel.MainFeedViewModel
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun FeedScreen(
-    appState : ApplicationState,
-    viewModel : FeedOptionViewModel = hiltViewModel()
+    appState: ApplicationState,
+    viewModel: FeedOptionViewModel = hiltViewModel()
 ) {
     // 뒤로가기 동작 제어
     BackHandler(enabled = true, onBack = {})
 
     // app State 저장
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
-    viewModel.initAppState(appState,screenWidth)
+    viewModel.initAppState(appState, screenWidth)
     // pager State 저장
     viewModel.initPagerState(rememberFeedPagerState())
 
-    Box (
+
+    Box(
         modifier = Modifier
             .background(colorResource(id = R.color.blue_gray_7))
-    ){
-        viewModel.pagerState?.topFeedPagerState?.let { topPagerState->
+    ) {
+        viewModel.pagerState?.topFeedPagerState?.let { topPagerState ->
 
             // 페이지 상태 지정 ( now - 추천 가로 페이징 )
             HorizontalPager(
