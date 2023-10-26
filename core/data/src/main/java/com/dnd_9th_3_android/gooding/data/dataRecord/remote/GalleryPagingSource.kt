@@ -2,12 +2,11 @@ package com.dnd_9th_3_android.gooding.data.dataRecord.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageInterface
-import com.dnd_9th_3_android.gooding.data.dataRecord.repository.ImageRepository
+import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageRepository
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 
 class GalleryPagingSource(
-    private val imageRepo: ImageInterface,
+    private val imageRepo: ImageRepository,
     private val currentLocation : String?
 ) : PagingSource<Int, GalleryImage>() {
 

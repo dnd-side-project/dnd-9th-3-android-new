@@ -2,7 +2,7 @@ package com.dnd_9th_3_android.gooding.data.dataRecord.domain
 
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 
-interface ImageInterface {
+interface ImageRepository {
 
     fun getAllPhotos(
         page : Int,

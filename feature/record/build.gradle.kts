@@ -75,6 +75,12 @@ dependencies {
     // compose hilt viewModel
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    val pagingVersion = "3.1.1"
+    // paging dependencies 추가
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    // optional - Jetpack Compose integration
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
+
     // module
     implementation(project(":core:api"))
     implementation(project(":core:model"))

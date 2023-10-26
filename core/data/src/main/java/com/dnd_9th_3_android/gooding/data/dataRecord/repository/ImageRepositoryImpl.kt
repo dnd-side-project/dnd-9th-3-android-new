@@ -8,15 +8,15 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.core.os.bundleOf
-import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageInterface
+import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageRepository
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject
 
-class ImageRepository @Inject constructor(
+class ImageRepositoryImpl @Inject constructor(
     @ApplicationContext private val context : Context
-) : ImageInterface{
+) : ImageRepository{
 
     // 버전 대응 -> API 30 이상이므로 필요 없음
     private val uriExternal : Uri by lazy {
