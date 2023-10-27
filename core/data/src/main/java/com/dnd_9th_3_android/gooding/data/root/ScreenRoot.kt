@@ -7,5 +7,4 @@ object ScreenRoot {
     const val MAIN_MY = "mainMyAccount"
     const val MAIN_SEARCH = "mainSearch"
     const val MY_SETTING = "mySetting"
-    const val MY_SCREEN = "myScreen"
 }

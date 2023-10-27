@@ -59,7 +59,6 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-compiler:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     // compose
     val composeVersion = "1.4.3"
@@ -69,11 +68,23 @@ dependencies {
     implementation ("androidx.compose.ui:ui-test-junit4:$composeVersion")
     implementation ("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation ("androidx.compose.ui:ui-test-manifest:$composeVersion")
+    implementation("androidx.activity:activity-compose:1.7.2")
     // compose view model
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+    // compose navi
+    implementation("androidx.navigation:navigation-compose:2.7.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
+    // image ui
+    implementation ("io.coil-kt:coil-compose:1.3.2")
 
-    // compose hilt viewModel
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    // coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+
+    val pagingVersion = "3.1.1"
+    // paging dependencies 추가
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    // optional - Jetpack Compose integration
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
 
     // module
     implementation(project(":core:api"))

@@ -41,8 +41,7 @@ import retrofit2.Response
 // start Screen
 @Composable
 fun LoginScreen(
-    naviController: NavHostController,
-    loginViewModel: LoginViewModel = hiltViewModel()
+    naviController: NavHostController
 ) {
     Box(modifier = Modifier
         .fillMaxSize()

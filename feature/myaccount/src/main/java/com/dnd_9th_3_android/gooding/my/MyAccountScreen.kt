@@ -27,7 +27,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 fun MyAccountScreen(
     appState : ApplicationState,
     viewModel : MyOptionViewModel = hiltViewModel(),
-    timeLineViewModel: TimeLineViewModel = hiltViewModel()
 ) {
 
 
