@@ -12,7 +12,6 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dnd_9th_3_android.gooding.record.viewModel.RecordOptionViewModel
 import androidx.compose.material.Text
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -21,9 +20,11 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryTopLayer(
-    optionViewModel : RecordOptionViewModel = hiltViewModel(),
-    recordViewModel: RecordViewModel = hiltViewModel()
+    currentFolder : String,
+    prevStep : () -> Unit,
+    nextStep : () -> Unit
 ) {
+
     Box(
        modifier = Modifier
            .fillMaxWidth()
@@ -38,7 +39,7 @@ fun GalleryTopLayer(
         Box(
             modifier = Modifier
                 .clickable {
-                    optionViewModel.goBackStage()
+                    prevStep()
                 }
                 .size(24.dp)
                 .align(Alignment.CenterStart),
@@ -61,7 +62,7 @@ fun GalleryTopLayer(
                 }
         ){
             Text(
-                text = recordViewModel.currentFolder.value.first,
+                text = currentFolder,
                 letterSpacing = (-0.25).sp,
                 fontSize = 18.sp,
                 fontFamily = pretendardBold,
@@ -85,7 +86,7 @@ fun GalleryTopLayer(
                 .align(Alignment.CenterEnd)
                 .clickable {
                     // 클릭 가능 상태면 이동, 다음 텍스트 변경
-                    optionViewModel.goMainRecord()
+                    nextStep()
                 }
         ){
             Text(

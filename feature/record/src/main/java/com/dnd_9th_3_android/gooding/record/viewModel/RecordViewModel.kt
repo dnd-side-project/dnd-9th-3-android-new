@@ -11,6 +11,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageRepository
+import com.dnd_9th_3_android.gooding.data.dataRecord.domain.RecordStateRepository
 import com.dnd_9th_3_android.gooding.data.dataRecord.remote.GalleryPagingSource
 import com.dnd_9th_3_android.gooding.data.dataRecord.remote.GalleryPagingSource.Companion.PAGING_SIZE
 import com.dnd_9th_3_android.gooding.data.di.DispatcherModule
@@ -27,6 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecordViewModel @Inject constructor(
     private val imageRepository: ImageRepository,
+    val recordStateRepository: RecordStateRepository,
     @DispatcherModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel(){
 

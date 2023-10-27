@@ -16,7 +16,7 @@ fun ManageBottomBarState(
         ->{
             bottomBarState.value = true
         }
-        ScreenRoot.MAIN_RECORD, ScreenRoot.MAIN_SEARCH, ScreenRoot.MY_SETTING
+        ScreenRoot.MAIN_RECORD, ScreenRoot.MAIN_SEARCH, ScreenRoot.MY_SETTING,
         -> {
             bottomBarState.value = false
         }

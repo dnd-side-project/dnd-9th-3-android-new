@@ -7,7 +7,4 @@ object ScreenRoot {
     const val MAIN_MY = "mainMyAccount"
     const val MAIN_SEARCH = "mainSearch"
     const val MY_SETTING = "mySetting"
-    const val RECORD_IMAGE_SELECT = "recordImageSelect"
-    const val RECORD_MAIN = "recordMain"
-    const val RECORD_FINISH = "recordFinish"
 }

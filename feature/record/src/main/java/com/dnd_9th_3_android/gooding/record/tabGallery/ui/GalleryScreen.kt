@@ -8,15 +8,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.GalleryTopLayer
+import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
-fun GalleryScreen() {
+fun GalleryScreen(
+    viewModel: RecordViewModel
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.blue_gray_7))
     ) {
-        GalleryTopLayer()
+        GalleryTopLayer(
+            viewModel.currentFolder.value.first,
+            prevStep = {
+                viewModel.recordStateRepository.goBackState()
+            },
+            nextStep = {
+                viewModel.recordStateRepository.goNextStep("mainRecordScreen")
+            }
+        )
 
     }
 }
