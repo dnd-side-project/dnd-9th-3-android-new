@@ -1,13 +1,17 @@
 package com.dnd_9th_3_android.gooding.data.dataRecord.repository
 
+import android.content.Context
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.data.dataRecord.domain.RecordStateRepository
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class RecordStateRepositoryImpl @Inject constructor()
+class RecordStateRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+)
     : RecordStateRepository {
     override var navController: NavHostController? = null
     override var appState: ApplicationState? = null
@@ -44,4 +48,6 @@ class RecordStateRepositoryImpl @Inject constructor()
         imageHeight = height
         appWidth = width
     }
+
+    override fun getContext(): Context = context
 }

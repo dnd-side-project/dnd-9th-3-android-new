@@ -3,7 +3,6 @@ package com.dnd_9th_3_android.gooding.record.tabGallery.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -13,6 +12,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
@@ -20,10 +21,12 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryTopLayer(
-    currentFolder : String,
     prevStep : () -> Unit,
-    nextStep : () -> Unit
+    nextStep : () -> Unit,
+    currentDirectory : Pair<String,String?>,
+    setCurrentDirectory : (Pair<String,String?>) -> Unit,
 ) {
+    var isDropDownMenuExpanded by remember { mutableStateOf(false) }
 
     Box(
        modifier = Modifier
@@ -59,10 +62,11 @@ fun GalleryTopLayer(
                 .align(Alignment.Center)
                 .clickable {
                     // 폴더 리스트 + image 회전 (180도)
+                    isDropDownMenuExpanded = !isDropDownMenuExpanded
                 }
         ){
             Text(
-                text = currentFolder,
+                text = currentDirectory.first,
                 letterSpacing = (-0.25).sp,
                 fontSize = 18.sp,
                 fontFamily = pretendardBold,
@@ -76,7 +80,9 @@ fun GalleryTopLayer(
                 Image(
                     painter = painterResource(id = R.drawable.arrow_bottom),
                     contentDescription = null ,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .rotate(if (isDropDownMenuExpanded) 180f else 0f)
                 )
             }
         }

@@ -34,15 +34,15 @@ class RecordViewModel @Inject constructor(
 
     private val _customGalleryPhotoList =
         MutableStateFlow<PagingData<GalleryImage>>(PagingData.empty())
-    val customGalleryPhotoList : StateFlow<PagingData<GalleryImage>> get() =
+    val customGalleryPhotoList : StateFlow<PagingData<GalleryImage>>  =
         _customGalleryPhotoList.asStateFlow()
 
     // 폴더 리스트
-    private val _folders = mutableStateListOf<Pair<String,String?>>("최근사진" to null)
+    private val _folders = mutableStateListOf<Pair<String,String?>>("최근 항목" to null)
     val folders get() = _folders
 
     // 현재 폴더
-    private val _currentFolder = mutableStateOf<Pair<String, String?>>("최근사진" to null)
+    private val _currentFolder = mutableStateOf<Pair<String, String?>>("최근 항목" to null)
     val currentFolder : State<Pair<String, String?>> = _currentFolder
 
     // 선택 이미지 리스트

@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.data.dataRecord.domain
 
+import android.content.Context
 import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
@@ -26,4 +27,5 @@ interface RecordStateRepository {
         height : Dp, width : Dp
     )
 
+    fun getContext() : Context
 }
