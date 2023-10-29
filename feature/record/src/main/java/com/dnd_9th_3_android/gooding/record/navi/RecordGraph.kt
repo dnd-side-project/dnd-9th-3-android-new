@@ -31,7 +31,7 @@ fun RecordGraph(
     ){
 
         composable("galleryScreen") {
-            GalleryScreen(viewModel)
+            GalleryScreen(viewModel,navi)
         }
         composable("mainRecordScreen") {
             MainRecordScreen(viewModel)

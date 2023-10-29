@@ -16,7 +16,7 @@ abstract class RecordModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindRecordRepository(
+    abstract fun bindRecordStateRepository(
         recordRepositoryImpl: RecordStateRepositoryImpl
     ) : RecordStateRepository
 

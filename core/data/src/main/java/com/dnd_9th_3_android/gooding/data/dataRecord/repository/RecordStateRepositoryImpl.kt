@@ -9,10 +9,10 @@ import javax.inject.Inject
 
 class RecordStateRepositoryImpl @Inject constructor()
     : RecordStateRepository {
-    var navController: NavHostController? = null
-    var appState: ApplicationState? = null
-    var appWidth = 360.dp
-    var imageHeight = 180.dp
+    override var navController: NavHostController? = null
+    override var appState: ApplicationState? = null
+    override var appWidth = 360.dp
+    override var imageHeight = 180.dp
 
     override fun goBackState() {
         appState?.navController?.popBackStack()

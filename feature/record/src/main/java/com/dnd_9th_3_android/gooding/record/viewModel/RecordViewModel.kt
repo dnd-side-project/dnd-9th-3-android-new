@@ -87,10 +87,17 @@ class RecordViewModel @Inject constructor(
         _selectedImages.add(image)
     }
 
+    fun addSelectedImageList(secondScreenResult : List<GalleryImage>?){
+        secondScreenResult?.let { _selectedImages.addAll(it) }
+    }
+
     fun removeSelectedImage(id : Long){
         val removeImage = _selectedImages.find { it.id == id }
         removeImage?.let {
             _selectedImages.remove(removeImage)
         }
     }
+
+    fun selectedImageSize() : Int = selectedImages.size
+
 }
