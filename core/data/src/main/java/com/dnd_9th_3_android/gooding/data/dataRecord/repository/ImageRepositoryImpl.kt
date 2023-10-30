@@ -7,9 +7,11 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.core.os.bundleOf
 import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageRepository
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
+import com.dnd_9th_3_android.gooding.model.record.ImageFolder
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject
@@ -80,8 +82,8 @@ class ImageRepositoryImpl @Inject constructor(
         return galleryImageList
     }
 
-    override fun getFolderList(): ArrayList<String> {
-        val folderList = ArrayList<String>()
+    override fun getFolderList(): ArrayList<ImageFolder> {
+        val folderList = ArrayList<ImageFolder>()
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = context.contentResolver.query(uri, projection, null, null, null)
@@ -90,13 +92,29 @@ class ImageRepositoryImpl @Inject constructor(
                 val columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
                 val filePath = cursor.getString(columnIndex)
                 val folder = File(filePath).parent
-                if (!folderList.contains(folder)) {
-                    folderList.add(folder)
+                val imageFolder = makeImageFolder(folder)
+                if (!folderList.contains(imageFolder)) {
+                    folderList.add(imageFolder)
                 }
             }
             cursor.close()
         }
         return folderList
+    }
+
+    override fun makeImageFolder(folder: String): ImageFolder {
+        val name = folder.split(",").last()
+        var imageCount = 0
+        var firstImage : String? = null
+        val file = File(folder)
+        val imageList = file.listFiles()
+        if (imageList != null) {
+            imageCount = imageList.size
+            firstImage = imageList[0]?.absolutePath
+        }
+
+
+        return ImageFolder(name,imageCount,firstImage,folder)
     }
 
     @SuppressLint("Recycle")

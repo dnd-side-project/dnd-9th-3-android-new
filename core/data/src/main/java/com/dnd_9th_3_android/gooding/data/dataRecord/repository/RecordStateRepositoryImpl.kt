@@ -1,18 +1,22 @@
 package com.dnd_9th_3_android.gooding.data.dataRecord.repository
 
+import android.content.Context
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.data.dataRecord.domain.RecordStateRepository
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class RecordStateRepositoryImpl @Inject constructor()
+class RecordStateRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+)
     : RecordStateRepository {
-    var navController: NavHostController? = null
-    var appState: ApplicationState? = null
-    var appWidth = 360.dp
-    var imageHeight = 180.dp
+    override var navController: NavHostController? = null
+    override var appState: ApplicationState? = null
+    override var appWidth = 360.dp
+    override var imageHeight = 180.dp
 
     override fun goBackState() {
         appState?.navController?.popBackStack()
@@ -44,4 +48,6 @@ class RecordStateRepositoryImpl @Inject constructor()
         imageHeight = height
         appWidth = width
     }
+
+    override fun getContext(): Context = context
 }
