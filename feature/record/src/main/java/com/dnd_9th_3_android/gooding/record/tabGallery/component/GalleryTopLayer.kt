@@ -18,16 +18,17 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.model.record.ImageFolder
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryTopLayer(
     prevStep: () -> Unit,
     nextStep: () -> Unit,
-    currentDirectory: Pair<String, String?>,
-    setCurrentDirectory: (Pair<String, String?>) -> Unit,
+    currentDirectory: Pair<String, ImageFolder?>,
+    setCurrentDirectory: (Pair<String, ImageFolder?>) -> Unit,
+    isDropDownMenuExpanded : MutableState<Boolean>
 ) {
-    var isDropDownMenuExpanded by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -63,7 +64,7 @@ fun GalleryTopLayer(
                 .align(Alignment.BottomCenter)
                 .clickable {
                     // 폴더 리스트 + image 회전 (180도)
-                    isDropDownMenuExpanded = !isDropDownMenuExpanded
+                    isDropDownMenuExpanded.value = !isDropDownMenuExpanded.value
                 }
         ) {
             Text(
@@ -83,7 +84,7 @@ fun GalleryTopLayer(
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()
-                        .rotate(if (isDropDownMenuExpanded) 180f else 0f)
+                        .rotate(if (isDropDownMenuExpanded.value) 180f else 0f)
                 )
             }
         }
@@ -107,13 +108,4 @@ fun GalleryTopLayer(
 
     }
 
-    DropdownMenu(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.blue_gray_7)),
-        expanded = isDropDownMenuExpanded,
-        onDismissRequest = { isDropDownMenuExpanded = false }
-    ) {
-
-    }
 }

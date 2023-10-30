@@ -16,6 +16,7 @@ import com.dnd_9th_3_android.gooding.data.dataRecord.remote.GalleryPagingSource
 import com.dnd_9th_3_android.gooding.data.dataRecord.remote.GalleryPagingSource.Companion.PAGING_SIZE
 import com.dnd_9th_3_android.gooding.data.di.DispatcherModule
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
+import com.dnd_9th_3_android.gooding.model.record.ImageFolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,12 +39,12 @@ class RecordViewModel @Inject constructor(
         _customGalleryPhotoList.asStateFlow()
 
     // 폴더 리스트
-    private val _folders = mutableStateListOf<Pair<String,String?>>("최근 항목" to null)
+    private val _folders = mutableStateListOf<Pair<String, ImageFolder?>>("최근 항목" to null)
     val folders get() = _folders
 
     // 현재 폴더
-    private val _currentFolder = mutableStateOf<Pair<String, String?>>("최근 항목" to null)
-    val currentFolder : State<Pair<String, String?>> = _currentFolder
+    private val _currentFolder = mutableStateOf<Pair<String, ImageFolder?>>("최근 항목" to null)
+    val currentFolder : State<Pair<String, ImageFolder?>> = _currentFolder
 
     // 선택 이미지 리스트
     private val _selectedImages = mutableStateListOf<GalleryImage>()
@@ -60,7 +61,7 @@ class RecordViewModel @Inject constructor(
             pagingSourceFactory = {
                 GalleryPagingSource(
                     imageRepo = imageRepository,
-                    currentLocation = currentFolder.value.second
+                    currentLocation = currentFolder.value.second?.uriPath
                 )
             }
         ).flow.cachedIn(viewModelScope).collectLatest {
@@ -68,7 +69,7 @@ class RecordViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentFolder(location : Pair<String, String?>){
+    fun setCurrentFolder(location : Pair<String, ImageFolder?>){
         _currentFolder.value = location
     }
 
@@ -79,7 +80,7 @@ class RecordViewModel @Inject constructor(
 
     fun getFolder(){
         imageRepository.getFolderList().map {
-            _folders.add(it.split("/").last() to it)
+            _folders.add(it.name to it)
         }
     }
 
