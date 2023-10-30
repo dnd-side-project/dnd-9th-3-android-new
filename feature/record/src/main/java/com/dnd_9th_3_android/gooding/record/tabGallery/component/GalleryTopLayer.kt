@@ -9,6 +9,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.foundation.Image
+import androidx.compose.material.DropdownMenu
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.material.Text
@@ -21,33 +22,33 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryTopLayer(
-    prevStep : () -> Unit,
-    nextStep : () -> Unit,
-    currentDirectory : Pair<String,String?>,
-    setCurrentDirectory : (Pair<String,String?>) -> Unit,
+    prevStep: () -> Unit,
+    nextStep: () -> Unit,
+    currentDirectory: Pair<String, String?>,
+    setCurrentDirectory: (Pair<String, String?>) -> Unit,
 ) {
     var isDropDownMenuExpanded by remember { mutableStateOf(false) }
 
     Box(
-       modifier = Modifier
-           .fillMaxWidth()
-           .padding(
-               start = 13.dp,
-               bottom = 15.dp,
-               end = 18.dp
-           )
-           .height(95.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 13.dp,
+                end = 18.dp,
+                bottom = 14.dp,
+            )
+            .height(95.dp),
         contentAlignment = Alignment.BottomCenter
-    ){
+    ) {
         Box(
             modifier = Modifier
                 .clickable {
                     prevStep()
                 }
                 .size(24.dp)
-                .align(Alignment.CenterStart),
+                .align(Alignment.BottomStart),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.close_my),
                 contentDescription = null,
@@ -59,12 +60,12 @@ fun GalleryTopLayer(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .wrapContentSize()
-                .align(Alignment.Center)
+                .align(Alignment.BottomCenter)
                 .clickable {
                     // 폴더 리스트 + image 회전 (180도)
                     isDropDownMenuExpanded = !isDropDownMenuExpanded
                 }
-        ){
+        ) {
             Text(
                 text = currentDirectory.first,
                 letterSpacing = (-0.25).sp,
@@ -75,11 +76,11 @@ fun GalleryTopLayer(
             Box(
                 modifier = Modifier
                     .size(24.dp),
-                contentAlignment = Alignment.Center
-            ){
+                contentAlignment = Alignment.BottomEnd
+            ) {
                 Image(
                     painter = painterResource(id = R.drawable.arrow_bottom),
-                    contentDescription = null ,
+                    contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()
                         .rotate(if (isDropDownMenuExpanded) 180f else 0f)
@@ -89,12 +90,12 @@ fun GalleryTopLayer(
 
         Box(
             modifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.BottomEnd)
                 .clickable {
                     // 클릭 가능 상태면 이동, 다음 텍스트 변경
                     nextStep()
                 }
-        ){
+        ) {
             Text(
                 text = "다음",
                 color = colorResource(id = R.color.blue_gray_3),
@@ -104,5 +105,15 @@ fun GalleryTopLayer(
             )
         }
 
-   }
+    }
+
+    DropdownMenu(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.blue_gray_7)),
+        expanded = isDropDownMenuExpanded,
+        onDismissRequest = { isDropDownMenuExpanded = false }
+    ) {
+
+    }
 }

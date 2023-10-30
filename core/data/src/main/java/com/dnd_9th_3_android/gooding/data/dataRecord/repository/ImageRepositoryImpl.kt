@@ -7,6 +7,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.core.os.bundleOf
 import com.dnd_9th_3_android.gooding.data.dataRecord.domain.ImageRepository
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage

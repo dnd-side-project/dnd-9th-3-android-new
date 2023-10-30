@@ -5,6 +5,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dnd_9th_3_android.gooding.core.data.R
@@ -23,10 +25,10 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryScreen(
-    viewModel: RecordViewModel,
-    navi : NavHostController
+    viewModel: RecordViewModel
 ) {
     val rememberView = remember{ mutableStateOf(false) }
+    val roadData = remember { mutableStateOf(true) }
     // 권한 얻기
     val launcher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -44,18 +46,12 @@ fun GalleryScreen(
     }
     val pagingItems = viewModel.customGalleryPhotoList.collectAsLazyPagingItems()
 
-    if (rememberView.value) { // 권한 허용 시 이미지 불러오기
+    if (rememberView.value && roadData.value) { // 권한 허용 시 이미지 불러오기
         LaunchedEffect(viewModel.currentFolder.value) {
             viewModel.getGalleryPagingImages()
-        }
-        // 이전 선택 뷰와 폴더 로드
-        LaunchedEffect(Unit) {
-            val secondScreenResult =
-                getSelectedImageFromBackStack(navi.previousBackStackEntry)
-            viewModel.addSelectedImageList(secondScreenResult)
             viewModel.getFolder()
         }
-
+        roadData.value = false
     }
 
     Column(
@@ -70,12 +66,11 @@ fun GalleryScreen(
                 viewModel.recordStateRepository.goNextStep("mainRecordScreen")
             },
             currentDirectory  = viewModel.currentFolder.value,
-            setCurrentDirectory = {folder ->
+            setCurrentDirectory = { folder ->
                 viewModel.setCurrentFolder(folder)
             }
         )
 
-        Log.d("data111111 ",pagingItems.itemSnapshotList.toString())
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize(),
             columns = GridCells.Fixed(3),

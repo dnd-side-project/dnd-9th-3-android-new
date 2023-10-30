@@ -2,25 +2,25 @@ package com.dnd_9th_3_android.gooding.record.tabGallery.item
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.Dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.record.tabGallery.SelectImageCount.MAX_IMAGE_COUNT
+import com.dnd_9th_3_android.gooding.record.tabGallery.function.SelectImageCount.MAX_IMAGE_COUNT
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
@@ -31,7 +31,18 @@ fun GalleryItemContent(
     galleryImage: GalleryImage,
     viewModel: RecordViewModel,
 ) {
-    Box {
+    val selectedSize = viewModel.selectedImageSize()
+    val selectedIndex = viewModel.getSelectNumber(galleryImage)
+    Box(
+        if (selectedIndex != 0) Modifier
+            .border(
+                1.5.dp,
+                colorResource(id = R.color.secondary_1),
+                RectangleShape
+            )
+            .padding(1.dp)
+        else Modifier.padding(1.dp)
+    ) {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(galleryImage.uri)
@@ -47,34 +58,36 @@ fun GalleryItemContent(
                 .height(viewModel.recordStateRepository.imageHeight)
                 .animateContentSize()
                 .clickable {
-                    if (galleryImage.isSelected) {
+                    if (selectedIndex != 0) {
                         viewModel.removeSelectedImage(galleryImage.id)
                     } else {
-                        viewModel.addSelectedImage(galleryImage)
+                        if (selectedSize < MAX_IMAGE_COUNT) {
+                            viewModel.addSelectedImage(galleryImage)
+                        }
                     }
-                    galleryImage.isSelected = !galleryImage.isSelected
                 },
-            alpha = if (viewModel.selectedImageSize() == MAX_IMAGE_COUNT &&
-                !galleryImage.isSelected) 0.5f else 1f,
+            alpha = if (selectedSize >= MAX_IMAGE_COUNT &&
+                selectedIndex == 0
+            ) 0.5f else 1f,
             error = {
                 FailImageLoad()
             }
 
         )
 
-        if (galleryImage.isSelected){
+        if (selectedIndex != 0) {
             Box(
                 modifier = Modifier
                     .background(colorResource(id = R.color.secondary_1))
                     .size(24.dp)
                     .align(Alignment.TopEnd),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 Text(
                     text = viewModel.getSelectNumber(galleryImage).toString(),
                     color = Color.Black,
                     fontSize = 12.sp,
-                    fontFamily =  pretendardBold
+                    fontFamily = pretendardBold
                 )
             }
         }
