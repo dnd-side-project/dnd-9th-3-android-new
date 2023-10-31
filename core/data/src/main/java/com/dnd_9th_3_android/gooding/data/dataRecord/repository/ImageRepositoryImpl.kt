@@ -5,6 +5,7 @@ import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -83,7 +84,9 @@ class ImageRepositoryImpl @Inject constructor(
     }
 
     override fun getFolderList(): ArrayList<ImageFolder> {
-        val folderList = ArrayList<ImageFolder>()
+        var totalCount = 0
+        val imageFolderList = ArrayList<ImageFolder>()
+        val folderList = ArrayList<String>()
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = context.contentResolver.query(uri, projection, null, null, null)
@@ -93,17 +96,40 @@ class ImageRepositoryImpl @Inject constructor(
                 val filePath = cursor.getString(columnIndex)
                 val folder = File(filePath).parent
                 val imageFolder = makeImageFolder(folder)
-                if (!folderList.contains(imageFolder)) {
-                    folderList.add(imageFolder)
+                if (!folderList.contains(folder)) {
+                    totalCount += imageFolder.imageCount
+                    imageFolderList.add(imageFolder)
+                    folderList.add(folder)
                 }
             }
             cursor.close()
         }
-        return folderList
+        imageFolderList.add(0,ImageFolder("최근 항목",totalCount,getFirstImage(),""))
+        return imageFolderList
+    }
+
+    @SuppressLint("Recycle")
+    override fun getFirstImage(): String? {
+        val projection = arrayOf(
+            MediaStore.Images.ImageColumns._ID,
+            MediaStore.Images.ImageColumns.DATA,
+            MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.ImageColumns.DATE_TAKEN,
+            MediaStore.Images.ImageColumns.MIME_TYPE
+        )
+        val cursor = context.contentResolver
+            .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null,
+                MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC")
+
+        return if (cursor!!.moveToFirst()) {
+            cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA))
+        }else{
+            null
+        }
     }
 
     override fun makeImageFolder(folder: String): ImageFolder {
-        val name = folder.split(",").last()
+        val name = folder.split("/").last()
         var imageCount = 0
         var firstImage : String? = null
         val file = File(folder)

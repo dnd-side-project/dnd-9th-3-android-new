@@ -19,10 +19,7 @@ import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 import com.dnd_9th_3_android.gooding.model.record.ImageFolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +36,7 @@ class RecordViewModel @Inject constructor(
         _customGalleryPhotoList.asStateFlow()
 
     // 폴더 리스트
-    private val _folders = mutableStateListOf<Pair<String, ImageFolder?>>("최근 항목" to null)
+    private val _folders = mutableStateListOf<Pair<String, ImageFolder?>>()
     val folders get() = _folders
 
     // 현재 폴더
@@ -49,6 +46,7 @@ class RecordViewModel @Inject constructor(
     // 선택 이미지 리스트
     private val _selectedImages = mutableStateListOf<GalleryImage>()
     val selectedImages: SnapshotStateList<GalleryImage> = _selectedImages
+
 
     // paging 처리 함수
     fun getGalleryPagingImages() = viewModelScope.launch {
@@ -73,12 +71,18 @@ class RecordViewModel @Inject constructor(
         _currentFolder.value = location
     }
 
+    fun setFirstFolder(){
+        _currentFolder.value = folders[0]
+    }
+
+
     fun getSelectNumber(image : GalleryImage) : Int{
         val index = _selectedImages.indexOf(image)
         return index+1
     }
 
     fun getFolder(){
+        _folders.clear()
         imageRepository.getFolderList().map {
             _folders.add(it.name to it)
         }
@@ -100,5 +104,4 @@ class RecordViewModel @Inject constructor(
     }
 
     fun selectedImageSize() : Int = selectedImages.size
-
 }

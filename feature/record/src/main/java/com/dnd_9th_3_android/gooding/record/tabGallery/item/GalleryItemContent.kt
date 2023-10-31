@@ -19,6 +19,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.record.tabGallery.function.SelectImageCount.MAX_IMAGE_COUNT
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
@@ -30,19 +31,11 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 fun GalleryItemContent(
     galleryImage: GalleryImage,
     viewModel: RecordViewModel,
+    isPreventSelectMessage : MutableState<Boolean>
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)
-    Box(
-        if (selectedIndex != 0) Modifier
-            .border(
-                1.5.dp,
-                colorResource(id = R.color.secondary_1),
-                RectangleShape
-            )
-            .padding(1.dp)
-        else Modifier.padding(1.dp)
-    ) {
+    Box(Modifier.padding(1.dp)) {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(galleryImage.uri)
@@ -57,18 +50,24 @@ fun GalleryItemContent(
                 .width(viewModel.recordStateRepository.appWidth / 3)
                 .height(viewModel.recordStateRepository.imageHeight)
                 .animateContentSize()
+                .border(
+                    if (selectedIndex!= 0) 1.5.dp else (-1.5).dp,
+                    colorResource(id = R.color.secondary_1),
+                    RectangleShape
+                )
                 .clickable {
                     if (selectedIndex != 0) {
                         viewModel.removeSelectedImage(galleryImage.id)
                     } else {
                         if (selectedSize < MAX_IMAGE_COUNT) {
                             viewModel.addSelectedImage(galleryImage)
+                        } else {
+                            isPreventSelectMessage.value= true
                         }
                     }
                 },
-            alpha = if (selectedSize >= MAX_IMAGE_COUNT &&
-                selectedIndex == 0
-            ) 0.5f else 1f,
+            alpha = if (selectedSize >= MAX_IMAGE_COUNT && selectedIndex == 0) 0.5f
+                    else 1f,
             error = {
                 FailImageLoad()
             }
