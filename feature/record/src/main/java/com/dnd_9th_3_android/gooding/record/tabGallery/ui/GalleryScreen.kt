@@ -21,10 +21,14 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.FolderListLayer
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.GalleryTopLayer
+import com.dnd_9th_3_android.gooding.record.tabGallery.component.MessagePreventSelectImageLayer
+import com.dnd_9th_3_android.gooding.record.tabGallery.function.BottomNotyMessage
 import com.dnd_9th_3_android.gooding.record.tabGallery.function.galleryPermissionCheck
 import com.dnd_9th_3_android.gooding.record.tabGallery.item.GalleryItemContent
 import com.dnd_9th_3_android.gooding.record.tabGallery.item.function.getSelectedImageFromBackStack
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun GalleryScreen(
@@ -32,6 +36,7 @@ fun GalleryScreen(
 ) {
     val rememberView = remember{ mutableStateOf(false) }
     val isDropDownMenuExpanded = remember { mutableStateOf(false) }
+    val isPreventSelectMessage = remember { mutableStateOf(false) }
     // 권한 얻기
     val launcher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -81,10 +86,40 @@ fun GalleryScreen(
             ) {
                 items(pagingItems.itemCount) { index ->
                     pagingItems[index]?.let { galleryImage ->
-                        GalleryItemContent(galleryImage, viewModel)
+                        GalleryItemContent(galleryImage, viewModel,isPreventSelectMessage)
                     }
                 }
             }
+
+            // 경고 메시지
+            if (isPreventSelectMessage.value) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(bottom = 14.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    MessagePreventSelectImageLayer()
+                    rememberCoroutineScope().launch {
+                        delay(1000)
+                        isPreventSelectMessage.value = false
+                    }
+
+                }
+            }
+
+            // bottom 메시지
+            Box( modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .height(60.dp)
+                .background(colorResource(id = R.color.record_noty_box_color_80))
+                .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ){
+                BottomNotyMessage(selected = viewModel.selectedImageSize())
+            }
+
+            // dropdown 메뉴
             Box(modifier = Modifier.align(Alignment.BottomCenter)){
                 val ratio = viewModel.recordStateRepository.imageHeight / 180.dp
                 if (isDropDownMenuExpanded.value) {

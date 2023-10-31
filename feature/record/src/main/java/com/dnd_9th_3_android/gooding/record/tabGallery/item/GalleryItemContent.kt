@@ -19,6 +19,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.record.tabGallery.function.SelectImageCount.MAX_IMAGE_COUNT
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
@@ -30,6 +31,7 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 fun GalleryItemContent(
     galleryImage: GalleryImage,
     viewModel: RecordViewModel,
+    isPreventSelectMessage : MutableState<Boolean>
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)
@@ -59,6 +61,8 @@ fun GalleryItemContent(
                     } else {
                         if (selectedSize < MAX_IMAGE_COUNT) {
                             viewModel.addSelectedImage(galleryImage)
+                        } else {
+                            isPreventSelectMessage.value= true
                         }
                     }
                 },

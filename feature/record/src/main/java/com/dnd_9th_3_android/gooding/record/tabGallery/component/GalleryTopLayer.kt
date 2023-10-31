@@ -32,6 +32,7 @@ fun GalleryTopLayer(
     isDropDownMenuExpanded : MutableState<Boolean>,
     viewModel : RecordViewModel
 ) {
+    val selectedCount = viewModel.selectedImageSize()
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,12 +99,15 @@ fun GalleryTopLayer(
                     .align(Alignment.BottomEnd)
                     .clickable {
                         // 클릭 가능 상태면 이동, 다음 텍스트 변경
-                        nextStep()
+                        if (selectedCount>=5) {
+                            nextStep()
+                        }
                     }
             ) {
                 Text(
                     text = "다음",
-                    color = colorResource(id = R.color.blue_gray_3),
+                    color = if (selectedCount>=5) colorResource(id = R.color.secondary_1)
+                            else colorResource(id = R.color.blue_gray_3),
                     letterSpacing = (-0.25).sp,
                     fontFamily = pretendardBold,
                     fontSize = 18.sp

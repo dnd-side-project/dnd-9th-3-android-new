@@ -9,6 +9,7 @@
     <color name="top_gra_color_2">#00000000</color> <!--0%-->
 
     <color name="image_back">#D9D9D9</color>
+    <color name="record_noty_box_color_80">#CC121318</color>
     <color name="bottom_gra_color_3">#CC090807</color> <!--80%-->
     <color name="bottom_gra_color_2">#66100F0C</color> <!--40%-->
     <color name="bottom_gra_color_1">#0011100D</color> <!--00%-->
