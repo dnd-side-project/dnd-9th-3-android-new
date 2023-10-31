@@ -10,26 +10,28 @@ import androidx.compose.ui.unit.dp
 import com.dnd_9th_3_android.gooding.core.data.R
 import androidx.compose.foundation.Image
 import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 import com.dnd_9th_3_android.gooding.model.record.ImageFolder
+import com.dnd_9th_3_android.gooding.record.tabGallery.component.folderItem.ItemFolder
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryTopLayer(
     prevStep: () -> Unit,
     nextStep: () -> Unit,
-    currentDirectory: Pair<String, ImageFolder?>,
-    setCurrentDirectory: (Pair<String, ImageFolder?>) -> Unit,
-    isDropDownMenuExpanded : MutableState<Boolean>
+    isDropDownMenuExpanded : MutableState<Boolean>,
+    viewModel : RecordViewModel
 ) {
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -68,7 +70,7 @@ fun GalleryTopLayer(
                 }
         ) {
             Text(
-                text = currentDirectory.first,
+                text = viewModel.currentFolder.value.first,
                 letterSpacing = (-0.25).sp,
                 fontSize = 18.sp,
                 fontFamily = pretendardBold,
@@ -89,23 +91,27 @@ fun GalleryTopLayer(
             }
         }
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .clickable {
-                    // 클릭 가능 상태면 이동, 다음 텍스트 변경
-                    nextStep()
-                }
-        ) {
-            Text(
-                text = "다음",
-                color = colorResource(id = R.color.blue_gray_3),
-                letterSpacing = (-0.25).sp,
-                fontFamily = pretendardBold,
-                fontSize = 18.sp
-            )
+        if (!isDropDownMenuExpanded.value) {
+            Box(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .align(Alignment.BottomEnd)
+                    .clickable {
+                        // 클릭 가능 상태면 이동, 다음 텍스트 변경
+                        nextStep()
+                    }
+            ) {
+                Text(
+                    text = "다음",
+                    color = colorResource(id = R.color.blue_gray_3),
+                    letterSpacing = (-0.25).sp,
+                    fontFamily = pretendardBold,
+                    fontSize = 18.sp
+                )
+            }
         }
 
     }
+
 
 }

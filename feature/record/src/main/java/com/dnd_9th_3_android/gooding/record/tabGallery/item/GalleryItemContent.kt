@@ -33,16 +33,7 @@ fun GalleryItemContent(
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)
-    Box(
-        if (selectedIndex != 0) Modifier
-            .border(
-                1.5.dp,
-                colorResource(id = R.color.secondary_1),
-                RectangleShape
-            )
-            .padding(1.dp)
-        else Modifier.padding(1.dp)
-    ) {
+    Box(Modifier.padding(1.dp)) {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(galleryImage.uri)
@@ -57,6 +48,11 @@ fun GalleryItemContent(
                 .width(viewModel.recordStateRepository.appWidth / 3)
                 .height(viewModel.recordStateRepository.imageHeight)
                 .animateContentSize()
+                .border(
+                    if (selectedIndex!= 0) 1.5.dp else (-1.5).dp,
+                    colorResource(id = R.color.secondary_1),
+                    RectangleShape
+                )
                 .clickable {
                     if (selectedIndex != 0) {
                         viewModel.removeSelectedImage(galleryImage.id)
@@ -66,9 +62,8 @@ fun GalleryItemContent(
                         }
                     }
                 },
-            alpha = if (selectedSize >= MAX_IMAGE_COUNT &&
-                selectedIndex == 0
-            ) 0.5f else 1f,
+            alpha = if (selectedSize >= MAX_IMAGE_COUNT && selectedIndex == 0) 0.5f
+                    else 1f,
             error = {
                 FailImageLoad()
             }

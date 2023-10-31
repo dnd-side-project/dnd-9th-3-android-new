@@ -13,6 +13,6 @@ interface ImageRepository {
 
     fun getFolderList() : ArrayList<ImageFolder>
 
-
+    fun getFirstImage() : String?
     fun makeImageFolder(folder : String) : ImageFolder
 }

@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.DropdownMenu
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -52,6 +52,9 @@ fun GalleryScreen(
     if (rememberView.value) { // 권한 허용 시 이미지 불러오기
         LaunchedEffect(viewModel.currentFolder.value) {
             viewModel.getGalleryPagingImages()
+        }
+        // 한 번만 실행
+        LaunchedEffect(Unit){
             viewModel.getFolder()
         }
     }
@@ -67,14 +70,11 @@ fun GalleryScreen(
             nextStep = {
                 viewModel.recordStateRepository.goNextStep("mainRecordScreen")
             },
-            currentDirectory  = viewModel.currentFolder.value,
-            setCurrentDirectory = { folder ->
-                viewModel.setCurrentFolder(folder)
-            },
-            isDropDownMenuExpanded
+            isDropDownMenuExpanded = isDropDownMenuExpanded,
+            viewModel = viewModel
         )
 
-        Box {
+        Box (Modifier.fillMaxSize()){
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
                 columns = GridCells.Fixed(3),
@@ -85,23 +85,28 @@ fun GalleryScreen(
                     }
                 }
             }
-            if (isDropDownMenuExpanded.value) {
-                DropdownMenu(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(colorResource(id = R.color.blue_gray_7)),
-                    expanded = isDropDownMenuExpanded.value,
-                    onDismissRequest = { isDropDownMenuExpanded.value = false }
-                ) {
-                    FolderListLayer(
-                        viewModel.folders,
-                        selectedFolder = { folder ->
-                            viewModel.setCurrentFolder(folder)
-                            isDropDownMenuExpanded.value = false
-                        }
-                    )
+            Box(modifier = Modifier.align(Alignment.BottomCenter)){
+                val ratio = viewModel.recordStateRepository.imageHeight / 180.dp
+                if (isDropDownMenuExpanded.value) {
+                    DropdownMenu(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .requiredHeight(660.dp * ratio)
+                            .background(colorResource(id = R.color.blue_gray_7)),
+                        expanded = isDropDownMenuExpanded.value,
+                        onDismissRequest = { isDropDownMenuExpanded.value = false },
+                    ) {
+                        FolderListLayer(
+                            viewModel.folders,
+                            selectedFolder = { folder ->
+                                viewModel.setCurrentFolder(folder)
+                                isDropDownMenuExpanded.value = false
+                            }
+                        )
+                    }
                 }
             }
         }
+
     }
 }
