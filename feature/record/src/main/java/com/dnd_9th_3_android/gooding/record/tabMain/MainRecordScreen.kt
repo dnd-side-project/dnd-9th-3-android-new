@@ -12,11 +12,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.record.state.RecordState
 import com.dnd_9th_3_android.gooding.record.tabMain.component.ImageLayer
+import com.dnd_9th_3_android.gooding.record.tabMain.component.MainLayer
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainRecordScreen(
+    recordState : RecordState,
     viewModel: RecordViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -46,10 +49,7 @@ fun MainRecordScreen(
                 Spacer(modifier = Modifier.height(36.dp))
                 ImageLayer()
                 Spacer(modifier = Modifier.height(36.dp))
-
-                Column(modifier = Modifier.padding(horizontal = 18.dp)) {
-
-                }
+                MainLayer(recordState,focusManager)
             }
         }
     }

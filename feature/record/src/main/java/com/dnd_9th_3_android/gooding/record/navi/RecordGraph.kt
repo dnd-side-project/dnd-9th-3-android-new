@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
 import com.dnd_9th_3_android.gooding.record.tabFinish.FinishRecordScreen
 import com.dnd_9th_3_android.gooding.record.tabGallery.GalleryScreen
 import com.dnd_9th_3_android.gooding.record.tabMain.MainRecordScreen
@@ -25,6 +26,7 @@ fun RecordGraph(
     val navi = rememberNavController()
     val width = LocalConfiguration.current.screenWidthDp.dp
     val height = 180.dp * (width/(360.dp))
+    val recordState = rememberRecordState()
     LaunchedEffect(Unit){
         viewModel.recordStateRepository.setState(appState,navi)
         viewModel.recordStateRepository.setSize(height,width)
@@ -42,7 +44,7 @@ fun RecordGraph(
             "mainRecordScreen"
         ) { entry ->
             val parentEntry  = remember(entry) { navi.getBackStackEntry("galleryScreen")}
-            MainRecordScreen(viewModel = hiltViewModel(parentEntry) )
+            MainRecordScreen(recordState, viewModel = hiltViewModel(parentEntry) )
         }
         composable(
             "finishRecordScreen"

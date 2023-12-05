@@ -17,6 +17,7 @@ import com.dnd_9th_3_android.gooding.data.dataRecord.remote.GalleryPagingSource.
 import com.dnd_9th_3_android.gooding.data.di.DispatcherModule
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 import com.dnd_9th_3_android.gooding.model.record.ImageFolder
+import com.dnd_9th_3_android.gooding.record.state.RecordState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
@@ -46,7 +47,6 @@ class RecordViewModel @Inject constructor(
     // 선택 이미지 리스트
     private val _selectedImages = mutableStateListOf<GalleryImage>()
     val selectedImages: SnapshotStateList<GalleryImage> = _selectedImages
-
 
     // paging 처리 함수
     fun getGalleryPagingImages() = viewModelScope.launch {
