@@ -51,7 +51,7 @@ fun GalleryItemContent(
                 .height(viewModel.recordStateRepository.imageHeight)
                 .animateContentSize()
                 .border(
-                    if (selectedIndex!= 0) 1.5.dp else (-1.5).dp,
+                    if (selectedIndex != 0) 1.5.dp else (-1.5).dp,
                     colorResource(id = R.color.secondary_1),
                     RectangleShape
                 )
@@ -62,7 +62,7 @@ fun GalleryItemContent(
                         if (selectedSize < MAX_IMAGE_COUNT) {
                             viewModel.addSelectedImage(galleryImage)
                         } else {
-                            isPreventSelectMessage.value= true
+                            isPreventSelectMessage.value = true
                         }
                     }
                 },
@@ -83,11 +83,29 @@ fun GalleryItemContent(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = viewModel.getSelectNumber(galleryImage).toString(),
+                    text = selectedIndex.toString(),
                     color = Color.Black,
                     fontSize = 12.sp,
                     fontFamily = pretendardBold
                 )
+            }
+
+            if (selectedIndex == 1){
+                Box(
+                    modifier = Modifier
+                        .background(colorResource(id = R.color.secondary_1))
+                        .width(37.dp)
+                        .height(24.dp)
+                        .align(Alignment.BottomStart),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = "표지",
+                        color = colorResource(id = R.color.blue_gray_7),
+                        fontFamily = pretendardBold,
+                        fontSize = 12.sp
+                    )
+                }
             }
         }
     }
