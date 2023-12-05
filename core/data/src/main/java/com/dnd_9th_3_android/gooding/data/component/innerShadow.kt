@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
-fun Modifier.coustomShadow(
+fun Modifier.customShadow(
     color: Color,
     offsetX: Dp = 0.dp,
     offsetY: Dp = 0.dp,

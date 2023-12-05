@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dnd_9th_3_android.gooding.core.data.R
@@ -32,7 +33,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun GalleryScreen(
-    viewModel: RecordViewModel
+    viewModel: RecordViewModel = hiltViewModel()
 ) {
     val rememberView = remember{ mutableStateOf(false) }
     val isDropDownMenuExpanded = remember { mutableStateOf(false) }
