@@ -1,4 +1,4 @@
-package com.dnd_9th_3_android.gooding.login.type
+package com.dnd_9th_3_android.gooding.data.type
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.model.user.Category
 

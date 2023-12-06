@@ -434,7 +434,7 @@ fun MainLayer(
 
             Text(
                 modifier = Modifier.align(Alignment.BottomStart),
-                text = "기록을 공개하면, 다른 사람들도 나의 기록을볼 수 있습니다.",
+                text = "기록을 공개하면, 다른 사람들도 나의 기록을 볼 수 있습니다.",
                 fontFamily = pretendardRegular,
                 fontSize = 12.sp,
                 letterSpacing = (-0.25).sp,

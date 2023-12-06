@@ -30,7 +30,6 @@ class RecordViewModel @Inject constructor(
     val recordStateRepository: RecordStateRepository,
     @DispatcherModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel(){
-
     private val _customGalleryPhotoList =
         MutableStateFlow<PagingData<GalleryImage>>(PagingData.empty())
     val customGalleryPhotoList : StateFlow<PagingData<GalleryImage>>  =

@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.login.component.CategoryBox
-//import com.dnd_9th_3_android.gooding.login.type.CategoryListType
+//import com.dnd_9th_3_android.gooding.data.type.CategoryListType
 import com.dnd_9th_3_android.gooding.login.viewModel.LoginViewModel
 import androidx.compose.material.Text
 import androidx.compose.ui.graphics.Color

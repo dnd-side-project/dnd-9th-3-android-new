@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
-//import com.dnd_9th_3_android.gooding.login.type.CategoryListType
+//import com.dnd_9th_3_android.gooding.data.type.CategoryListType
 import com.dnd_9th_3_android.gooding.model.user.Category
 
 @Composable
