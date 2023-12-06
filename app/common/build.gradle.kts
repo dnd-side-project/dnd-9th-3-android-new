@@ -66,8 +66,7 @@ dependencies {
     // compose view model
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
 
-    // compose hilt viewModel
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
     // compose navi
     implementation ("androidx.fragment:fragment-ktx:1.5.4")
     implementation("androidx.navigation:navigation-compose:2.7.0")

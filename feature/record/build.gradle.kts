@@ -1,3 +1,5 @@
+import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -27,15 +29,20 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
+
 }
 
 dependencies {
@@ -68,7 +75,6 @@ dependencies {
     implementation ("androidx.compose.ui:ui-test-junit4:$composeVersion")
     implementation ("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation ("androidx.compose.ui:ui-test-manifest:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.7.2")
     // compose view model
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     // compose navi
@@ -79,6 +85,9 @@ dependencies {
 
     // coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+
+    // bottom sheet
+    implementation ("com.holix.android:bottomsheetdialog-compose:1.3.1")
 
     val pagingVersion = "3.1.1"
     // paging dependencies 추가

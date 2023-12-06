@@ -28,18 +28,15 @@ android {
             )
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
     buildFeatures {
         compose = true
-    }
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
     }
     kotlinOptions {
         jvmTarget = "1.8"

@@ -42,6 +42,7 @@ fun CategorySelectScreen(
         else if (!recordState.checkCategoryText()) Color(0xFF3CEFA3)
         else Color(0xFF3E4049)
     )
+
     val buttonTextColorState = animateColorAsState(
         targetValue =
         if (!recordState.checkCategoryText()) Color.Black
@@ -79,7 +80,10 @@ fun CategorySelectScreen(
                     modifier = Modifier.clickable(
                         interactionSource = MutableInteractionSource(),
                         indication = null
-                    ) { scope.launch { bottomSheetState.hide() } },
+                    ) { scope.launch {
+                        recordState.recordCategory.value = -1
+                        bottomSheetState.hide()
+                    } },
                     painter = painterResource(id = R.drawable.close_my),
                     tint = Color.White,
                     contentDescription = "close_icon"

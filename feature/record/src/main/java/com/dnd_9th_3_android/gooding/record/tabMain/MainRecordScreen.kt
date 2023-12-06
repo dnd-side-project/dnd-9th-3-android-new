@@ -7,7 +7,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +24,13 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.record.state.RecordState
+import com.dnd_9th_3_android.gooding.record.tabMain.component.CategorySelectScreen
 import com.dnd_9th_3_android.gooding.record.tabMain.component.ImageLayer
 import com.dnd_9th_3_android.gooding.record.tabMain.component.MainLayer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainRecordScreen(
     recordState: RecordState,
@@ -38,6 +39,7 @@ fun MainRecordScreen(
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val buttonClickedState = remember { mutableStateOf(false) }
+    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val nextButtonColorState = animateColorAsState(
         targetValue =
         if (recordState.checkNextStep() && buttonClickedState.value) Color(0xBF3CEFA3)
@@ -50,98 +52,112 @@ fun MainRecordScreen(
         else Color(0xFFA4A6AA)
     )
 
-    Box(
-        modifier = Modifier
-            .padding(top = 56.dp)
-            .fillMaxSize()
-            .clickable(
-                interactionSource = MutableInteractionSource(),
-                indication = null
-            ) {
-                focusManager.clearFocus()
-            }
+
+    ModalBottomSheetLayout(
+        sheetState = bottomSheetState,
+        scrimColor = Color(0x99000000),
+        sheetBackgroundColor = Color.Transparent,
+        sheetContent = {
+            CategorySelectScreen(
+                bottomSheetState = bottomSheetState,
+                scope = scope,
+                recordState = recordState
+            )
+        }
     ) {
-        CompositionLocalProvider(LocalOverscrollConfiguration.provides(null)) {
+        Box(
+            modifier = Modifier
+                .padding(top = 56.dp)
+                .fillMaxSize()
+                .clickable(
+                    interactionSource = MutableInteractionSource(),
+                    indication = null
+                ) {
+                    focusManager.clearFocus()
+                }
+        ) {
+            CompositionLocalProvider(LocalOverscrollConfiguration.provides(null)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    ImageLayer()
+                    Spacer(modifier = Modifier.height(36.dp))
+                    MainLayer(
+                        recordState,
+                        focusManager,
+                        onClickSearchLocation = {
+
+                        },
+                        onClickSetCategory = {
+
+                        },
+                        onClickShowCalendar = {
+
+                        },
+                    )
+
+                    Spacer(modifier = Modifier.height(130.dp))
+                }
+            }
+
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-            ) {
-                Spacer(modifier = Modifier.height(36.dp))
-                ImageLayer()
-                Spacer(modifier = Modifier.height(36.dp))
-                MainLayer(
-                    recordState,
-                    focusManager,
-                    onClickSearchLocation = {
-
-                    },
-                    onClickSetCategory = {
-
-                    },
-                    onClickShowCalendar = {
-
-                    },
-                )
-
-                Spacer(modifier = Modifier.height(130.dp))
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .height(121.dp)
-        ) {
-            Box(
-                modifier = Modifier
+                    .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .height(30.dp)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(
-                                Color(0x001C1D27),
-                                Color(0xFF1C1D27)
-                            )
-                        )
-                    )
-            )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(91.dp)
-                    .background(color = Color(0xFF1C1D27))
+                    .height(121.dp)
             ) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 28.dp)
-                        .padding(horizontal = 18.dp)
-                        .clip(shape = RoundedCornerShape(8.dp))
                         .fillMaxWidth()
-                        .height(47.dp)
-                        .background(color = nextButtonColorState.value)
-                        .pointerInput(Unit) {
-                            detectTapGestures {
-                                scope.launch {
-                                    buttonClickedState.value = true
-                                    delay(100L)
-                                    buttonClickedState.value = false
-                                    // next step
+                        .height(30.dp)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                listOf(
+                                    Color(0x001C1D27),
+                                    Color(0xFF1C1D27)
+                                )
+                            )
+                        )
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(91.dp)
+                        .background(color = Color(0xFF1C1D27))
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 28.dp)
+                            .padding(horizontal = 18.dp)
+                            .clip(shape = RoundedCornerShape(8.dp))
+                            .fillMaxWidth()
+                            .height(47.dp)
+                            .background(color = nextButtonColorState.value)
+                            .pointerInput(Unit) {
+                                detectTapGestures {
+                                    scope.launch {
+                                        buttonClickedState.value = true
+                                        delay(100L)
+                                        buttonClickedState.value = false
+                                        // next step
+                                    }
                                 }
                             }
-                        }
-                ) {
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "다음",
-                        color = nextButtonTextColorState.value,
-                        fontFamily = pretendardBold,
-                        fontSize = 16.sp,
-                        letterSpacing = (-0.25).sp
-                    )
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "다음",
+                            color = nextButtonTextColorState.value,
+                            fontFamily = pretendardBold,
+                            fontSize = 16.sp,
+                            letterSpacing = (-0.25).sp
+                        )
+                    }
                 }
             }
         }
