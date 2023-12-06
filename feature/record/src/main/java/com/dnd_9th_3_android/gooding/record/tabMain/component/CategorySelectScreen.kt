@@ -6,25 +6,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
@@ -33,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
 import com.dnd_9th_3_android.gooding.record.tabMain.item.ItemCategory
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -45,7 +38,7 @@ fun CategorySelectScreen(
     val buttonClickedState = remember { mutableStateOf(false) }
     val buttonColorState = animateColorAsState(
         targetValue =
-        if ( (!recordState.checkCategoryText()) && buttonClickedState.value) Color(0xBF3CEFA3)
+        if ((!recordState.checkCategoryText()) && buttonClickedState.value) Color(0xBF3CEFA3)
         else if (!recordState.checkCategoryText()) Color(0xFF3CEFA3)
         else Color(0xFF3E4049)
     )
@@ -95,16 +88,16 @@ fun CategorySelectScreen(
 
             Spacer(modifier = Modifier.height(26.dp))
 
-            LazyVerticalGrid(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                columns = GridCells.Fixed(3),
-                content = {
-                    items(recordState.getCategoryList()){ category ->
-                        ItemCategory(category,recordState.recordCategory)
+            for (i in listOf(0,3,6)){
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    repeat(3){
+                        ItemCategory(recordState.getCategoryList()[i+it], recordState.recordCategory)
                     }
                 }
-            )
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+            ItemCategory(recordState.getCategoryList()[9],recordState.recordCategory)
+
         }
 
         Spacer(modifier = Modifier.height(36.dp))
@@ -137,4 +130,15 @@ fun CategorySelectScreen(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview
+@Composable
+fun PreviewCategorySelectScreen() {
+    CategorySelectScreen(
+        bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden),
+        scope = rememberCoroutineScope(),
+        recordState = rememberRecordState()
+    )
 }
