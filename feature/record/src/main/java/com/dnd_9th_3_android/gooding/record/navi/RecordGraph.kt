@@ -20,36 +20,29 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun RecordGraph(
-    appState : ApplicationState,
-    viewModel: RecordViewModel = hiltViewModel()
+    appState : ApplicationState
 ) {
     val navi = rememberNavController()
-    val width = LocalConfiguration.current.screenWidthDp.dp
-    val height = 180.dp * (width/(360.dp))
     val recordState = rememberRecordState()
-    LaunchedEffect(Unit){
-        viewModel.recordStateRepository.setState(appState,navi)
-        viewModel.recordStateRepository.setSize(height,width)
-    }
 
     NavHost(
         navController = navi,
-        startDestination = "galleryScreen"
+        startDestination = "mainRecordScreen"
     ){
 
-        composable("galleryScreen") {
-            GalleryScreen()
+        composable("galleryScreen") { entry->
+            val parentEntry  = remember(entry) { navi.getBackStackEntry("mainRecordScreen")}
+            GalleryScreen(viewModel = hiltViewModel(parentEntry))
         }
         composable(
             "mainRecordScreen"
-        ) { entry ->
-            val parentEntry  = remember(entry) { navi.getBackStackEntry("galleryScreen")}
-            MainRecordScreen(recordState, viewModel = hiltViewModel(parentEntry) )
+        ) {
+            MainRecordScreen(appState,navi,recordState)
         }
         composable(
             "finishRecordScreen"
         ) { entry ->
-            val parentEntry  = remember(entry) { navi.getBackStackEntry("galleryScreen")}
+            val parentEntry  = remember(entry) { navi.getBackStackEntry("mainRecordScreen")}
             FinishRecordScreen(viewModel = hiltViewModel(parentEntry) )
         }
     }

@@ -64,7 +64,7 @@ class RecordState(
     fun checkCategoryText() = recordCategory.value == -1
 
     fun getCategoryText() =
-        if (recordCategory.value == -1) "카테고리를 선택해주세요. (선택)" else categoryList[recordCategory.value].name
+        if (recordCategory.value == -1) "카테고리를 선택해주세요. (선택)" else categoryList[recordCategory.value-1].name
 
     fun getCategoryList() = categoryList
 

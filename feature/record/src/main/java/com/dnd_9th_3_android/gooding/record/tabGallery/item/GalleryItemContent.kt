@@ -24,14 +24,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryItemContent(
     galleryImage: GalleryImage,
-    viewModel: RecordViewModel,
-    isPreventSelectMessage : MutableState<Boolean>
+    isPreventSelectMessage : MutableState<Boolean>,
+    viewModel: RecordViewModel = hiltViewModel(),
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)

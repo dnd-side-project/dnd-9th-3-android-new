@@ -30,7 +30,7 @@ fun GalleryTopLayer(
     prevStep: () -> Unit,
     nextStep: () -> Unit,
     isDropDownMenuExpanded : MutableState<Boolean>,
-    viewModel : RecordViewModel
+    viewModel : RecordViewModel = hiltViewModel()
 ) {
     val selectedCount = viewModel.selectedImageSize()
     Box(
@@ -99,7 +99,7 @@ fun GalleryTopLayer(
                     .align(Alignment.BottomEnd)
                     .clickable {
                         // 클릭 가능 상태면 이동, 다음 텍스트 변경
-                        if (selectedCount>=1) {
+                        if (selectedCount >= 1) {
                             nextStep()
                         }
                     }

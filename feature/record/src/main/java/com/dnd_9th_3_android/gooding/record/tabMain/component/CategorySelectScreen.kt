@@ -28,10 +28,9 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
 import com.dnd_9th_3_android.gooding.record.tabMain.item.ItemCategory
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CategorySelectScreen(
-    bottomSheetState: ModalBottomSheetState,
+    bottomSheetState: MutableState<Boolean>,
     scope: CoroutineScope,
     recordState: RecordState
 ) {
@@ -82,7 +81,7 @@ fun CategorySelectScreen(
                         indication = null
                     ) { scope.launch {
                         recordState.recordCategory.value = -1
-                        bottomSheetState.hide()
+                        bottomSheetState.value = false
                     } },
                     painter = painterResource(id = R.drawable.close_my),
                     tint = Color.White,
@@ -119,7 +118,7 @@ fun CategorySelectScreen(
                             buttonClickedState.value = true
                             delay(100L)
                             buttonClickedState.value = false
-                            bottomSheetState.hide()
+                            bottomSheetState.value = false
                         }
                     }
                 }
@@ -141,7 +140,7 @@ fun CategorySelectScreen(
 @Composable
 fun PreviewCategorySelectScreen() {
     CategorySelectScreen(
-        bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden),
+        bottomSheetState = mutableStateOf(true),
         scope = rememberCoroutineScope(),
         recordState = rememberRecordState()
     )
