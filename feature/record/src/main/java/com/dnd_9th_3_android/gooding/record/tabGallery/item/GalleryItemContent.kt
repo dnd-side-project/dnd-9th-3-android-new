@@ -32,7 +32,7 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 fun GalleryItemContent(
     galleryImage: GalleryImage,
     isPreventSelectMessage : MutableState<Boolean>,
-    viewModel: RecordViewModel = hiltViewModel(),
+    viewModel: RecordViewModel,
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)

@@ -30,7 +30,7 @@ fun GalleryTopLayer(
     prevStep: () -> Unit,
     nextStep: () -> Unit,
     isDropDownMenuExpanded : MutableState<Boolean>,
-    viewModel : RecordViewModel = hiltViewModel()
+    viewModel : RecordViewModel
 ) {
     val selectedCount = viewModel.selectedImageSize()
     Box(

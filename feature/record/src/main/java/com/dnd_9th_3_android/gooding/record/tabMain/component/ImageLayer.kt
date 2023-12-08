@@ -1,5 +1,6 @@
 package com.dnd_9th_3_android.gooding.record.tabMain.component
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,8 +34,9 @@ import com.dnd_9th_3_android.gooding.data.component.camptonBold
 
 @Composable
 fun ImageLayer(
-    viewModel: RecordViewModel = hiltViewModel()
+    viewModel: RecordViewModel
 ) {
+
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
@@ -62,7 +64,7 @@ fun ImageLayer(
                         CircularProgressIndicator(fraction = 0.3f)
                     },
                     contentScale = ContentScale.Crop,
-                    contentDescription = "user_added_image"
+                    contentDescription = null
                 )
 
                 Icon(

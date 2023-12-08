@@ -110,16 +110,20 @@ class RecordViewModel @Inject constructor(
 
     fun initState(
         appState: ApplicationState,
-        recordNavigation: NavHostController,
+        recordNavi : NavHostController,
         height: Dp,
         width: Dp
     ) {
-        recordStateRepository.setState(appState, recordNavigation)
+        recordStateRepository.setState(appState,recordNavi)
         recordStateRepository.setSize(height, width)
     }
 
-    fun backStep() {
+    fun goMain(){
         recordStateRepository.goBackState()
+    }
+
+    fun prevStep() {
+        recordStateRepository.goPrevStep()
     }
 
     fun nextStep(step: String) {

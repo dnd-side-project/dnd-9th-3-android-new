@@ -2,6 +2,7 @@ package com.dnd_9th_3_android.gooding.record.tabMain
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -20,6 +21,7 @@ import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +31,7 @@ import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.record.state.RecordState
+import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
 import com.dnd_9th_3_android.gooding.record.tabMain.component.CategorySelectScreen
 import com.dnd_9th_3_android.gooding.record.tabMain.component.ImageLayer
 import com.dnd_9th_3_android.gooding.record.tabMain.component.MainLayer
@@ -42,20 +45,17 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainRecordScreen(
-    appState: ApplicationState,
-    navi: NavHostController,
-    recordState: RecordState,
+    recordState : RecordState,
     viewModel: RecordViewModel = hiltViewModel()
 ) {
-    val viewUpdate = rememberSaveable { mutableStateOf(true) }
-    val width = LocalConfiguration.current.screenWidthDp.dp
-    val height = 180.dp * (width / (360.dp))
-    if (viewUpdate.value) {
-        LaunchedEffect(Unit) {
-            viewModel.initState(appState, navi, height, width)
-            viewUpdate.value = false
+    // 뒤로가기 제어 : 갤러리
+    BackHandler(
+        enabled = true,
+        onBack = {
+           // 삭제 바텀 sheet
+            viewModel.goMain()
         }
-    }
+    )
 
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
@@ -91,7 +91,7 @@ fun MainRecordScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 Spacer(modifier = Modifier.height(36.dp))
-                ImageLayer()
+                ImageLayer(viewModel)
                 Spacer(modifier = Modifier.height(36.dp))
                 MainLayer(
                     recordState,

@@ -49,6 +49,7 @@ fun MainNaviHost(
             composable(ScreenRoot.MAIN_RECORD){
                 RecordScreen(appState)
             }
+
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.dnd_9th_3_android.gooding.record.tabGallery
 
-import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -11,17 +11,12 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.state.ApplicationState
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.FolderListLayer
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.GalleryTopLayer
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.MessagePreventSelectImageLayer
@@ -37,7 +32,13 @@ import kotlinx.coroutines.launch
 fun GalleryScreen(
     viewModel: RecordViewModel = hiltViewModel()
 ) {
-
+     //뒤로가기 제어 -> 메인으로 이동
+    BackHandler(
+        enabled = true,
+        onBack = {
+            viewModel.goMain()
+        }
+    )
     val rememberView = remember{ mutableStateOf(false) }
     val isDropDownMenuExpanded = remember { mutableStateOf(false) }
     val isPreventSelectMessage = remember { mutableStateOf(false) }
@@ -74,12 +75,13 @@ fun GalleryScreen(
     ) {
         GalleryTopLayer(
             prevStep = {
-                viewModel.backStep()
+                viewModel.goMain()
             },
             nextStep = {
-                viewModel.nextStep("mainRecordScreen")
+                viewModel.nextStep(ScreenRoot.SUB_RECORD)
             },
             isDropDownMenuExpanded = isDropDownMenuExpanded,
+            viewModel = viewModel
         )
 
         Box (Modifier.fillMaxSize()){
@@ -89,7 +91,7 @@ fun GalleryScreen(
             ) {
                 items(pagingItems.itemCount) { index ->
                     pagingItems[index]?.let { galleryImage ->
-                        GalleryItemContent(galleryImage, isPreventSelectMessage)
+                        GalleryItemContent(galleryImage, isPreventSelectMessage,viewModel)
                     }
                 }
             }

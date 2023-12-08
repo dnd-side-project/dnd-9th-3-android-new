@@ -13,7 +13,7 @@ class RecordStateRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context
 )
     : RecordStateRepository {
-    override var navController: NavHostController? = null
+    override var navController: NavHostController? = null // record navi
     override var appState: ApplicationState? = null
     override var appWidth = 360.dp
     override var imageHeight = 180.dp
