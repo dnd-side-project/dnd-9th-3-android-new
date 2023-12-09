@@ -29,6 +29,7 @@ import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.record.state.RecordState
 import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
@@ -91,7 +92,16 @@ fun MainRecordScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 Spacer(modifier = Modifier.height(36.dp))
-                ImageLayer(viewModel)
+                ImageLayer(
+                    viewModel.selectedImages,
+                    viewModel.selectedImageSize(),
+                    removeImage = {
+                        viewModel.removeSelectedImage(it)
+                    },
+                    addImage = {
+                        viewModel.nextStep(ScreenRoot.SUB_GALLERY)
+                    }
+                )
                 Spacer(modifier = Modifier.height(36.dp))
                 MainLayer(
                     recordState,
