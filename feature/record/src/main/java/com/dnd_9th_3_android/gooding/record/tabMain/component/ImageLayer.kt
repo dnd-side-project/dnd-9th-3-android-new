@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -34,6 +35,7 @@ import com.dnd_9th_3_android.gooding.record.tabGallery.component.CircularProgres
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.camptonBold
+import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.model.record.GalleryImage
 
 @Composable
@@ -83,7 +85,9 @@ fun ImageLayer(
                             interactionSource = MutableInteractionSource(),
                             indication = null
                         ) {
-                            removeImage(item.id)
+                            if (imageSize>1) { // 표지 삭제 방지
+                                removeImage(item.id)
+                            }
                         },
                     painter = painterResource(id = R.drawable.close_my),
                     tint = Color.White,
@@ -127,8 +131,19 @@ fun ImageLayer(
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    Column(){
-
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        Image(
+                            painter = painterResource(id = R.drawable.plus_circle),
+                            contentDescription = null)
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "사진 추가",
+                            color = colorResource(id = R.color.blue_gray_4),
+                            fontFamily = pretendardBold,
+                            fontSize = 12.sp,
+                        )
                     }
                 }
             }
