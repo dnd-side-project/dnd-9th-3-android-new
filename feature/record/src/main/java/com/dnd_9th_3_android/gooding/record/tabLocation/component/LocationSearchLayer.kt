@@ -16,6 +16,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Surface
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -73,42 +74,53 @@ fun LocationSearchLayer(
                 horizontal = 18.dp,
                 vertical = 9.dp
             )
-            .background(
-                colorResource(id = R.color.blue_gray_6),
-                shape = RoundedCornerShape(108.dp)
-            )
     ) {
-        BasicTextField(
-            value = query.value,
-            singleLine = true,
-            textStyle = TextStyle(
-                color = Color.White,
-                fontSize = 14.sp,
-                fontFamily = pretendardRegular
-            ),
-            onValueChange = { query.value = it },
-            interactionSource = interactionSource,
-            cursorBrush = SolidColor(colorResource(id = R.color.secondary_1)),
-            modifier = Modifier.fillMaxWidth()
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    colorResource(id = R.color.blue_gray_6),
+                    shape = RoundedCornerShape(108.dp)
+                )
+                .padding(
+                    start = 12.dp,
+                    top = 4.dp,
+                    bottom = 4.dp,
+                    end = 9.dp
+                )
         ) {
-            TextFieldDefaults.TextFieldDecorationBox(
-                value = query.value.text,
-                innerTextField = it,
-                enabled = true,
+            BasicTextField(
+                value = query.value,
                 singleLine = true,
-                visualTransformation = VisualTransformation.None,
+                textStyle = TextStyle(
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontFamily = pretendardRegular
+                ),
+                onValueChange = { query.value = it },
                 interactionSource = interactionSource,
-                placeholder = {
-                    Text(
-                        text = "지역,장소 검색",
-                        color = colorResource(id = R.color.blue_gray_3),
-                        fontSize = 14.sp,
-                        fontFamily = pretendardRegular
-                    )
-                },
-                trailingIcon = iconState,
-                colors = TextFieldDefaults.textFieldColors(backgroundColor = colorResource(id = R.color.blue_gray_6))
-            )
+                cursorBrush = SolidColor(colorResource(id = R.color.secondary_1)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                TextFieldDefaults.TextFieldDecorationBox(
+                    value = query.value.text,
+                    innerTextField = it,
+                    enabled = true,
+                    singleLine = true,
+                    visualTransformation = VisualTransformation.None,
+                    interactionSource = interactionSource,
+                    placeholder = {
+                        Text(
+                            text = "지역,장소 검색",
+                            color = colorResource(id = R.color.blue_gray_3),
+                            fontSize = 14.sp,
+                            fontFamily = pretendardRegular
+                        )
+                    },
+                    trailingIcon = iconState,
+                    colors = TextFieldDefaults.textFieldColors(backgroundColor = colorResource(id = R.color.blue_gray_6))
+                )
+            }
         }
     }
 }

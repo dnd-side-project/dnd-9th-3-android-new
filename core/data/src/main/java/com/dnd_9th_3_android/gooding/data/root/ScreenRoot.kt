@@ -11,4 +11,5 @@ object ScreenRoot {
     const val SUB_GALLERY  = "galleryScreen"
     const val SUB_RECORD = "mainRecordScreen"
     const val SUB_FINISH = "finishRecordScreen"
+    const val LOCATION = "locationScreen"
 }

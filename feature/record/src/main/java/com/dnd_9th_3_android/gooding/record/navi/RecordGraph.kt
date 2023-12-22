@@ -22,6 +22,7 @@ import com.dnd_9th_3_android.gooding.record.RecordScreen
 import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
 import com.dnd_9th_3_android.gooding.record.tabFinish.FinishRecordScreen
 import com.dnd_9th_3_android.gooding.record.tabGallery.GalleryScreen
+import com.dnd_9th_3_android.gooding.record.tabLocation.ui.LocationScreen
 import com.dnd_9th_3_android.gooding.record.tabMain.MainRecordScreen
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
@@ -54,6 +55,13 @@ fun RecordGraph(
         ) { entry ->
             val parentEntry = remember(entry) {  appState.navController.getBackStackEntry(ScreenRoot.MAIN_RECORD)  }
             FinishRecordScreen(recordState,viewModel = hiltViewModel(parentEntry))
+        }
+
+        composable(
+            ScreenRoot.LOCATION
+        ) { entry ->
+            val parentEntry = remember(entry) {  appState.navController.getBackStackEntry(ScreenRoot.MAIN_RECORD)  }
+            LocationScreen(recordState,viewModel = hiltViewModel(parentEntry))
         }
     }
 }

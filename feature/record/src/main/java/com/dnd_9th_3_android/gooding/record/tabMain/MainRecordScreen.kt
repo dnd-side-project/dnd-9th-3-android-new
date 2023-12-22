@@ -100,7 +100,7 @@ fun MainRecordScreen(
                     recordState,
                     focusManager,
                     onClickSearchLocation = {
-
+                        viewModel.nextStep(ScreenRoot.LOCATION)
                     },
                     onClickSetCategory = {
                         categoryBottomSheetState.value = true
