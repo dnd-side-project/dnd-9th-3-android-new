@@ -24,10 +24,7 @@ import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.record.state.RecordState
-import com.dnd_9th_3_android.gooding.record.tabMain.component.CalendarBottomSheet
-import com.dnd_9th_3_android.gooding.record.tabMain.component.CategorySelectScreen
-import com.dnd_9th_3_android.gooding.record.tabMain.component.ImageLayer
-import com.dnd_9th_3_android.gooding.record.tabMain.component.MainLayer
+import com.dnd_9th_3_android.gooding.record.tabMain.component.*
 import com.holix.android.bottomsheetdialog.compose.BottomSheetBehaviorProperties
 import com.holix.android.bottomsheetdialog.compose.BottomSheetDialog
 import com.holix.android.bottomsheetdialog.compose.BottomSheetDialogProperties
@@ -38,15 +35,16 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainRecordScreen(
-    recordState : RecordState,
+    recordState: RecordState,
     viewModel: RecordViewModel = hiltViewModel()
 ) {
+    val closeBottomSheetState = remember { mutableStateOf(false) }
+
     // 뒤로가기 제어 : 갤러리
     BackHandler(
         enabled = true,
         onBack = {
-           // 삭제 바텀 sheet
-            viewModel.goMain()
+            closeBottomSheetState.value = true
         }
     )
 
@@ -172,7 +170,7 @@ fun MainRecordScreen(
             }
         }
     }
-    if (calendarBottomSheetState.value){
+    if (calendarBottomSheetState.value) {
         BottomSheetDialog(
             onDismissRequest = {
                 calendarBottomSheetState.value = false
@@ -186,7 +184,7 @@ fun MainRecordScreen(
             )
         ) {
             CalendarBottomSheet(
-                bottomSheetState =  calendarBottomSheetState,
+                bottomSheetState = calendarBottomSheetState,
                 scope = scope,
                 recordState = recordState
             )
@@ -212,4 +210,28 @@ fun MainRecordScreen(
             )
         }
     }
+    if (closeBottomSheetState.value) {
+        BottomSheetDialog(
+            onDismissRequest = {
+                closeBottomSheetState.value = false
+            },
+            properties = BottomSheetDialogProperties(
+                dismissOnBackPress = true,
+                dismissOnClickOutside = false,
+                behaviorProperties = BottomSheetBehaviorProperties(
+                    isDraggable =  false
+                )
+            )
+        ) {
+            CloseBottomSheet(
+                closeSheet = {
+                    closeBottomSheetState.value = false
+                },
+                exitMain = {
+                    viewModel.goMain()
+                }
+            )
+        }
+    }
+
 }

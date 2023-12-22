@@ -32,7 +32,6 @@ fun LocationScreen(
     BackHandler(
         enabled = true,
         onBack = {
-            // 삭제 바텀 sheet
             viewModel.prevStep()
         }
     )
@@ -43,7 +42,7 @@ fun LocationScreen(
 
         LocationTopLayer(
             backState = {
-
+                viewModel.prevStep()
             }
         )
 

@@ -68,7 +68,9 @@ class RecordState(
 
     fun getCategoryList() = categoryList
 
-    fun setToggleState() = toggleState.value != toggleState.value
+    fun setToggleState() {
+        toggleState.value = !toggleState.value
+    }
 
     fun checkNextStep() = !checkSubjectEmpty() && !checkCommentEmpty() && checkDateEmpty() != null
 

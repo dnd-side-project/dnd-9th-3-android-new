@@ -37,8 +37,10 @@ fun LocationSearchLayer(
 ) {
     val iconState = @Composable {
         Box(modifier = Modifier
-            .width(52.dp)
-            .height(24.dp)) {
+            .width(60.dp)
+            .height(24.dp)
+            .padding(end = 8.dp)
+        ){
             if (query.value.text.isNotEmpty()) {
                 Box(
                     modifier = Modifier
@@ -73,10 +75,11 @@ fun LocationSearchLayer(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(50.dp)
             .padding(
                 horizontal = 18.dp,
-                vertical = 9.dp
-            )
+            ),
+        contentAlignment = Alignment.Center
     ) {
         BasicTextField(
             value = query.value,
@@ -90,10 +93,6 @@ fun LocationSearchLayer(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(32.dp)
-                .padding(
-                    start = 12.dp,
-                    end = 9.dp
-                )
                 .background(
                     colorResource(id = R.color.blue_gray_6),
                     shape = RoundedCornerShape(108.dp)
@@ -113,10 +112,11 @@ fun LocationSearchLayer(
                         text = "지역,장소 검색",
                         color = colorResource(id = R.color.blue_gray_3),
                         fontSize = 14.sp,
-                        fontFamily = pretendardRegular
+                        fontFamily = pretendardRegular,
                     )
                 },
                 trailingIcon = iconState,
+                contentPadding = PaddingValues(start = 12.dp)
             )
         }
     }
