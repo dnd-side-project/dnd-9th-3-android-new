@@ -1,7 +1,6 @@
 package com.dnd_9th_3_android.gooding.record.tabMain
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.*
@@ -17,22 +16,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
-import com.dnd_9th_3_android.gooding.core.data.R
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
-import com.dnd_9th_3_android.gooding.data.state.ApplicationState
 import com.dnd_9th_3_android.gooding.record.state.RecordState
-import com.dnd_9th_3_android.gooding.record.state.rememberRecordState
+import com.dnd_9th_3_android.gooding.record.tabMain.component.CalendarBottomSheet
 import com.dnd_9th_3_android.gooding.record.tabMain.component.CategorySelectScreen
 import com.dnd_9th_3_android.gooding.record.tabMain.component.ImageLayer
 import com.dnd_9th_3_android.gooding.record.tabMain.component.MainLayer
@@ -61,7 +53,8 @@ fun MainRecordScreen(
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val buttonClickedState = remember { mutableStateOf(false) }
-    val bottomSheetState = remember { mutableStateOf(false) }
+    val calendarBottomSheetState = remember { mutableStateOf(false) }
+    val categoryBottomSheetState = remember { mutableStateOf(false) }
     val nextButtonColorState = animateColorAsState(
         targetValue =
         if (recordState.checkNextStep() && buttonClickedState.value) Color(0xBF3CEFA3)
@@ -110,10 +103,10 @@ fun MainRecordScreen(
 
                     },
                     onClickSetCategory = {
-                        bottomSheetState.value = true
+                        categoryBottomSheetState.value = true
                     },
                     onClickShowCalendar = {
-
+                        calendarBottomSheetState.value = true
                     },
                 )
 
@@ -179,10 +172,30 @@ fun MainRecordScreen(
             }
         }
     }
-    if (bottomSheetState.value) {
+    if (calendarBottomSheetState.value){
         BottomSheetDialog(
             onDismissRequest = {
-                bottomSheetState.value = false
+                calendarBottomSheetState.value = false
+            },
+            properties = BottomSheetDialogProperties(
+                dismissOnBackPress = true,
+                dismissOnClickOutside = false,
+                behaviorProperties = BottomSheetBehaviorProperties(
+                    isDraggable = false
+                )
+            )
+        ) {
+            CalendarBottomSheet(
+                bottomSheetState =  calendarBottomSheetState,
+                scope = scope,
+                recordState = recordState
+            )
+        }
+    }
+    if (categoryBottomSheetState.value) {
+        BottomSheetDialog(
+            onDismissRequest = {
+                categoryBottomSheetState.value = false
             },
             properties = BottomSheetDialogProperties(
                 dismissOnBackPress = true,
@@ -193,7 +206,7 @@ fun MainRecordScreen(
             )
         ) {
             CategorySelectScreen(
-                bottomSheetState = bottomSheetState,
+                bottomSheetState = categoryBottomSheetState,
                 scope = scope,
                 recordState = recordState
             )
