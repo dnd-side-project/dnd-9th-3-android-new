@@ -1,6 +1,6 @@
 package com.dnd_9th_3_android.gooding.record.tabGallery
 
-import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -11,14 +11,12 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dnd_9th_3_android.gooding.core.data.R
+import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.FolderListLayer
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.GalleryTopLayer
 import com.dnd_9th_3_android.gooding.record.tabGallery.component.MessagePreventSelectImageLayer
@@ -32,8 +30,15 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun GalleryScreen(
-    viewModel: RecordViewModel
+    viewModel: RecordViewModel = hiltViewModel()
 ) {
+     //뒤로가기 제어 -> 메인으로 이동
+    BackHandler(
+        enabled = true,
+        onBack = {
+            viewModel.goMain()
+        }
+    )
     val rememberView = remember{ mutableStateOf(false) }
     val isDropDownMenuExpanded = remember { mutableStateOf(false) }
     val isPreventSelectMessage = remember { mutableStateOf(false) }
@@ -45,7 +50,7 @@ fun GalleryScreen(
     }
     SideEffect{
         galleryPermissionCheck(
-            context = viewModel.recordStateRepository.getContext(),
+            context = viewModel.getContext(),
             launcher,
             action = {
                 rememberView.value = true
@@ -70,10 +75,10 @@ fun GalleryScreen(
     ) {
         GalleryTopLayer(
             prevStep = {
-                viewModel.recordStateRepository.goBackState()
+                viewModel.goMain()
             },
             nextStep = {
-                viewModel.recordStateRepository.goNextStep("mainRecordScreen")
+                viewModel.nextStep(ScreenRoot.SUB_RECORD)
             },
             isDropDownMenuExpanded = isDropDownMenuExpanded,
             viewModel = viewModel
@@ -86,7 +91,7 @@ fun GalleryScreen(
             ) {
                 items(pagingItems.itemCount) { index ->
                     pagingItems[index]?.let { galleryImage ->
-                        GalleryItemContent(galleryImage, viewModel,isPreventSelectMessage)
+                        GalleryItemContent(galleryImage, isPreventSelectMessage,viewModel)
                     }
                 }
             }
@@ -121,7 +126,7 @@ fun GalleryScreen(
 
             // dropdown 메뉴
             Box(modifier = Modifier.align(Alignment.BottomCenter)){
-                val ratio = viewModel.recordStateRepository.imageHeight / 180.dp
+                val ratio = viewModel.getImageHeight() / 180.dp
                 if (isDropDownMenuExpanded.value) {
                     DropdownMenu(
                         modifier = Modifier

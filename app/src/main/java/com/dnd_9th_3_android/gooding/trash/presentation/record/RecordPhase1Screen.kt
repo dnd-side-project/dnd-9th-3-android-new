@@ -189,52 +189,52 @@ fun RecordPhase1Screen(
 
 
                     Row {
-                        Text(
-                            text = "어떤 굳이데이를 보내셨나요?",
-                            fontFamily = pretendardBold,
-                            fontSize = 14.sp,
-                            letterSpacing = (-0.25).sp,
-                            color = Color.White
-                        )
+                                        Text(
+                                            text = "어떤 굳이데이를 보내셨나요?",
+                                            fontFamily = pretendardBold,
+                                            fontSize = 14.sp,
+                                            letterSpacing = (-0.25).sp,
+                                            color = Color.White
+                                        )
 
-                        Spacer(modifier = Modifier.width(2.dp))
+                                        Spacer(modifier = Modifier.width(2.dp))
 
-                        Text(
-                            text = "*",
-                            fontFamily = pretendardBold,
-                            fontSize = 14.sp,
-                            letterSpacing = (-0.25).sp,
-                            color = Color(0xFF3CEFA3)
-                        )
-                    }
+                                        Text(
+                                            text = "*",
+                                            fontFamily = pretendardBold,
+                                            fontSize = 14.sp,
+                                            letterSpacing = (-0.25).sp,
+                                            color = Color(0xFF3CEFA3)
+                                        )
+                                    }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(12.dp))
 
-                    val titleFocusState = remember { mutableStateOf(false) }
-                    val titleBorderColorState = animateColorAsState(targetValue = if (titleFocusState.value) Color(0x803CEFA3) else Color(0xFF282932))
+                                        val titleFocusState = remember { mutableStateOf(false) }
+                                        val titleBorderColorState = animateColorAsState(targetValue = if (titleFocusState.value) Color(0x803CEFA3) else Color(0xFF282932))
 
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(6.dp))
-                            .fillMaxWidth()
-                            .height(48.dp)
-                            .background(color = Color(0xFF282932))
-                            .border(
-                                width = 1.5.dp,
-                                shape = RoundedCornerShape(6.dp),
-                                color = titleBorderColorState.value
-                            )
-                    ) {
-                        CompositionLocalProvider(LocalTextSelectionColors.provides(textSelectionColor())) {
-                            BasicTextField(
-                                modifier = Modifier
-                                    .align(CenterStart)
-                                    .padding(
-                                        start = 14.dp,
-                                        end = 40.dp
-                                    )
-                                    .fillMaxWidth()
-                                    .onFocusChanged { titleFocusState.value = it.hasFocus },
+                                        Box(
+                                            modifier = Modifier
+                                                .clip(shape = RoundedCornerShape(6.dp))
+                                                .fillMaxWidth()
+                                                .height(48.dp)
+                                                .background(color = Color(0xFF282932))
+                                                .border(
+                                                    width = 1.5.dp,
+                                                    shape = RoundedCornerShape(6.dp),
+                                                    color = titleBorderColorState.value
+                                                )
+                                        ) {
+                                            CompositionLocalProvider(LocalTextSelectionColors.provides(textSelectionColor())) {
+                                                BasicTextField(
+                                                    modifier = Modifier
+                                                        .align(CenterStart)
+                                                        .padding(
+                                                            start = 14.dp,
+                                                            end = 40.dp
+                                                        )
+                                                        .fillMaxWidth()
+                                                        .onFocusChanged { titleFocusState.value = it.hasFocus },
                                 value = titleTextState.value,
                                 onValueChange = {
                                     if (it.length <= 20) {

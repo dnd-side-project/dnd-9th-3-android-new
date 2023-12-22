@@ -1,26 +1,21 @@
 package com.dnd_9th_3_android.gooding.login.viewModel
 
 import android.content.Intent
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavHostController
 import com.dnd_9th_3_android.gooding.login.clientId
 import com.dnd_9th_3_android.gooding.login.data.domain.GoogleLoginInterface
 import com.dnd_9th_3_android.gooding.login.data.domain.KaKaoLoginInterface
 import com.dnd_9th_3_android.gooding.login.data.domain.LoginRepository
-import com.dnd_9th_3_android.gooding.login.type.CategoryListType
+import com.dnd_9th_3_android.gooding.data.type.CategoryListType
 import com.dnd_9th_3_android.gooding.model.user.AccessToken
 import com.dnd_9th_3_android.gooding.model.user.Category
 import com.dnd_9th_3_android.gooding.model.user.UserData
 import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
-//import com.dnd_9th_3_android.gooding.login.type.CategoryListType
+//import com.dnd_9th_3_android.gooding.data.type.CategoryListType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel

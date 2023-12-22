@@ -99,14 +99,14 @@ fun GalleryTopLayer(
                     .align(Alignment.BottomEnd)
                     .clickable {
                         // 클릭 가능 상태면 이동, 다음 텍스트 변경
-                        if (selectedCount>=5) {
+                        if (selectedCount >= 1) {
                             nextStep()
                         }
                     }
             ) {
                 Text(
                     text = "다음",
-                    color = if (selectedCount>=5) colorResource(id = R.color.secondary_1)
+                    color = if (selectedCount>=1) colorResource(id = R.color.secondary_1)
                             else colorResource(id = R.color.blue_gray_3),
                     letterSpacing = (-0.25).sp,
                     fontFamily = pretendardBold,

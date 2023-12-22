@@ -111,6 +111,7 @@ fun SearchTextLayer(
                             text = hintText,
                             color = colorResource(id = R.color.blue_gray_3),
                             fontSize = 14.sp,
+                            fontFamily = pretendardRegular
                         )
                     },
                     interactionSource = interactionSource,

@@ -24,14 +24,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 
 @Composable
 fun GalleryItemContent(
     galleryImage: GalleryImage,
+    isPreventSelectMessage : MutableState<Boolean>,
     viewModel: RecordViewModel,
-    isPreventSelectMessage : MutableState<Boolean>
 ) {
     val selectedSize = viewModel.selectedImageSize()
     val selectedIndex = viewModel.getSelectNumber(galleryImage)
@@ -51,7 +52,7 @@ fun GalleryItemContent(
                 .height(viewModel.recordStateRepository.imageHeight)
                 .animateContentSize()
                 .border(
-                    if (selectedIndex!= 0) 1.5.dp else (-1.5).dp,
+                    if (selectedIndex != 0) 1.5.dp else (-1.5).dp,
                     colorResource(id = R.color.secondary_1),
                     RectangleShape
                 )
@@ -62,7 +63,7 @@ fun GalleryItemContent(
                         if (selectedSize < MAX_IMAGE_COUNT) {
                             viewModel.addSelectedImage(galleryImage)
                         } else {
-                            isPreventSelectMessage.value= true
+                            isPreventSelectMessage.value = true
                         }
                     }
                 },
@@ -83,11 +84,29 @@ fun GalleryItemContent(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = viewModel.getSelectNumber(galleryImage).toString(),
+                    text = selectedIndex.toString(),
                     color = Color.Black,
                     fontSize = 12.sp,
                     fontFamily = pretendardBold
                 )
+            }
+
+            if (selectedIndex == 1){
+                Box(
+                    modifier = Modifier
+                        .background(colorResource(id = R.color.secondary_1))
+                        .width(37.dp)
+                        .height(24.dp)
+                        .align(Alignment.BottomStart),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = "표지",
+                        color = colorResource(id = R.color.blue_gray_7),
+                        fontFamily = pretendardBold,
+                        fontSize = 12.sp
+                    )
+                }
             }
         }
     }

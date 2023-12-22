@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 
 import com.dnd_9th_3_android.gooding.core.data.R
-import com.dnd_9th_3_android.gooding.data.component.coustomShadow
+import com.dnd_9th_3_android.gooding.data.component.customShadow
 import com.dnd_9th_3_android.gooding.feed.romanticBar.BarInternalContent
 import com.dnd_9th_3_android.gooding.feed.romanticBar.ProgressGradient
 import com.dnd_9th_3_android.gooding.feed.romanticBar.function.ProgressGraphic
@@ -82,7 +82,7 @@ fun RomanticBarLayer(
                     color = colorResource(id = R.color.romantic_bar_color),
                     shape = RoundedCornerShape(16.dp)
                 )
-                .coustomShadow(
+                .customShadow(
                     color = colorResource(id = R.color.shadow_color_romantic),
                     offsetY =4.dp,
                     blurRadius = 30f
