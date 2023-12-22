@@ -25,7 +25,7 @@ fun LocationTopLayer(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(95.dp)
+            .height(94.dp)
             .padding(bottom = 14.dp,start = 11.dp)
     ) {
         Box(
@@ -45,19 +45,11 @@ fun LocationTopLayer(
 
         Text(
             text = "장소 선택",
-            letterSpacing = (-2.5).sp,
+            letterSpacing = (-0.25).sp,
             fontSize = 18.sp,
             color = Color.White,
             fontFamily = pretendardBold,
             modifier = Modifier.align(Alignment.BottomCenter)
-        )
-
-        Divider(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(color = colorResource(id = R.color.blue_gray_6))
         )
     }
 }

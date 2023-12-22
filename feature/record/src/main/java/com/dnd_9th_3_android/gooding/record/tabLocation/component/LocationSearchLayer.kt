@@ -36,11 +36,14 @@ fun LocationSearchLayer(
     query: MutableState<TextFieldValue>
 ) {
     val iconState = @Composable {
-        Row {
+        Box(modifier = Modifier
+            .width(52.dp)
+            .height(24.dp)) {
             if (query.value.text.isNotEmpty()) {
                 Box(
                     modifier = Modifier
                         .size(24.dp)
+                        .align(Alignment.CenterStart)
                         .clickable {
                             query.value = TextFieldValue("")
                         },
@@ -52,9 +55,10 @@ fun LocationSearchLayer(
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(4.dp))
             Box(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(24.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -69,58 +73,51 @@ fun LocationSearchLayer(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
             .padding(
                 horizontal = 18.dp,
                 vertical = 9.dp
             )
     ) {
-        Surface(
+        BasicTextField(
+            value = query.value,
+            singleLine = true,
+            textStyle = TextStyle(
+                color = Color.White,
+                fontSize = 14.sp,
+                fontFamily = pretendardRegular
+            ),
+            onValueChange = { query.value = it },
             modifier = Modifier
                 .fillMaxWidth()
+                .height(32.dp)
+                .padding(
+                    start = 12.dp,
+                    end = 9.dp
+                )
                 .background(
                     colorResource(id = R.color.blue_gray_6),
                     shape = RoundedCornerShape(108.dp)
-                )
-                .padding(
-                    start = 12.dp,
-                    top = 4.dp,
-                    bottom = 4.dp,
-                    end = 9.dp
-                )
-        ) {
-            BasicTextField(
-                value = query.value,
-                singleLine = true,
-                textStyle = TextStyle(
-                    color = Color.White,
-                    fontSize = 14.sp,
-                    fontFamily = pretendardRegular
                 ),
-                onValueChange = { query.value = it },
+            interactionSource = interactionSource,
+            cursorBrush = SolidColor(colorResource(id = R.color.secondary_1)),
+        ) {
+            TextFieldDefaults.TextFieldDecorationBox(
+                value = query.value.text,
+                innerTextField = it,
+                enabled = true,
+                singleLine = true,
+                visualTransformation = VisualTransformation.None,
                 interactionSource = interactionSource,
-                cursorBrush = SolidColor(colorResource(id = R.color.secondary_1)),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                TextFieldDefaults.TextFieldDecorationBox(
-                    value = query.value.text,
-                    innerTextField = it,
-                    enabled = true,
-                    singleLine = true,
-                    visualTransformation = VisualTransformation.None,
-                    interactionSource = interactionSource,
-                    placeholder = {
-                        Text(
-                            text = "지역,장소 검색",
-                            color = colorResource(id = R.color.blue_gray_3),
-                            fontSize = 14.sp,
-                            fontFamily = pretendardRegular
-                        )
-                    },
-                    trailingIcon = iconState,
-                    colors = TextFieldDefaults.textFieldColors(backgroundColor = colorResource(id = R.color.blue_gray_6))
-                )
-            }
+                placeholder = {
+                    Text(
+                        text = "지역,장소 검색",
+                        color = colorResource(id = R.color.blue_gray_3),
+                        fontSize = 14.sp,
+                        fontFamily = pretendardRegular
+                    )
+                },
+                trailingIcon = iconState,
+            )
         }
     }
 }
