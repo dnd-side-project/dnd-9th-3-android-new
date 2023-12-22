@@ -15,7 +15,8 @@ class RecordState(
     val recordDate: MutableState<String>,
     val recordPlace: MutableState<String>,
     val recordCategory: MutableState<Int>,
-    val toggleState: MutableState<Boolean>
+    val toggleState: MutableState<Boolean>,
+    val romanceLevelState: MutableState<Int>
 ) {
     private var categoryList = listOf<Category>()
 
@@ -45,6 +46,10 @@ class RecordState(
 
     fun setRecordCategory(index: Int) {
         recordCategory.value = index
+    }
+
+    fun setRomanceLevelState(level : Int){
+        romanceLevelState.value = level
     }
 
     fun getSubjectSize() = subject.value.length

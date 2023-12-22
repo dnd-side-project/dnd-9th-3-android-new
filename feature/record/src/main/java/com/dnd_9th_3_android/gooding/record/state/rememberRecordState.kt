@@ -12,14 +12,16 @@ fun rememberRecordState(
     recordDate: MutableState<String> = mutableStateOf(""),
     recordPlace: MutableState<String> = mutableStateOf(""),
     recordCategory: MutableState<Int> = mutableStateOf(-1),
-    toggleState: MutableState<Boolean> = mutableStateOf(false)
-) = remember(subject, comment, recordDate, recordPlace, recordCategory,toggleState) {
+    toggleState: MutableState<Boolean> = mutableStateOf(false),
+    romanceLevelState: MutableState<Int> = mutableStateOf(0)
+) = remember(subject, comment, recordDate, recordPlace, recordCategory,toggleState,romanceLevelState) {
     RecordState(
         subject,
         comment,
         recordDate,
         recordPlace,
         recordCategory,
-        toggleState
+        toggleState,
+        romanceLevelState
     )
 }

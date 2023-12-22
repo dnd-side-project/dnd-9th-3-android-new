@@ -54,7 +54,9 @@ fun RecordGraph(
             ScreenRoot.SUB_FINISH
         ) { entry ->
             val parentEntry = remember(entry) {  appState.navController.getBackStackEntry(ScreenRoot.MAIN_RECORD)  }
-            FinishRecordScreen(recordState,viewModel = hiltViewModel(parentEntry))
+            FinishRecordScreen(recordState,
+//                viewModel = hiltViewModel(parentEntry)
+            )
         }
 
         composable(
