@@ -1,8 +1,10 @@
 package com.dnd_9th_3_android.gooding.record.tabMain
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -16,6 +18,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.dnd_9th_3_android.gooding.record.viewModel.RecordViewModel
 import com.dnd_9th_3_android.gooding.data.component.pretendardBold
 import com.dnd_9th_3_android.gooding.data.root.ScreenRoot
+import com.dnd_9th_3_android.gooding.record.progress.ProgressBar
 import com.dnd_9th_3_android.gooding.record.state.RecordState
 import com.dnd_9th_3_android.gooding.record.tabMain.component.*
 import com.holix.android.bottomsheetdialog.compose.BottomSheetBehaviorProperties
@@ -48,6 +53,7 @@ fun MainRecordScreen(
         }
     )
 
+    val appWidth = LocalConfiguration.current.screenWidthDp.dp / 3
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val buttonClickedState = remember { mutableStateOf(false) }
@@ -59,113 +65,125 @@ fun MainRecordScreen(
         else if (recordState.checkNextStep()) Color(0xFF3CEFA3)
         else Color(0xFF3E4049)
     )
+    val progressState = animateDpAsState(
+        targetValue =
+        if (recordState.checkNextStep()) appWidth * 2
+        else appWidth
+    )
     val nextButtonTextColorState = animateColorAsState(
         targetValue =
         if (recordState.checkNextStep()) Color(0xFF1C1D27)
         else Color(0xFFA4A6AA)
     )
 
-    Box(
-        modifier = Modifier
-            .padding(top = 56.dp)
-            .fillMaxSize()
-            .clickable(
-                interactionSource = MutableInteractionSource(),
-                indication = null
-            ) {
-                focusManager.clearFocus()
+    Column {
+        ProgressBar(
+            backStage = {
+                closeBottomSheetState.value = true
+            },
+            progressState = progressState
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable(
+                    interactionSource = MutableInteractionSource(),
+                    indication = null
+                ) {
+                    focusManager.clearFocus()
+                }
+        ) {
+            CompositionLocalProvider(LocalOverscrollConfiguration.provides(null)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    ImageLayer(
+                        viewModel.selectedImages,
+                        viewModel.selectedImageSize(),
+                        removeImage = {
+                            viewModel.removeSelectedImage(it)
+                        },
+                        addImage = {
+                            viewModel.nextStep(ScreenRoot.SUB_GALLERY)
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(36.dp))
+                    MainLayer(
+                        recordState,
+                        focusManager,
+                        onClickSearchLocation = {
+                            viewModel.nextStep(ScreenRoot.LOCATION)
+                        },
+                        onClickSetCategory = {
+                            categoryBottomSheetState.value = true
+                        },
+                        onClickShowCalendar = {
+                            calendarBottomSheetState.value = true
+                        },
+                    )
+
+                    Spacer(modifier = Modifier.height(130.dp))
+                }
             }
-    ) {
-        CompositionLocalProvider(LocalOverscrollConfiguration.provides(null)) {
+
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-            ) {
-                Spacer(modifier = Modifier.height(36.dp))
-                ImageLayer(
-                    viewModel.selectedImages,
-                    viewModel.selectedImageSize(),
-                    removeImage = {
-                        viewModel.removeSelectedImage(it)
-                    },
-                    addImage = {
-                        viewModel.nextStep(ScreenRoot.SUB_GALLERY)
-                    }
-                )
-                Spacer(modifier = Modifier.height(36.dp))
-                MainLayer(
-                    recordState,
-                    focusManager,
-                    onClickSearchLocation = {
-                        viewModel.nextStep(ScreenRoot.LOCATION)
-                    },
-                    onClickSetCategory = {
-                        categoryBottomSheetState.value = true
-                    },
-                    onClickShowCalendar = {
-                        calendarBottomSheetState.value = true
-                    },
-                )
-
-                Spacer(modifier = Modifier.height(130.dp))
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .height(121.dp)
-        ) {
-            Box(
-                modifier = Modifier
+                    .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .height(30.dp)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(
-                                Color(0x001C1D27),
-                                Color(0xFF1C1D27)
-                            )
-                        )
-                    )
-            )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(91.dp)
-                    .background(color = Color(0xFF1C1D27))
+                    .height(121.dp)
             ) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 28.dp)
-                        .padding(horizontal = 18.dp)
-                        .clip(shape = RoundedCornerShape(8.dp))
                         .fillMaxWidth()
-                        .height(47.dp)
-                        .background(color = nextButtonColorState.value)
-                        .pointerInput(Unit) {
-                            detectTapGestures {
-                                scope.launch {
-                                    buttonClickedState.value = true
-                                    delay(100L)
-                                    buttonClickedState.value = false
-                                    // next step
+                        .height(30.dp)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                listOf(
+                                    Color(0x001C1D27),
+                                    Color(0xFF1C1D27)
+                                )
+                            )
+                        )
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(91.dp)
+                        .background(color = Color(0xFF1C1D27))
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 28.dp)
+                            .padding(horizontal = 18.dp)
+                            .clip(shape = RoundedCornerShape(8.dp))
+                            .fillMaxWidth()
+                            .height(47.dp)
+                            .background(color = nextButtonColorState.value)
+                            .pointerInput(Unit) {
+                                detectTapGestures {
+                                    scope.launch {
+                                        buttonClickedState.value = true
+                                        delay(100L)
+                                        buttonClickedState.value = false
+                                        // next step
+                                    }
                                 }
                             }
-                        }
-                ) {
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "다음",
-                        color = nextButtonTextColorState.value,
-                        fontFamily = pretendardBold,
-                        fontSize = 16.sp,
-                        letterSpacing = (-0.25).sp
-                    )
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "다음",
+                            color = nextButtonTextColorState.value,
+                            fontFamily = pretendardBold,
+                            fontSize = 16.sp,
+                            letterSpacing = (-0.25).sp
+                        )
+                    }
                 }
             }
         }
@@ -219,7 +237,7 @@ fun MainRecordScreen(
                 dismissOnBackPress = true,
                 dismissOnClickOutside = false,
                 behaviorProperties = BottomSheetBehaviorProperties(
-                    isDraggable =  false
+                    isDraggable = false
                 )
             )
         ) {
