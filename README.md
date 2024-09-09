@@ -3,8 +3,6 @@
 
 ## Project Info
 [프로젝트 Info](https://dnd.ac/projects/59)
-## Architecture
-![굳잉 멀티 모듈](https://github.com/dnd-side-project/dnd-9th-3-android-new/assets/85734140/6ac15095-fcd0-4584-bede-ab27f256083b)
 
 ## Stack
 <div align=start> 
